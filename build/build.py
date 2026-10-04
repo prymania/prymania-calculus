@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-สร้างเว็บไซต์ Calculus (1204105) จากไฟล์ใน build/src  →  site/*.html
+สร้างเว็บไซต์ Calculus (1204105) จากไฟล์ใน build/src  →  docs/*.html
 
   python build/build.py
 
@@ -17,7 +17,7 @@ import numpy as np
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(HERE, "src")
-OUT = os.path.join(os.path.dirname(HERE), "site")
+OUT = os.path.join(os.path.dirname(HERE), "docs")
 
 PAGES = [
     dict(file="index.html", title="หน้าแรก / ภาพรวม", group=0, icon="🏠"),
