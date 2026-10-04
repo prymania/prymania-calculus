@@ -1,0 +1,57 @@
+<section class="hero">
+  <img src="icon/me_cat.png" alt="">
+  <div class="code-no">1204105 · Mathematics for Computer Science 2</div>
+  <h1>แคลคูลัส (Calculus)</h1>
+  <div class="en">Limit · Differential · Integral — Lecture Note</div>
+  <div class="meta"><span>👩‍🏫 Calculus by Prymania</span><span>📚 8 บท + 2 ภาคผนวก</span><span>✍️ ตัวอย่างพร้อมเฉลยกว่า 90 ข้อ</span><span>🏫 วิทยาการคอมพิวเตอร์ ม.มหาสารคาม</span></div>
+</section>
+
+<div class="box idea"><div class="box-t">💡 แคลคูลัสเรียนเรื่องอะไร (ในหนึ่งย่อหน้า)</div>
+<p>แคลคูลัสคือคณิตศาสตร์ของ <b>การเปลี่ยนแปลง</b> มีสองพระเอก: <b>อนุพันธ์ (ดิฟ)</b> ตอบคำถาม “ตอนนี้กำลังเปลี่ยนเร็วแค่ไหน” เช่น ความเร็ว ณ ขณะหนึ่ง หรือความชันของกราฟ
+และ <b>อินทิกรัล</b> ตอบคำถาม “สะสมรวมแล้วได้เท่าไร” เช่น ระยะทางรวม หรือพื้นที่ใต้กราฟ — ทั้งสองเรื่องสร้างบนฐานเดียวกันคือ <b>ลิมิต</b> ซึ่งเป็นที่มาของการแบ่งเนื้อหาเป็น 3 ส่วน</p></div>
+
+<plot>{'x':[-0.3,4.3],'y':[-0.5,5],'xs':1,'ys':1,'noticks':1,'f':[{'e':'0.25*x**2+0.5','c':1,'lab':'f(x)','at':[3.9,4.6],'anchor':'end'},{'e':'1.5*(x-3)+2.75','c':2,'d':[1.8,4.2],'lab':'ดิฟ = ความชันตรงนี้','at':[2.3,3.9],'anchor':'end'}],'shade':[{'f':0,'a':0.5,'b':2.5,'c':3}],'pts':[[3,2.75,'c','',2]],'text':[[1.5,0.45,'อินทิกรัล = พื้นที่สะสม',3]],'cap':'สองคำถามหลักของแคลคูลัสบนกราฟเดียว: ความชัน ณ จุดหนึ่ง (ดิฟ) และพื้นที่ใต้กราฟ (อินทิกรัล)'}</plot>
+
+<h2 id="chapters">แผนที่บทเรียน</h2>
+<div class="part-t">ส่วนที่ 1 · ลิมิต — สอบ Exam 1 (30%)</div>
+<div class="cards">
+<a class="tcard" href="01-function.html"><span class="num">01</span><b>ฟังก์ชัน กราฟ และความชัน</b><span>ฟังก์ชัน โดเมน–เรนจ์ ฟังก์ชันประกอบ ความชันและสมการเส้นตรง</span><i class="wk">ปูพื้นฐาน</i></a>
+<a class="tcard" href="02-limit.html"><span class="num">02</span><b>ลิมิตของฟังก์ชัน</b><span>แทนค่า ทฤษฎีบท 0/0 แยกตัวประกอบ คอนจูเกต ลิมิตซ้าย–ขวา</span><i class="wk">Exam 1</i></a>
+<a class="tcard" href="03-continuity.html"><span class="num">03</span><b>ความต่อเนื่องของฟังก์ชัน</b><span>เงื่อนไข 3 ข้อ ฟังก์ชันหลายช่วง หาค่า k</span><i class="wk">Exam 1</i></a>
+</div>
+<div class="part-t">ส่วนที่ 2 · อนุพันธ์ — สอบ Midterm (30%)</div>
+<div class="cards">
+<a class="tcard p2" href="04-derivative.html"><span class="num">04</span><b>อนุพันธ์และสูตรการดิฟ</b><span>อัตราการเปลี่ยนแปลง นิยาม ผลคูณ ผลหาร กฎลูกโซ่ อันดับสูง</span><i class="wk">Midterm</i></a>
+<a class="tcard p2" href="05-derivative-app.html"><span class="num">05</span><b>ความชัน เส้นสัมผัส ค่าสูงสุด–ต่ำสุด</b><span>เส้นสัมผัส ฟังก์ชันเพิ่ม–ลด จุดวิกฤต สูงสุด–ต่ำสุดสัมบูรณ์</span><i class="wk">Midterm</i></a>
+<a class="tcard p2" href="06-optimization.html"><span class="num">06</span><b>โจทย์ปัญหาค่าเหมาะที่สุด</b><span>พื้นที่มากสุด รายได้–กำไรสูงสุด กล่อง การเคลื่อนที่</span><i class="wk">Midterm</i></a>
+</div>
+<div class="part-t">ส่วนที่ 3 · อินทิกรัล — สอบ Final (30%)</div>
+<div class="cards">
+<a class="tcard p3" href="07-indefinite.html"><span class="num">07</span><b>อินทิกรัลไม่จำกัดเขต</b><span>ปฏิยานุพันธ์ สูตร จัดรูปก่อนอินทิเกรต หาค่า C</span><i class="wk">Final</i></a>
+<a class="tcard p3" href="08-definite-area.html"><span class="num">08</span><b>อินทิกรัลจำกัดเขตและพื้นที่</b><span>พื้นที่ใต้เส้นโค้ง ตัดแกน x พื้นที่ระหว่างเส้นโค้ง</span><i class="wk">Final</i></a>
+</div>
+<div class="part-t">ภาคผนวก</div>
+<div class="cards">
+<a class="tcard p4" href="appendix-a-formulas.html"><span class="num">ก</span><b>สรุปสูตร (Cheat Sheet)</b><span>สูตรทั้งเล่มในหน้าเดียว ทวนก่อนสอบ</span></a>
+<a class="tcard p4" href="appendix-b-playground.html"><span class="num">ข</span><b>ห้องทดลองกราฟ</b><span>พิมพ์ฟังก์ชันเอง ดูกราฟ ดิฟ เส้นสัมผัส พื้นที่</span></a>
+</div>
+
+<h2 id="assess">การวัดผล</h2>
+<table class="tbl">
+<tr><th>รายการ</th><th>เนื้อหา</th><th>สัดส่วน</th></tr>
+<tr><td>Quiz (บางสัปดาห์ ตลอดภาคเรียน)</td><td>ท้ายชั่วโมง</td><td>10%</td></tr>
+<tr><td>Exam 1</td><td>ลิมิต (บทที่ 1–3)</td><td>30%</td></tr>
+<tr><td>Midterm (Exam 2)</td><td>อนุพันธ์ (บทที่ 4–6)</td><td>30%</td></tr>
+<tr><td>Final (Exam 3)</td><td>อินทิกรัล (บทที่ 7–8)</td><td>30%</td></tr>
+<tr><td style="color:var(--coral2);font-weight:700">โบนัสระหว่างเรียน</td><td style="color:var(--coral2)">ตอบคำถาม/ข้อ BONUS ในชั้นเรียน</td><td style="color:var(--coral2);font-weight:700">สูงสุด 10%</td></tr>
+</table>
+
+<h2 id="legend">องค์ประกอบในแต่ละบท</h2>
+<div class="legend">
+<div class="lg"><i style="background:var(--grape)"></i><div><b>ตัวอย่าง + ปุ่ม 👀 ดูเฉลย</b><br>ลองคิดเองก่อน แล้วค่อยกดดูวิธีทำ มีระดับ ⭐ ง่าย ถึง ⭐⭐⭐ ท้าทาย</div></div>
+<div class="lg"><i style="background:var(--coral)"></i><div><b>คำถามท้ายบท + 🔑 ดูเฉลย</b><br>เฉลยล็อกด้วยรหัสผ่านแยกตามบท (ขอจากผู้สอน)</div></div>
+<div class="lg"><i style="background:var(--mint)"></i><div><b>กราฟโต้ตอบ (ลองเล่น)</b><br>เลื่อนแถบ ลากจุด ดูลิมิต เส้นสัมผัส และพื้นที่เปลี่ยนแบบสด ๆ</div></div>
+<div class="lg"><i style="background:var(--mango)"></i><div><b>ตรวจคำตอบด้วย Python</b><br>โค้ด SymPy สั้น ๆ พร้อมผลลัพธ์ที่รันจริง เอาไปลองต่อได้</div></div>
+</div>
+<div class="box formula"><div class="box-t">📦 ตัวอย่างกล่องสูตร</div>$$\frac{d}{dx}x^n = nx^{n-1} \qquad\qquad \int x^n\,dx = \frac{x^{n+1}}{n+1} + C$$</div>
+<div class="box tip"><div class="box-t">✅ วิธีเรียนให้ได้ผล</div><ol><li>อ่านคำอธิบาย + ดูกราฟให้เข้าใจ “ภาพ” ก่อนจำสูตร</li><li>ทำตัวอย่างเองบนกระดาษ แล้วค่อยกดดูเฉลย</li><li>ทำคำถามท้ายบทให้ครบก่อน Quiz</li><li>ก่อนสอบ เปิด <a href="appendix-a-formulas.html">สรุปสูตร</a> ทวนอีกรอบ</li></ol></div>

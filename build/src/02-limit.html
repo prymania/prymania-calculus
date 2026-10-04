@@ -1,0 +1,205 @@
+<div class="objectives"><div class="box-t">🎯 เมื่อเรียนจบบทนี้ นิสิตจะสามารถ</div><ol>
+<li>อธิบายความหมายของ $\displaystyle\lim_{x\to a} f(x)$ ได้ทั้งจากตาราง กราฟ และสมการ</li>
+<li>หาลิมิตด้วยการแทนค่า และใช้ทฤษฎีบทของลิมิตได้</li>
+<li>จัดการรูปแบบ $\tfrac{0}{0}$ ด้วยการแยกตัวประกอบและการคูณคอนจูเกตได้</li>
+<li>หาลิมิตซ้าย ลิมิตขวา และตัดสินว่าลิมิตหาค่าได้หรือไม่</li>
+<li>หาลิมิตเมื่อ $x\to\infty$ ของฟังก์ชันตรรกยะได้ (เสริม)</li>
+</ol></div>
+<!--TOC-->
+
+<h2 id="s1">ลิมิตคืออะไร — “เข้าใกล้” ไม่ใช่ “เท่ากับ”</h2>
+<p>สัญลักษณ์ $\displaystyle\lim_{x\to a} f(x) = L$ อ่านว่า <b>“ลิมิตของ f(x) เมื่อ x เข้าใกล้ a เท่ากับ L”</b>
+หมายความว่า <span class="hl">เมื่อ x เข้าใกล้ a มาก ๆ ๆ ๆ (แต่ไม่ต้องเท่ากับ a) ค่าของ f(x) จะเข้าใกล้ L</span></p>
+<div class="box idea"><div class="box-t">🚶 เปรียบเทียบ: เดินเข้าหาประตู</div>
+<p>ลองเดินเข้าหาประตูโดยแต่ละก้าวเดินแค่ครึ่งหนึ่งของระยะที่เหลือ — คุณจะเข้าใกล้ประตูขึ้นเรื่อย ๆ จนห่างแค่ 0.0001 เมตร
+ลิมิตถามว่า <b>“กำลังมุ่งหน้าไปหาอะไร”</b> ไม่ได้ถามว่า “ถึงหรือยัง” — ต่อให้ประตูถูกถอดออกไป (ฟังก์ชันไม่นิยามที่จุดนั้น) เราก็ยังบอกได้ว่ากำลังเดินไปที่ประตู</p></div>
+
+<p>ตัวอย่าง $f(x) = x + 3$ เมื่อ x เข้าใกล้ 2 จากทั้งสองฝั่ง</p>
+<div class="tables">
+<table class="tbl num mini"><tr><th>x &lt; 2 (ฝั่งซ้าย)</th><th>f(x)</th></tr><tr><td>1.9</td><td>4.9</td></tr><tr><td>1.99</td><td>4.99</td></tr><tr><td>1.999</td><td>4.999</td></tr><tr><td>↓</td><td class="hot">→ 5</td></tr></table>
+<table class="tbl num mini"><tr><th>x &gt; 2 (ฝั่งขวา)</th><th>f(x)</th></tr><tr><td>2.1</td><td>5.1</td></tr><tr><td>2.01</td><td>5.01</td></tr><tr><td>2.001</td><td>5.001</td></tr><tr><td>↓</td><td class="hot">→ 5</td></tr></table>
+</div>
+<p>ทั้งสองฝั่งวิ่งเข้าหา 5 → $\displaystyle\lim_{x\to 2}(x+3) = 5$</p>
+
+<h3>ทำไมต้องมีลิมิต? เพราะบางจุด “แทนค่าไม่ได้”</h3>
+<p>พิจารณา $f(x) = \dfrac{x^2-1}{x-1}$ — ถ้าแทน x = 1 จะได้ $\tfrac{0}{0}$ (หาค่าไม่ได้) แต่ถ้าดูกราฟ จะเห็นว่าเป็นเส้นตรงที่มี <b>“รู”</b> ที่ x = 1 และรอบ ๆ รูนั้นค่า y วิ่งเข้าหา 2</p>
+<plot>{'x':[-2,4],'y':[-1,5],'xs':1,'ys':1,'f':[{'e':'(x**2-1)/(x-1)','c':1,'lab':'f(x) = (x² − 1)/(x − 1)','at':[1.6,4.4]}],'lines':[[1,0,1,2,2,1],[0,2,1,2,2,1]],'pts':[[1,2,'o','รู (1, 2) — f(1) ไม่นิยาม',2,'se']],'cap':'$f(1)$ หาค่าไม่ได้ แต่ $\\lim_{x\\to1} f(x) = 2$'}</plot>
+<div class="widget" data-w="approach" data-f="(x^2-1)/(x-1)" data-a="1" data-x="-1,3" data-y="-0.5,4.5"></div>
+
+<h2 id="s2">หาลิมิตโดยการแทนค่าโดยตรง</h2>
+<p>ถ้าฟังก์ชัน “เรียบร้อย” ที่จุดนั้น (เช่น พหุนาม หรือเศษส่วนที่ตัวส่วนไม่เป็น 0) <b>แทน x = a ลงไปได้เลย</b> ไม่ต้องสร้างตาราง</p>
+<ex t="แทนค่าได้เลย" lv="1">
+<ol class="qlist">
+<li>$\displaystyle\lim_{x\to0}(x-2)$</li><li>$\displaystyle\lim_{x\to5}(5x+3)$</li><li>$\displaystyle\lim_{x\to-1}(x^2+2)$</li><li>$\displaystyle\lim_{x\to0} 7$</li>
+<li>$\displaystyle\lim_{x\to7}\frac{x-7}{x}$</li><li>$\displaystyle\lim_{x\to0}\frac{x^2-2x+1}{x-1}$</li><li>$\displaystyle\lim_{x\to3}(2x^3 - x^2 + 4)$</li>
+</ol>
+<ans>
+<ol class="qlist"><li>$0-2 = -2$</li><li>$25+3 = 28$</li><li>$1+2 = 3$</li><li>ลิมิตของค่าคงที่ = ค่าคงที่นั้น = 7</li><li>$\tfrac{0}{7} = 0$</li><li>$\tfrac{1}{-1} = -1$</li><li>$54 - 9 + 4 = 49$</li></ol>
+</ans></ex>
+
+<h2 id="s3">ทฤษฎีบทของลิมิต</h2>
+<p>กำหนด $\displaystyle\lim_{x\to a}f(x) = L$ และ $\displaystyle\lim_{x\to a}g(x) = M$ (มีค่าทั้งคู่) และ $k$ เป็นค่าคงที่</p>
+<div class="fgrid">
+<div class="fcard"><h4>1. ค่าคงที่</h4>$\displaystyle\lim_{x\to a} k = k$</div>
+<div class="fcard"><h4>2. ตัวแปรเอง</h4>$\displaystyle\lim_{x\to a} x = a,\ \ \lim_{x\to a} x^n = a^n$</div>
+<div class="fcard"><h4>3. ดึงค่าคงที่ออก</h4>$\displaystyle\lim_{x\to a} k f(x) = kL$</div>
+<div class="fcard"><h4>4. บวก / ลบ</h4>$\displaystyle\lim_{x\to a}[f(x)\pm g(x)] = L \pm M$</div>
+<div class="fcard"><h4>5. คูณ</h4>$\displaystyle\lim_{x\to a}[f(x)\,g(x)] = LM$</div>
+<div class="fcard"><h4>6. หาร</h4>$\displaystyle\lim_{x\to a}\frac{f(x)}{g(x)} = \frac{L}{M},\ M\ne0$</div>
+<div class="fcard"><h4>7. ยกกำลัง</h4>$\displaystyle\lim_{x\to a}[f(x)]^n = L^n$</div>
+<div class="fcard"><h4>8. ราก</h4>$\displaystyle\lim_{x\to a}\sqrt[n]{f(x)} = \sqrt[n]{L}$</div>
+</div>
+<p>สรุปง่าย ๆ: <b>ลิมิต “กระจาย” เข้าไปในการบวก ลบ คูณ หาร ยกกำลังได้</b> — นี่คือเหตุผลที่การแทนค่าตรง ๆ ใช้ได้กับพหุนาม</p>
+<ex t="ใช้ทฤษฎีบททีละขั้น" lv="1">
+<p>ถ้า $\displaystyle\lim_{x\to 2}f(x) = 4$ และ $\displaystyle\lim_{x\to2}g(x) = -3$ จงหา</p>
+<ol class="qlist"><li>$\displaystyle\lim_{x\to2}[3f(x) - 2g(x)]$</li><li>$\displaystyle\lim_{x\to2}f(x)\,g(x)$</li><li>$\displaystyle\lim_{x\to2}\frac{[f(x)]^2}{g(x)+1}$</li><li>$\displaystyle\lim_{x\to2}\sqrt{f(x)} + x^2$</li></ol>
+<ans><ol class="qlist"><li>$3(4) - 2(-3) = 12 + 6 = 18$</li><li>$4 \times (-3) = -12$</li><li>$\dfrac{16}{-3+1} = -8$</li><li>$\sqrt4 + 4 = 6$</li></ol></ans></ex>
+
+<h2 id="s4">เมื่อแทนค่าแล้วเจอปัญหา: แผนที่ตัดสินใจ</h2>
+<p>แทนค่า x = a ลงไปก่อนเสมอ แล้วดูว่าได้หน้าตาแบบไหน</p>
+<table class="tbl">
+<tr><th>แทนค่าแล้วได้</th><th>ตัวอย่าง</th><th>สรุป</th></tr>
+<tr><td>ตัวเลขปกติ</td><td>$\displaystyle\lim_{x\to5}(x^2-5) = 20$</td><td>✅ ตอบเลขนั้นเลย</td></tr>
+<tr><td>$\dfrac{0}{\text{เลขที่ไม่ใช่ 0}}$</td><td>$\displaystyle\lim_{x\to2}\frac{x-2}{5} = \frac05$</td><td>✅ ได้ 0</td></tr>
+<tr><td>$\dfrac{\text{เลขที่ไม่ใช่ 0}}{0}$</td><td>$\displaystyle\lim_{x\to0}\frac{x-2}{x} \to \frac{-2}{0}$</td><td>❌ หาค่าไม่ได้ (พุ่งไป ±∞)</td></tr>
+<tr><td>$\dfrac{0}{0}$ <b>รูปแบบยังไม่กำหนด</b></td><td>$\displaystyle\lim_{x\to1}\frac{x^3-1}{x-1}$</td><td>⚠️ <b>ยังสรุปไม่ได้!</b> ต้องจัดรูปก่อน</td></tr>
+</table>
+<div class="flow"><div class="st">แทนค่า x = a<small>ขั้นแรกเสมอ</small></div><div class="ar">➜</div><div class="st c">ได้ 0/0 ?<small>รูปแบบยังไม่กำหนด</small></div><div class="ar">➜</div>
+<div class="st m">มีพหุนาม → แยกตัวประกอบ<small>แล้วตัดตัวร่วม</small></div><div class="st o">มีราก √ → คูณคอนจูเกต<small>แล้วตัดตัวร่วม</small></div><div class="ar">➜</div><div class="st">แทนค่าใหม่</div></div>
+<div class="box note"><div class="box-t">📌 ทำไมตัด (x − a) ได้?</div>
+<p>เพราะลิมิตสนใจแค่ x ที่ <b>เข้าใกล้</b> a ซึ่ง x ≠ a ดังนั้น $x - a \ne 0$ จึงหารตัดได้อย่างถูกต้อง ($\frac{x-5}{x-5} = 1$ เมื่อ $x\ne5$ → $\displaystyle\lim_{x\to5}\frac{x-5}{x-5} = 1$ ไม่ใช่ "หาค่าไม่ได้")</p></div>
+
+<h2 id="s5">เครื่องมือที่ 1: แยกตัวประกอบ</h2>
+<h3>สูตรที่ต้องจำให้ขึ้นใจ</h3>
+<table class="tbl">
+<tr><th>ชื่อสูตร</th><th>สูตร</th></tr>
+<tr><td>ผลต่างกำลังสอง</td><td>$a^2 - b^2 = (a-b)(a+b)$ &nbsp;<b>← ใช้ทำคอนจูเกตด้วย</b></td></tr>
+<tr><td>กำลังสองสมบูรณ์</td><td>$(a\pm b)^2 = a^2 \pm 2ab + b^2$</td></tr>
+<tr><td>ผลต่างกำลังสาม</td><td>$a^3 - b^3 = (a-b)(a^2+ab+b^2)$</td></tr>
+<tr><td>ผลบวกกำลังสาม</td><td>$a^3 + b^3 = (a+b)(a^2-ab+b^2)$</td></tr>
+</table>
+<h3>แยกตัวประกอบ $x^2 + bx + c$: “คูณได้ค่าหลัง บวกได้ค่ากลาง”</h3>
+<p>หาเลขสองตัว $p, q$ ที่ <b style="color:var(--coral2)">คูณกันได้ c</b> และ <b style="color:var(--sky2)">บวกกันได้ b</b> แล้วเขียน $(x+p)(x+q)$</p>
+<div class="vs">
+<div class="neu"><h4>$x^2 + 7x + 6$</h4><p>คู่ที่คูณได้ 6: (1,6) (2,3) (−1,−6) (−2,−3) → คู่ที่บวกได้ 7 คือ <b>1 กับ 6</b></p><p>→ $(x+1)(x+6)$</p></div>
+<div class="warm"><h4>$x^2 - x - 20$</h4><p>คูณได้ −20 → เครื่องหมายต้องต่างกัน: (4,−5) (−4,5) (2,−10) … → บวกได้ −1 คือ <b>4 กับ −5</b></p><p>→ $(x+4)(x-5)$</p></div>
+</div>
+<ex t="ฝึกแยกตัวประกอบ (อุ่นเครื่อง)" lv="1">
+<ol class="qlist"><li>$x^2 - 7x + 10$</li><li>$x^2 + 15x - 100$</li><li>$x^2 - 15x - 100$</li><li>$x^2 + 20x + 100$</li><li>$x^2 + 3x - 18$</li><li>$x^2 - 14x + 40$</li><li>$x^3 - 8$</li></ol>
+<ans><ol class="qlist"><li>$(x-2)(x-5)$</li><li>$(x+20)(x-5)$</li><li>$(x-20)(x+5)$</li><li>$(x+10)^2$</li><li>$(x+6)(x-3)$</li><li>$(x-4)(x-10)$</li><li>$(x-2)(x^2+2x+4)$</li></ol></ans></ex>
+
+<ex t="ลิมิตที่ต้องแยกตัวประกอบ" lv="2">
+<ol class="qlist">
+<li>$\displaystyle\lim_{x\to-1}\frac{x^2+7x+6}{x+1}$</li><li>$\displaystyle\lim_{x\to-4}\frac{x^2+x-12}{x+4}$</li><li>$\displaystyle\lim_{x\to1}\frac{x^2-8x+7}{x^2+4x-5}$</li>
+<li>$\displaystyle\lim_{x\to1}\frac{x^3-1}{x-1}$</li><li>$\displaystyle\lim_{x\to3}\frac{x^3-27}{x-3}$</li><li>$\displaystyle\lim_{x\to3}\frac{x^4-3x^3}{x-3}$</li>
+</ol>
+<ans>
+<ol class="qlist">
+<li>$\dfrac{(x+1)(x+6)}{x+1} = x + 6 \to -1+6 = $ <span class="final">5</span></li>
+<li>$\dfrac{(x-3)(x+4)}{x+4} = x - 3 \to $ <span class="final">−7</span></li>
+<li>$\dfrac{(x-7)(x-1)}{(x-1)(x+5)} = \dfrac{x-7}{x+5} \to \dfrac{-6}{6} = $ <span class="final">−1</span></li>
+<li>$\dfrac{(x-1)(x^2+x+1)}{x-1} = x^2+x+1 \to $ <span class="final">3</span></li>
+<li>$\dfrac{(x-3)(x^2+3x+9)}{x-3} = x^2+3x+9 \to 9+9+9 = $ <span class="final">27</span></li>
+<li>ดึง $x^3$ ร่วม: $\dfrac{x^3(x-3)}{x-3} = x^3 \to $ <span class="final">27</span></li>
+</ol></ans></ex>
+
+<ex t="ลิมิตแบบหลายชั้น" lv="3">
+<ol class="qlist"><li>$\displaystyle\lim_{x\to2}\frac{x^4-16}{x-2}$</li><li>$\displaystyle\lim_{x\to3}\frac{x^2-9}{6x-18}$</li><li>$\displaystyle\lim_{x\to-2}\frac{x^3+8}{x^2-4}$</li></ol>
+<ans>
+<ol class="qlist">
+<li>$x^4 - 16 = (x^2-4)(x^2+4) = (x-2)(x+2)(x^2+4)$ → เหลือ $(x+2)(x^2+4) \to 4 \times 8 = $ <span class="final">32</span></li>
+<li>$\dfrac{(x-3)(x+3)}{6(x-3)} = \dfrac{x+3}{6} \to $ <span class="final">1</span></li>
+<li>$\dfrac{(x+2)(x^2-2x+4)}{(x+2)(x-2)} = \dfrac{x^2-2x+4}{x-2} \to \dfrac{4+4+4}{-4} = $ <span class="final">−3</span></li>
+</ol></ans></ex>
+
+<h2 id="s6">เครื่องมือที่ 2: คูณด้วยคอนจูเกต (เมื่อเจอรากที่สอง)</h2>
+<p><span class="term">คอนจูเกต</span> ของ $\sqrt{A} - B$ คือ $\sqrt{A} + B$ (สลับเครื่องหมายตรงกลาง) เมื่อคูณกันจะได้ผลต่างกำลังสอง ทำให้ <b>รากหายไป</b>:
+$$(\sqrt{A} - B)(\sqrt{A} + B) = A - B^2$$</p>
+<ol class="steps">
+<li>หา $\displaystyle\lim_{x\to1}\frac{\sqrt x - 1}{x-1}$ — แทนค่าได้ $\tfrac00$ จึงคูณทั้งเศษและส่วนด้วย $\sqrt x + 1$</li>
+<li>$\displaystyle\frac{\sqrt x - 1}{x-1}\cdot\frac{\sqrt x + 1}{\sqrt x + 1} = \frac{x - 1}{(x-1)(\sqrt x + 1)}$ &nbsp;(เศษใช้ผลต่างกำลังสอง)</li>
+<li>ตัด $(x-1)$ ได้ $\dfrac{1}{\sqrt x + 1}$</li>
+<li>ตอนนี้แทนค่าได้แล้ว (ส่วนไม่เป็น 0): $\dfrac{1}{1+1} = \dfrac12$</li>
+</ol>
+<ex t="คอนจูเกต" lv="2">
+<ol class="qlist"><li>$\displaystyle\lim_{x\to4}\frac{\sqrt x - 2}{x-4}$</li><li>$\displaystyle\lim_{x\to0}\frac{\sqrt{4+x} - 2}{x}$</li><li>$\displaystyle\lim_{x\to4}\frac{\sqrt{x+5} - 3}{x-4}$</li><li>$\displaystyle\lim_{x\to9}\frac{x-9}{\sqrt x - 3}$</li></ol>
+<ans>
+<ol class="qlist">
+<li>$\dfrac{(\sqrt x-2)(\sqrt x+2)}{(x-4)(\sqrt x+2)} = \dfrac{x-4}{(x-4)(\sqrt x+2)} = \dfrac{1}{\sqrt x + 2} \to $ <span class="final">1/4</span></li>
+<li>$\dfrac{(4+x) - 4}{x(\sqrt{4+x}+2)} = \dfrac{1}{\sqrt{4+x}+2} \to \dfrac{1}{2+2} = $ <span class="final">1/4</span></li>
+<li>$\dfrac{(x+5) - 9}{(x-4)(\sqrt{x+5}+3)} = \dfrac{1}{\sqrt{x+5}+3} \to $ <span class="final">1/6</span></li>
+<li>รากอยู่ที่ตัวส่วน คูณ $\sqrt x + 3$: $\dfrac{(x-9)(\sqrt x+3)}{x - 9} = \sqrt x + 3 \to $ <span class="final">6</span><br><small>(หรือมอง $x - 9 = (\sqrt x-3)(\sqrt x+3)$ ก็ได้)</small></li>
+</ol></ans></ex>
+<div class="box warn"><div class="box-t">⚠️ อย่าคูณคอนจูเกตโดยไม่ดู</div><p>เช่น $\displaystyle\lim_{x\to3}\frac{\sqrt x - 9}{x-3}$ แทนค่าได้ $\dfrac{\sqrt3 - 9}{0}$ — เศษ <b>ไม่ใช่ 0</b> จึงไม่ใช่รูป $\tfrac00$ ลิมิตนี้ <b>หาค่าไม่ได้</b> ทันที ไม่ต้องจัดรูปอะไรเลย</p></div>
+
+<h2 id="s7">ลิมิตซ้าย ลิมิตขวา</h2>
+<div class="vs">
+<div class="good"><h4>ลิมิตซ้าย $\displaystyle\lim_{x\to a^-}f(x)$</h4><p>x เข้าใกล้ a จาก <b>ค่าที่น้อยกว่า a</b> (เช่น 1.9, 1.99, 1.999 → 2)</p></div>
+<div class="warm"><h4>ลิมิตขวา $\displaystyle\lim_{x\to a^+}f(x)$</h4><p>x เข้าใกล้ a จาก <b>ค่าที่มากกว่า a</b> (เช่น 2.1, 2.01, 2.001 → 2)</p></div>
+</div>
+<div class="box formula"><div class="box-t">🔑 กฎสำคัญที่สุดของหัวข้อนี้</div>
+$$\lim_{x\to a}f(x) \text{ หาค่าได้} \iff \lim_{x\to a^-}f(x) = \lim_{x\to a^+}f(x)$$
+<p>ถ้าซ้ายกับขวาไม่เท่ากัน → <b>ลิมิตหาค่าไม่ได้</b> (ค่าของ f(a) เองไม่เกี่ยว!)</p></div>
+<ex t="อ่านลิมิตจากกราฟ" lv="1">
+<plot>{'x':[-2,5],'y':[-3,6],'xs':1,'ys':1,'f':[{'e':'3-0.5*x','c':1,'d':[-2,2]},{'e':'x+1','c':1,'d':[2,5]}],'pts':[[2,2,'o','',1],[2,3,'o','',1],[2,0,'c','',2]],'lines':[[0,2,2,2,6,1],[0,3,2,3,6,1]]}</plot>
+<p>จากกราฟ จงหา $f(2)$, $\displaystyle\lim_{x\to2^-}f(x)$, $\displaystyle\lim_{x\to2^+}f(x)$ และ $\displaystyle\lim_{x\to2}f(x)$</p>
+<ans>
+<p>จุดทึบที่ x = 2 อยู่ที่ y = 0 → $f(2) = 0$ · เดินจากซ้ายเข้าหารู → $\displaystyle\lim_{x\to2^-}f(x) = 2$ · เดินจากขวา → $\displaystyle\lim_{x\to2^+}f(x) = 3$</p>
+<p>ซ้าย (2) ≠ ขวา (3) → <span class="final">$\lim_{x\to2}f(x)$ หาค่าไม่ได้</span> ทั้งที่ $f(2) = 0$ หาค่าได้</p>
+</ans></ex>
+<ex t="ฟังก์ชันหลายช่วง (piecewise)" lv="2">
+<p>$$f(x) = \begin{cases} x - 1 & ;\ x \lt 0\\ 0 & ;\ x = 0\\ x + 2 & ;\ x \gt 0\end{cases}$$ จงหา $\displaystyle\lim_{x\to0^-}f(x)$, $\displaystyle\lim_{x\to0^+}f(x)$ และ $\displaystyle\lim_{x\to0}f(x)$</p>
+<ans>
+<p>ฝั่งซ้าย (x &lt; 0) ใช้สูตร $x - 1$ → $0 - 1 = -1$ · ฝั่งขวา (x &gt; 0) ใช้ $x+2$ → $2$</p>
+<p>$-1 \ne 2$ → <span class="final">ลิมิตหาค่าไม่ได้</span></p>
+<plot class="sm">{'x':[-3,3],'y':[-4,5],'w':320,'h':240,'f':[{'e':'x-1','c':1,'d':[-3,0]},{'e':'x+2','c':2,'d':[0,3]}],'pts':[[0,-1,'o','',1],[0,2,'o','',2],[0,0,'c','',3]]}</plot>
+</ans></ex>
+<div class="widget" data-w="approach" data-fl="x-1" data-fr="x+2" data-fa="0" data-a="0" data-x="-3,3" data-y="-4,5" data-title="ลิมิตซ้าย ≠ ลิมิตขวา: ลองเลื่อนดู"></div>
+<ex t="ค่าสัมบูรณ์" lv="3">
+<p>จงหา $\displaystyle\lim_{x\to0}\frac{|x|}{x}$</p>
+<ans>
+<p>เมื่อ $x > 0$: $|x| = x$ จึงได้ $\frac{x}{x} = 1$ · เมื่อ $x \lt 0$: $|x| = -x$ จึงได้ $\frac{-x}{x} = -1$</p>
+<p>ลิมิตขวา = 1, ลิมิตซ้าย = −1 → <span class="final">หาค่าไม่ได้</span> (กราฟเป็นขั้นบันไดกระโดดที่ x = 0)</p>
+</ans></ex>
+
+<h2 id="s8">ลิมิตที่อนันต์และลิมิตอนันต์ <span class="chip o">เสริม</span></h2>
+<p>บางครั้งเราสนใจว่า <b>เมื่อ x ใหญ่ขึ้นไม่สิ้นสุด</b> ฟังก์ชันจะวิ่งไปหาค่าอะไร เช่น ค่าเฉลี่ยต้นทุนเมื่อผลิตเยอะ ๆ หรือความเร็วของอัลกอริทึมเมื่อข้อมูลใหญ่มาก</p>
+<p>หลักสำคัญ: $\displaystyle\lim_{x\to\infty}\frac{1}{x} = 0$ (หาร 1 ด้วยเลขมหาศาล ได้เกือบ 0) และ $\displaystyle\lim_{x\to\infty}\frac{k}{x^n} = 0$ สำหรับ $n > 0$</p>
+<plot>{'x':[-6,6],'y':[-5,5],'xs':1,'ys':1,'f':[{'e':'1/x','c':5,'lab':'y = 1/x','at':[1.2,3.8]}],'cap':'เมื่อ $x\\to\\infty$ กราฟแนบแกน x (เข้าใกล้ 0) ส่วนเมื่อ $x\\to0^+$ กราฟพุ่งขึ้น $+\\infty$'}</plot>
+<div class="box tip"><div class="box-t">⚡ ทางลัดฟังก์ชันตรรกยะ $\dfrac{P(x)}{Q(x)}$ เมื่อ $x\to\infty$ — เทียบกำลังสูงสุด</div>
+<ul><li>กำลังเศษ <b>น้อยกว่า</b> ส่วน → ลิมิต = 0</li><li>กำลัง <b>เท่ากัน</b> → ลิมิต = อัตราส่วนสัมประสิทธิ์ตัวหน้า</li><li>กำลังเศษ <b>มากกว่า</b> ส่วน → ±∞ (หาค่าไม่ได้)</li></ul></div>
+<ex t="ลิมิตเมื่อ x → ∞" lv="2">
+<ol class="qlist"><li>$\displaystyle\lim_{x\to\infty}\frac{3x^2+1}{x^2-5}$</li><li>$\displaystyle\lim_{x\to\infty}\frac{5x+2}{x^3+1}$</li><li>$\displaystyle\lim_{x\to\infty}\frac{2x^3}{x^2+4}$</li><li>$\displaystyle\lim_{x\to0}\frac{1}{x^2}$</li></ol>
+<ans><ol class="qlist">
+<li>หารทุกพจน์ด้วย $x^2$: $\dfrac{3 + 1/x^2}{1 - 5/x^2} \to \dfrac{3+0}{1-0} = $ <span class="final">3</span></li>
+<li>กำลังเศษ (1) &lt; ส่วน (3) → <span class="final">0</span></li>
+<li>กำลังเศษ (3) &gt; ส่วน (2) → โตไม่หยุด <span class="final">∞ (หาค่าไม่ได้)</span></li>
+<li>ทั้งซ้ายและขวา $x^2$ เป็นบวกเล็กมาก → $\frac1{x^2}\to+\infty$ <span class="final">∞ (หาค่าไม่ได้ แต่บอกได้ว่าพุ่งขึ้น)</span></li>
+</ol></ans></ex>
+
+<py>from sympy import symbols, limit, sqrt, oo
+x = symbols('x')
+print(limit((x**3 - 27)/(x - 3), x, 3))
+print(limit((sqrt(4 + x) - 2)/x, x, 0))
+print(limit(abs(x)/x, x, 0, '+'), limit(abs(x)/x, x, 0, '-'))
+print(limit((3*x**2 + 1)/(x**2 - 5), x, oo))</py>
+
+<review>
+<part>แทนค่าและทฤษฎีบท</part>
+<q>จงหา (ก) $\displaystyle\lim_{x\to2}(x^3 - 4x + 1)$ (ข) $\displaystyle\lim_{x\to-3}\frac{x+5}{x^2-1}$ (ค) $\displaystyle\lim_{x\to4}\sqrt{2x+1}$<sol><p>(ก) $8 - 8 + 1 = 1$ (ข) $\dfrac{2}{8} = \dfrac14$ (ค) $\sqrt9 = 3$</p></sol></q>
+<q>ถ้า $\displaystyle\lim_{x\to1}f(x) = 5$ และ $\displaystyle\lim_{x\to1}g(x) = 2$ จงหา $\displaystyle\lim_{x\to1}\frac{f(x) - 3g(x)}{[g(x)]^3}$<sol><p>$\dfrac{5 - 6}{8} = -\dfrac18$</p></sol></q>
+<part>รูปแบบ 0/0</part>
+<q h="แยกตัวประกอบ">จงหา $\displaystyle\lim_{x\to5}\frac{x^2-25}{x-5}$<sol><p>$\dfrac{(x-5)(x+5)}{x-5} = x + 5 \to 10$</p></sol></q>
+<q h="แยกตัวประกอบทั้งเศษและส่วน">จงหา $\displaystyle\lim_{x\to2}\frac{x^2-5x+6}{x^2-4}$<sol><p>$\dfrac{(x-2)(x-3)}{(x-2)(x+2)} = \dfrac{x-3}{x+2} \to -\dfrac14$</p></sol></q>
+<q h="ผลต่างกำลังสาม">จงหา $\displaystyle\lim_{x\to2}\frac{x^3-8}{x-2}$<sol><p>$\dfrac{(x-2)(x^2+2x+4)}{x-2} = x^2+2x+4 \to 12$</p></sol></q>
+<q h="ดึงตัวร่วม">จงหา $\displaystyle\lim_{x\to0}\frac{x^3 + 5x^2 - 2x}{x}$<sol><p>$\dfrac{x(x^2+5x-2)}{x} = x^2 + 5x - 2 \to -2$</p></sol></q>
+<q h="คอนจูเกต">จงหา $\displaystyle\lim_{x\to9}\frac{\sqrt x - 3}{x - 9}$<sol><p>$\dfrac{x - 9}{(x-9)(\sqrt x + 3)} = \dfrac{1}{\sqrt x+3} \to \dfrac16$</p></sol></q>
+<q h="คอนจูเกต">จงหา $\displaystyle\lim_{x\to0}\frac{\sqrt{x+1} - 1}{x}$<sol><p>$\dfrac{(x+1)-1}{x(\sqrt{x+1}+1)} = \dfrac{1}{\sqrt{x+1}+1} \to \dfrac12$</p></sol></q>
+<q>นิสิตคนหนึ่งตอบว่า $\displaystyle\lim_{x\to2}\frac{x+3}{x-2}$ “ต้องแยกตัวประกอบก่อน” ถูกหรือไม่ อธิบาย<sol><p>ไม่ถูก แทนค่าได้ $\dfrac{5}{0}$ ซึ่ง <b>ไม่ใช่</b> รูป $\tfrac00$ จึงสรุปได้ทันทีว่าลิมิต <b>หาค่าไม่ได้</b> (ลิมิตซ้ายพุ่ง −∞ ลิมิตขวาพุ่ง +∞)</p></sol></q>
+<part>ลิมิตซ้าย–ขวา</part>
+<q>กำหนด $f(x) = \begin{cases} 2x+1 &;\ x \lt 1\\ x^2 + 2 &;\ x \ge 1\end{cases}$ จงหา $\displaystyle\lim_{x\to1}f(x)$<sol><p>ซ้าย: $2(1)+1 = 3$ · ขวา: $1 + 2 = 3$ · เท่ากัน → $\displaystyle\lim_{x\to1}f(x) = 3$</p></sol></q>
+<q>กำหนด $f(x) = \begin{cases} x^2 &;\ x \lt 2\\ 7 &;\ x = 2 \\ 10 - 3x &;\ x \gt 2\end{cases}$ จงหา $f(2)$ และ $\displaystyle\lim_{x\to2}f(x)$<sol><p>$f(2) = 7$ · ซ้าย: 4 · ขวา: $10 - 6 = 4$ → $\displaystyle\lim_{x\to2}f(x) = 4$ (ลิมิตมีค่า แม้ไม่เท่ากับ f(2) — เรื่องนี้สำคัญมากในบทที่ 3)</p></sol></q>
+<q>จงหา $\displaystyle\lim_{x\to3}\frac{|x-3|}{x-3}$<sol><p>ขวา: $\frac{x-3}{x-3} = 1$ · ซ้าย: $\frac{-(x-3)}{x-3} = -1$ → ไม่เท่ากัน หาค่าไม่ได้</p></sol></q>
+<part>ลิมิตที่อนันต์ (เสริม)</part>
+<q>จงหา $\displaystyle\lim_{x\to\infty}\frac{4x^3 - x}{2x^3 + 7x^2}$ และ $\displaystyle\lim_{x\to\infty}\frac{100x}{x^2+1}$<sol><p>กำลังเท่ากัน → $\dfrac42 = 2$ · กำลังเศษน้อยกว่า → 0</p></sol></q>
+</review>

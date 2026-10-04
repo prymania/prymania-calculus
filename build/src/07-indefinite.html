@@ -1,0 +1,131 @@
+<div class="objectives"><div class="box-t">🎯 เมื่อเรียนจบบทนี้ นิสิตจะสามารถ</div><ol>
+<li>อธิบายว่าอินทิกรัลคือ “การดิฟย้อนกลับ” และทำไมต้องมี $+C$</li>
+<li>ใช้สูตรอินทิกรัลยกกำลัง และ $\int \frac1x\,dx = \ln|x| + C$ ได้</li>
+<li>จัดรูปฟังก์ชัน (กระจาย แยกเศษส่วน ตัดตัวร่วม) ก่อนอินทิเกรตได้</li>
+<li>หาค่าคงที่ $C$ จากเงื่อนไขที่โจทย์กำหนดได้</li>
+</ol></div>
+<!--TOC-->
+
+<h2 id="s1">อินทิกรัล = ดิฟย้อนกลับ</h2>
+<div class="machine">
+<div class="io">$\int f(x)\,dx$<small>อินทิกรัล</small></div>
+<div class="arr">⇄</div>
+<div class="mbox">$f(x)$<small>ฟังก์ชัน</small></div>
+<div class="arr">⇄</div>
+<div class="io">$f'(x)$<small>อนุพันธ์</small></div>
+</div>
+<p class="center">➡️ ดิฟ (derivative) ไปทางขวา &nbsp;·&nbsp; ⬅️ อินทิเกรต (integration) ย้อนกลับไปทางซ้าย</p>
+<p>ถ้าถามว่า “ฟังก์ชันอะไรเมื่อดิฟแล้วได้ $2x$?” คำตอบคือ $x^2$ — แต่ $x^2 + 5$, $x^2 - 100$ ดิฟก็ได้ $2x$ เหมือนกัน เพราะค่าคงที่ดิฟได้ 0 ดังนั้น</p>
+<div class="box formula"><div class="box-t">∫ ปฏิยานุพันธ์ (Antiderivative)</div>$$\int 2x\,dx = x^2 + C \qquad (C \text{ คือค่าคงที่ใด ๆ})$$
+<p>$\int$ อ่านว่า “อินทิกรัล” · $f(x)$ คือ <b>integrand</b> · $dx$ บอกว่าอินทิเกรตเทียบกับ x · เรียกว่า <b>อินทิกรัลไม่จำกัดเขต</b> เพราะยังไม่ได้กำหนดช่วง</p></div>
+<plot>{'x':[-3,3],'y':[-4,9],'xs':1,'ys':1,'f':[{'e':'x**2-3','c':5,'lab':'C = −3','at':[2.2,1.2]},{'e':'x**2','c':1,'lab':'C = 0','at':[2.3,5.6]},{'e':'x**2+3','c':2,'lab':'C = 3','at':[-2.25,8.4],'anchor':'end'}],'cap':'$\\int 2x\\,dx = x^2 + C$ คือ “ครอบครัวของกราฟ” ที่เลื่อนขึ้นลง — ทุกเส้นมีความชันเท่ากันที่ x เดียวกัน'}</plot>
+
+<h2 id="s2">สูตรอินทิกรัล</h2>
+<div class="fgrid">
+<div class="fcard"><h4>ยกกำลัง (สำคัญที่สุด)</h4>$$\int ax^n\,dx = \frac{a\,x^{n+1}}{n+1} + C,\ \ n \ne -1$$<p>“<b>บวกกำลังเพิ่ม 1 แล้วหารด้วยกำลังใหม่</b>” — ตรงข้ามกับการดิฟ</p></div>
+<div class="fcard"><h4>ค่าคงที่</h4>$$\int k\,dx = kx + C$$</div>
+<div class="fcard"><h4>ผลบวก/ผลต่าง</h4>$$\int [f \pm g]\,dx = \int f\,dx \pm \int g\,dx$$<p>อินทิเกรตทีละพจน์</p></div>
+<div class="fcard"><h4>กรณีพิเศษ n = −1</h4>$$\int \frac1x\,dx = \ln|x| + C,\ x\ne0$$<p>เพราะสูตรยกกำลังจะได้ $\frac{x^0}{0}$ ใช้ไม่ได้</p></div>
+</div>
+<div class="box warn"><div class="box-t">⚠️ ไม่มีสูตรผลคูณ / ผลหารแบบง่าย ๆ</div><p>$\int f\cdot g\,dx \ne \int f\,dx\cdot\int g\,dx$ — ถ้าเจอผลคูณหรือผลหาร ให้ <b>กระจาย / แยกพจน์ / ตัดตัวร่วม</b> จนเป็นผลบวกของ $x^n$ ก่อนเสมอ</p></div>
+<div class="box tip"><div class="box-t">✅ ตรวจคำตอบได้ทุกข้อ</div><p>ดิฟคำตอบที่ได้ ต้องกลับมาเป็นฟังก์ชันในอินทิกรัล — เช่น $\int 5x^4dx = x^5 + C$ ดิฟ $x^5$ ได้ $5x^4$ ✓</p></div>
+<ex t="สูตรยกกำลัง" lv="1">
+<ol class="qlist"><li>$\int x\,dx$</li><li>$\int x^3\,dx$</li><li>$\int 5x^4\,dx$</li><li>$\int 2\,dx$</li><li>$\int (2x^3 + 2x^2 - x)\,dx$</li><li>$\int (4x^5 - 2x^4 - x + 2)\,dx$</li><li>$\int (x^2 - 2x - 3)\,dx$</li><li>$\int (10x^4 + 10x^3 - 10x + 10)\,dx$</li></ol>
+<ans><ol class="qlist">
+<li>$\dfrac{x^2}{2} + C$</li><li>$\dfrac{x^4}{4} + C$</li><li>$x^5 + C$</li><li>$2x + C$</li><li>$\dfrac{x^4}{2} + \dfrac{2x^3}{3} - \dfrac{x^2}{2} + C$</li><li>$\dfrac{2x^6}{3} - \dfrac{2x^5}{5} - \dfrac{x^2}{2} + 2x + C$</li><li>$\dfrac{x^3}{3} - x^2 - 3x + C$</li><li>$2x^5 + \dfrac{5x^4}{2} - 5x^2 + 10x + C$</li>
+</ol></ans></ex>
+<ex t="กำลังลบ ราก และ 1/x" lv="2">
+<ol class="qlist"><li>$\int \sqrt x\,dx$</li><li>$\int \dfrac{1}{\sqrt x}\,dx$</li><li>$\int \dfrac{3}{x^2}\,dx$</li><li>$\int \dfrac{5}{x}\,dx$</li><li>$\int \left(x^2 + \dfrac{1}{x}\right)dx$</li></ol>
+<ans><ol class="qlist">
+<li>$\int x^{1/2}dx = \dfrac{x^{3/2}}{3/2} = \dfrac23x^{3/2} + C$</li>
+<li>$\int x^{-1/2}dx = \dfrac{x^{1/2}}{1/2} = 2\sqrt x + C$</li>
+<li>$\int 3x^{-2}dx = \dfrac{3x^{-1}}{-1} = -\dfrac{3}{x} + C$</li>
+<li>$5\ln|x| + C$</li>
+<li>$\dfrac{x^3}{3} + \ln|x| + C$</li>
+</ol></ans></ex>
+
+<h2 id="s3">จัดรูปก่อนอินทิเกรต</h2>
+<div class="flow"><div class="st">ผลคูณ?<small>กระจายออก</small></div><div class="st c">เศษส่วนที่ตัวส่วนพจน์เดียว?<small>แยกเป็นพจน์ ๆ</small></div><div class="st m">มีตัวร่วมเศษ–ส่วน?<small>แยกตัวประกอบแล้วตัด</small></div><div class="ar">➜</div><div class="st o">เหลือผลบวกของ $x^n$<small>ใช้สูตรได้</small></div></div>
+<ex t="กระจายก่อน" lv="2">
+<ol class="qlist"><li>$\int (x^2 - 2)(x + 5)\,dx$</li><li>$\int \dfrac{(x-5)^2}{5}\,dx$</li><li>$\int (2x+1)^2\,dx$</li></ol>
+<ans>
+<p><b>a)</b> $x^3 + 5x^2 - 2x - 10$ → <span class="final">$\dfrac{x^4}{4} + \dfrac{5x^3}{3} - x^2 - 10x + C$</span></p>
+<p><b>b)</b> $\dfrac{x^2 - 10x + 25}{5} = \tfrac15x^2 - 2x + 5$ → <span class="final">$\dfrac{x^3}{15} - x^2 + 5x + C$</span></p>
+<p><b>c)</b> $4x^2 + 4x + 1$ → <span class="final">$\dfrac{4x^3}{3} + 2x^2 + x + C$</span></p>
+</ans></ex>
+<ex t="ตัดตัวร่วม" lv="2">
+<ol class="qlist"><li>$\int \dfrac{x(x-5)^2}{x-5}\,dx$</li><li>$\int \dfrac{x(x^2+2x-3)}{x-1}\,dx$</li><li>$\int \dfrac{x^2-1}{(x+1)(x-1)}\,dx$</li></ol>
+<ans>
+<p><b>a)</b> $x(x-5) = x^2 - 5x$ → <span class="final">$\dfrac{x^3}{3} - \dfrac{5x^2}{2} + C$</span></p>
+<p><b>b)</b> $\dfrac{x(x-1)(x+3)}{x-1} = x^2 + 3x$ → <span class="final">$\dfrac{x^3}{3} + \dfrac{3x^2}{2} + C$</span></p>
+<p><b>c)</b> เศษกับส่วนเท่ากัน $= 1$ → <span class="final">$x + C$</span></p>
+</ans></ex>
+<ex t="แยกเศษส่วน" lv="3">
+<ol class="qlist"><li>$\int \dfrac{x^4 + 3x^2 + 5}{x^4}\,dx$</li><li>$\int \dfrac{x^2 + 4x + 1}{x}\,dx$</li><li>$\int \dfrac{(\sqrt x + 1)^2}{\sqrt x}\,dx$</li></ol>
+<ans>
+<p><b>a)</b> $1 + 3x^{-2} + 5x^{-4}$ → $x + \dfrac{3x^{-1}}{-1} + \dfrac{5x^{-3}}{-3}$ = <span class="final">$x - \dfrac3x - \dfrac{5}{3x^3} + C$</span></p>
+<p><b>b)</b> $x + 4 + \dfrac1x$ → <span class="final">$\dfrac{x^2}{2} + 4x + \ln|x| + C$</span></p>
+<p><b>c)</b> $\dfrac{x + 2\sqrt x + 1}{\sqrt x} = x^{1/2} + 2 + x^{-1/2}$ → <span class="final">$\tfrac23x^{3/2} + 2x + 2\sqrt x + C$</span></p>
+</ans></ex>
+
+<h2 id="s4">หาค่าคงที่ C — หาฟังก์ชันจริงจากอนุพันธ์</h2>
+<p>ถ้ารู้ $f'(x)$ และรู้ <b>จุดหนึ่งจุด</b> ที่กราฟผ่าน เราจะหา $C$ ได้ค่าเดียว → ได้ฟังก์ชันจริง (เลือกเส้นเดียวจากครอบครัวกราฟ)</p>
+<div class="box formula"><div class="box-t">🎯 ขั้นตอน</div><ol><li>$f(x) = \int f'(x)\,dx$ (ยังมี $+C$)</li><li>แทนเงื่อนไขที่โจทย์ให้ เช่น $f(10) = 800$</li><li>แก้สมการหา $C$ แล้วเขียน $f(x)$ ใหม่ (ตรวจคำตอบด้วยการแทนค่า)</li></ol></div>
+<ex t="หาฟังก์ชันจากอนุพันธ์" lv="1">
+<p>กำหนด $f'(x) = 3x^2 - 4x + 6$ และ $f(10) = 800$ จงหา $f(x)$</p>
+<ans>
+<p>$f(x) = x^3 - 2x^2 + 6x + C$ · แทน x = 10: $1000 - 200 + 60 + C = 800 \Rightarrow C = -60$</p>
+<p><span class="final">$f(x) = x^3 - 2x^2 + 6x - 60$</span> · ตรวจ: $f(10) = 860 - 60 = 800$ ✓</p>
+</ans></ex>
+<ex t="หาฟังก์ชันจากอนุพันธ์ (ฝึกต่อ)" lv="2">
+<ol class="qlist"><li>$f'(x) = 4x^3 - 6x^2 - 2x,\ f(1) = 0$</li><li>$f'(x) = 3x^2 - 2x,\ f(10) = 900$</li><li>$f'(x) = 6x^2 - 8x + 5,\ f(2) = 0$</li><li>$f'(x) = 3x^2,\ f(2) = 7$</li></ol>
+<ans>
+<p><b>a)</b> $x^4 - 2x^3 - x^2 + C$ · $1 - 2 - 1 + C = 0 \Rightarrow C = 2$ → $f(x) = x^4 - 2x^3 - x^2 + 2$</p>
+<p><b>b)</b> $x^3 - x^2 + C$ · $1000 - 100 + C = 900 \Rightarrow C = 0$ → $f(x) = x^3 - x^2$</p>
+<p><b>c)</b> $2x^3 - 4x^2 + 5x + C$ · $16 - 16 + 10 + C = 0 \Rightarrow C = -10$ → $f(x) = 2x^3 - 4x^2 + 5x - 10$</p>
+<p><b>d)</b> $x^3 + C$ · $8 + C = 7 \Rightarrow C = -1$ → $f(x) = x^3 - 1$</p>
+</ans></ex>
+<ex t="สมการเส้นโค้งจากความชัน" lv="2">
+<p>เส้นโค้งหนึ่งมีความชัน ณ จุดใด ๆ เท่ากับ $2x + 1$ และผ่านจุด $(1, 5)$ จงหาสมการเส้นโค้ง</p>
+<ans><p>$y = \int(2x+1)dx = x^2 + x + C$ · $5 = 1 + 1 + C \Rightarrow C = 3$ → <span class="final">$y = x^2 + x + 3$</span></p></ans></ex>
+<ex t="จากความเร็วหาตำแหน่ง" lv="2">
+<p>รถเคลื่อนที่ด้วยความเร็ว $v(t) = 3t^2 + 2$ เมตร/วินาที และที่ $t = 0$ อยู่ที่ตำแหน่ง $s = 5$ เมตร จงหา $s(t)$ และตำแหน่งที่ $t = 3$</p>
+<ans><p>ความเร็วคืออนุพันธ์ของตำแหน่ง → $s(t) = \int(3t^2 + 2)dt = t^3 + 2t + C$ · $s(0) = C = 5$</p>
+<p><span class="final">$s(t) = t^3 + 2t + 5$</span> · $s(3) = 27 + 6 + 5 = 38$ เมตร</p></ans></ex>
+
+<h2 id="s5">การอินทิเกรตโดยการแทนค่า <span class="chip o">เสริม</span></h2>
+<p>เป็น “กฎลูกโซ่ย้อนกลับ” ใช้เมื่อเห็น <b>ก้อนหนึ่ง กับ อนุพันธ์ของก้อนนั้น</b> คูณกันอยู่</p>
+<div class="box formula"><div class="box-t">🔁 แนวคิด</div><p>ให้ $u = $ ก้อนข้างใน → $du = u'\,dx$ → เปลี่ยนทั้งโจทย์ให้เป็นตัวแปร $u$ → อินทิเกรต → แทน $u$ กลับ</p></div>
+<ex t="แทนค่า u" lv="3">
+<ol class="qlist"><li>$\int 2x(x^2+1)^3\,dx$</li><li>$\int (3x+1)^5\,dx$</li><li>$\int x^2\sqrt{x^3 + 4}\,dx$</li></ol>
+<ans>
+<p><b>a)</b> $u = x^2 + 1,\ du = 2x\,dx$ → $\int u^3du = \dfrac{u^4}{4}$ = <span class="final">$\dfrac{(x^2+1)^4}{4} + C$</span></p>
+<p><b>b)</b> $u = 3x + 1,\ du = 3dx \Rightarrow dx = \tfrac13du$ → $\tfrac13\int u^5du = \dfrac{u^6}{18}$ = <span class="final">$\dfrac{(3x+1)^6}{18} + C$</span></p>
+<p><b>c)</b> $u = x^3 + 4,\ du = 3x^2dx$ → $\tfrac13\int u^{1/2}du = \tfrac13\cdot\tfrac23u^{3/2}$ = <span class="final">$\tfrac29(x^3+4)^{3/2} + C$</span></p>
+</ans></ex>
+
+<py>from sympy import symbols, integrate, solve, Eq
+x, C = symbols('x C')
+print(integrate((x**2 - 2)*(x + 5), x))
+print(integrate((x**4 + 3*x**2 + 5)/x**4, x))
+F = integrate(3*x**2 - 4*x + 6, x) + C
+print("C =", solve(Eq(F.subs(x, 10), 800), C))
+print(integrate(2*x*(x**2 + 1)**3, x).factor())</py>
+
+<review>
+<part>สูตรพื้นฐาน</part>
+<q>จงหา (ก) $\int (6x^2 - 4x + 7)\,dx$ (ข) $\int (x^5 - x^{-3})\,dx$ (ค) $\int 0\,dx$<sol><p>(ก) $2x^3 - 2x^2 + 7x + C$ (ข) $\dfrac{x^6}{6} + \dfrac{1}{2x^2} + C$ (ค) $C$</p></sol></q>
+<q>จงหา $\int \left(\dfrac{4}{x^3} - 3\sqrt x\right)dx$<sol><p>$\int (4x^{-3} - 3x^{1/2})dx = -2x^{-2} - 2x^{3/2} + C = -\dfrac{2}{x^2} - 2x^{3/2} + C$</p></sol></q>
+<q h="ดิฟคำตอบดู">นิสิตตอบว่า $\int 3x^2\,dx = 6x + C$ ผิดตรงไหน<sol><p>สับสนกับการดิฟ · ที่ถูกคือ $\dfrac{3x^3}{3} = x^3 + C$ · ตรวจ: ดิฟ $x^3$ ได้ $3x^2$ ✓ (ส่วนดิฟ $6x$ ได้ 6 ✗)</p></sol></q>
+<q>จงหา $\int \dfrac{2}{x}\,dx$ และ $\int \dfrac{x+1}{x}\,dx$<sol><p>$2\ln|x| + C$ · $\int(1 + \tfrac1x)dx = x + \ln|x| + C$</p></sol></q>
+<part>จัดรูปก่อน</part>
+<q>จงหา $\int (x+3)(x-3)\,dx$<sol><p>$\int(x^2 - 9)dx = \dfrac{x^3}{3} - 9x + C$</p></sol></q>
+<q>จงหา $\int \dfrac{x^3 - 2x^2 + x}{x}\,dx$<sol><p>$\int(x^2 - 2x + 1)dx = \dfrac{x^3}{3} - x^2 + x + C$</p></sol></q>
+<q h="แยกตัวประกอบ">จงหา $\int \dfrac{x^2 - 4}{x - 2}\,dx$<sol><p>$\int(x + 2)dx = \dfrac{x^2}{2} + 2x + C$</p></sol></q>
+<q>จงหา $\int x^2(x^3 - 2)\,dx$ (โดยกระจาย)<sol><p>$\int(x^5 - 2x^2)dx = \dfrac{x^6}{6} - \dfrac{2x^3}{3} + C$</p></sol></q>
+<part>หาค่า C</part>
+<q>กำหนด $f'(x) = 4x - 3$ และ $f(2) = 5$ จงหา $f(x)$<sol><p>$f = 2x^2 - 3x + C$ · $8 - 6 + C = 5 \Rightarrow C = 3$ → $f(x) = 2x^2 - 3x + 3$</p></sol></q>
+<q>กำหนด $f'(x) = x^2 + 2x$ และ $f(0) = -4$ จงหา $f(3)$<sol><p>$f = \dfrac{x^3}{3} + x^2 + C$ · $C = -4$ → $f(3) = 9 + 9 - 4 = 14$</p></sol></q>
+<q h="อินทิเกรต 2 ครั้ง">กำหนด $f''(x) = 6x$, $f'(1) = 5$ และ $f(0) = 2$ จงหา $f(x)$<sol><p>$f' = 3x^2 + C_1$ · $3 + C_1 = 5 \Rightarrow C_1 = 2$ · $f = x^3 + 2x + C_2$ · $C_2 = 2$ → $f(x) = x^3 + 2x + 2$</p></sol></q>
+<q>เส้นโค้งมีความชัน $3x^2 - 6x$ และผ่านจุด $(2, 1)$ จงหาสมการเส้นโค้ง<sol><p>$y = x^3 - 3x^2 + C$ · $8 - 12 + C = 1 \Rightarrow C = 5$ → $y = x^3 - 3x^2 + 5$</p></sol></q>
+</review>

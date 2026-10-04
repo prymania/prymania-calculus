@@ -1,0 +1,192 @@
+<div class="objectives"><div class="box-t">🎯 เมื่อเรียนจบบทนี้ นิสิตจะสามารถ</div><ol>
+<li>หาอัตราการเปลี่ยนแปลงเฉลี่ย และอธิบายว่าคือความชันของเส้นตัด (secant)</li>
+<li>หาอนุพันธ์จากนิยาม $\displaystyle\lim_{h\to0}\frac{f(x+h)-f(x)}{h}$ ได้</li>
+<li>ใช้สูตรดิฟค่าคงที่ ยกกำลัง ผลคูณ ผลหาร และกฎลูกโซ่ได้คล่อง</li>
+<li>หาอนุพันธ์ของฟังก์ชันประกอบ และอนุพันธ์อันดับสูงได้</li>
+</ol></div>
+<!--TOC-->
+
+<h2 id="s1">อัตราการเปลี่ยนแปลงเฉลี่ย</h2>
+<p>ขับรถจากมหาสารคามไปขอนแก่น 75 กม. ใช้เวลา 1.5 ชม. → <b>ความเร็วเฉลี่ย</b> $= \dfrac{75}{1.5} = 50$ กม./ชม. นี่แหละคือ “อัตราการเปลี่ยนแปลงเฉลี่ย”: ระยะทางเปลี่ยนไปเท่าไร ต่อเวลาที่เปลี่ยนไป</p>
+<div class="box formula"><div class="box-t">📐 อัตราการเปลี่ยนแปลงเฉลี่ย เมื่อ x เปลี่ยนจาก $x$ เป็น $x + h$</div>
+$$\frac{\Delta y}{\Delta x} = \frac{f(x+h) - f(x)}{(x+h) - x} = \frac{f(x+h) - f(x)}{h} \quad\text{หรือ}\quad \frac{f(x_2) - f(x_1)}{x_2 - x_1}$$
+<p>ในทางกราฟ คือ <b>ความชันของเส้นตัด (secant line)</b> ที่ลากผ่านสองจุดบนกราฟ</p></div>
+<plot>{'x':[-0.5,4.5],'y':[-1,12],'xs':1,'ys':2,'f':[{'e':'x**2/2+1','c':1,'lab':'y = f(x)','at':[3.9,10.2],'anchor':'end'},{'e':'2*x-0.5','c':2,'lab':'เส้นตัด','at':[0.4,1.4]}],'lines':[[1,1.5,3,1.5,4,1],[3,1.5,3,5.5,3,1]],'pts':[[1,1.5,'c','(x, f(x))',1,'nw'],[3,5.5,'c','(x+h, f(x+h))',2,'nw']],'text':[[2,0.6,'h = Δx',4],[3.1,3.5,'Δy',3,'start']],'cap':'อัตราการเปลี่ยนแปลงเฉลี่ย = ความชันของเส้นตัดที่ผ่าน 2 จุด'}</plot>
+<ex t="อัตราการเปลี่ยนแปลงเฉลี่ย" lv="1">
+<p>$f(x) = 2x + 1$ เมื่อ x เปลี่ยนจาก 1 เป็น 3</p>
+<ans><p>$f(1) = 3,\ f(3) = 7$ → $\dfrac{7 - 3}{3 - 1} = $ <span class="final">2</span> (เส้นตรง อัตราเฉลี่ยเท่ากับความชันเสมอ)</p></ans></ex>
+<ex t="อัตราการเปลี่ยนแปลงเฉลี่ย (ชุดฝึก)" lv="2">
+<ol class="qlist"><li>$f(x) = x^2 + 5$ เมื่อ x เปลี่ยนจาก 1 เป็น 8</li><li>$f(x) = x^2 - 5x$ เมื่อ x เปลี่ยนจาก −10 เป็น 10</li><li>$f(x) = \dfrac{x-2}{x+2}$ เมื่อ x เปลี่ยนจาก −5 เป็น 5</li><li>$f(x) = 3x^2 + 2x + 7$ เมื่อ x เปลี่ยนจาก 0 เป็น 10</li></ol>
+<ans><ol class="qlist">
+<li>$\dfrac{(64+5) - (1+5)}{8 - 1} = \dfrac{63}{7} = $ <span class="final">9</span></li>
+<li>$f(10) = 50,\ f(-10) = 150$ → $\dfrac{50 - 150}{20} = $ <span class="final">−5</span></li>
+<li>$f(5) = \tfrac37,\ f(-5) = \tfrac{-7}{-3} = \tfrac73$ → $\dfrac{\frac37 - \frac73}{10} = \dfrac{-\frac{40}{21}}{10} = $ <span class="final">−4/21 ≈ −0.19</span></li>
+<li>$f(10) = 327,\ f(0) = 7$ → $\dfrac{320}{10} = $ <span class="final">32</span></li>
+</ol></ans></ex>
+
+<h2 id="s2">อัตราการเปลี่ยนแปลงขณะใด ๆ = อนุพันธ์</h2>
+<p>มาตรวัดความเร็วในรถไม่ได้บอกความเร็วเฉลี่ย แต่บอกความเร็ว <b>ณ วินาทีนั้น</b> — ทำได้โดยให้ช่วงเวลา $h$ <span class="hl">เล็กลงจนเข้าใกล้ 0</span> นั่นคือใช้ลิมิตจากบทที่ 2!</p>
+<div class="box formula"><div class="box-t">⭐ นิยามอนุพันธ์ (Derivative)</div>
+$$f'(x) = \lim_{h\to0}\frac{f(x+h) - f(x)}{h}$$
+<p>เขียนแทนได้หลายแบบ: $f'(x),\ y',\ \dfrac{dy}{dx},\ \dfrac{d}{dx}f(x)$ — เรียกการหาอนุพันธ์ว่า “<b>การดิฟ</b>” (differentiate)</p>
+<p>ในทางกราฟ $f'(a)$ = <b>ความชันของเส้นสัมผัส (tangent line)</b> ที่จุด $x = a$</p></div>
+<div class="widget" data-w="secant" data-f="x^2/2+1" data-x0="1" data-x="-1,4.5" data-y="-1,11"></div>
+<p>ลองเลื่อน h ให้เล็กลง: จุด Q ไหลเข้าหา P และเส้นตัดสีชมพูค่อย ๆ ทับเส้นสัมผัสสีเขียว — <b>ความชันของเส้นตัดวิ่งเข้าหาความชันของเส้นสัมผัส</b> นี่คือความหมายของอนุพันธ์</p>
+<ex t="ดิฟจากนิยาม" lv="2">
+<p>หาอัตราการเปลี่ยนแปลงขณะใด ๆ ของ $f(x) = x^2 + 5$ แล้วหาค่าเมื่อ $x = 1$</p>
+<ans>
+$$\begin{aligned}f'(x) &= \lim_{h\to0}\frac{[(x+h)^2+5] - [x^2+5]}{h} = \lim_{h\to0}\frac{x^2+2xh+h^2+5-x^2-5}{h}\\ &= \lim_{h\to0}\frac{2xh+h^2}{h} = \lim_{h\to0}\frac{h(2x+h)}{h} = \lim_{h\to0}(2x+h) = 2x\end{aligned}$$
+<p>เมื่อ $x = 1$: $f'(1) = $ <span class="final">2</span></p>
+</ans></ex>
+<ex t="ดิฟจากนิยาม (ฝึกต่อ)" lv="3">
+<ol class="qlist"><li>$f(x) = 3x^2 - 5$ ขณะ $x = 10$</li><li>$f(x) = x^3 - x^2$ ขณะ $x = 5$</li></ol>
+<ans>
+<p><b>a)</b> $f(x+h) - f(x) = 3(x^2+2xh+h^2) - 5 - 3x^2 + 5 = 6xh + 3h^2$</p>
+$$f'(x) = \lim_{h\to0}\frac{6xh+3h^2}{h} = \lim_{h\to0}(6x+3h) = 6x \quad\Rightarrow\quad f'(10) = 60$$
+<p><b>b)</b> ใช้ $(x+h)^3 = x^3 + 3x^2h + 3xh^2 + h^3$</p>
+$$\begin{aligned}f(x+h)-f(x) &= (3x^2h + 3xh^2 + h^3) - (2xh + h^2)\\ f'(x) &= \lim_{h\to0}(3x^2 + 3xh + h^2 - 2x - h) = 3x^2 - 2x\end{aligned}$$
+<p>$f'(5) = 75 - 10 = $ <span class="final">65</span></p>
+</ans></ex>
+<div class="box tip"><div class="box-t">😮‍💨 นิยามยาวไปไหม?</div><p>ใช่! เลยมีคนสรุปเป็น <b>สูตร</b> ไว้ให้ใช้ (หัวข้อถัดไป) แต่ต้องเข้าใจที่มาก่อนว่าสูตรทั้งหมดมาจากลิมิตตัวนี้</p></div>
+
+<h2 id="s3">สูตรการดิฟพื้นฐาน</h2>
+<div class="fgrid">
+<div class="fcard"><h4>1. ดิฟค่าคงที่</h4>$$\frac{d}{dx}C = 0$$<p>เส้นนอน ความชัน = 0</p></div>
+<div class="fcard"><h4>2. ดิฟเลขยกกำลัง (Power rule)</h4>$$\frac{d}{dx}ax^n = (n\cdot a)\,x^{n-1}$$<p>“เอากำลังลงมาคูณ แล้วลดกำลังลง 1”</p></div>
+<div class="fcard"><h4>3. ดิฟผลบวก/ผลต่าง</h4>$$\frac{d}{dx}[f \pm g] = f' \pm g'$$<p>ดิฟทีละพจน์ได้เลย</p></div>
+<div class="fcard"><h4>4. ใช้กับกำลังลบ/เศษส่วนได้</h4>$$\frac{d}{dx}\frac{1}{x} = -\frac{1}{x^2},\ \ \frac{d}{dx}\sqrt x = \frac{1}{2\sqrt x}$$<p>เขียน $\frac1x = x^{-1}$, $\sqrt x = x^{1/2}$ ก่อน</p></div>
+</div>
+<ex t="สูตรยกกำลัง" lv="1">
+<ol class="qlist">
+<li>$\dfrac{d}{dx}100$</li><li>$\dfrac{d}{dx}x^2$</li><li>$\dfrac{d}{dx}3x^5$</li><li>$\dfrac{d}{dx}(3x^5 + 20x + 2)$</li><li>$\dfrac{d}{dx}(3x^{10} - 20x^2 + 2x - 7)$</li><li>$\dfrac{d}{dx}(-5x^8 - 4x^3 - 10x - 3)$</li>
+<li>$\dfrac{d}{dx}\left(\tfrac14x^4 - \tfrac13x^3 - \tfrac14x^2 - 3\right)$</li><li>$\dfrac{d}{dx}\left(\tfrac15x^5 - \tfrac23x^3 + \tfrac12x^2 + 3\right)$</li>
+</ol>
+<ans><ol class="qlist">
+<li>$0$</li><li>$2x$</li><li>$15x^4$</li><li>$15x^4 + 20$</li><li>$30x^9 - 40x + 2$</li><li>$-40x^7 - 12x^2 - 10$</li><li>$x^3 - x^2 - \tfrac12x$</li><li>$x^4 - 2x^2 + x$</li>
+</ol></ans></ex>
+<ex t="กำลังลบและราก" lv="2">
+<ol class="qlist"><li>$y = \dfrac{4}{x^3}$</li><li>$y = 6\sqrt x$</li><li>$y = x^2 + \dfrac{1}{x} - \dfrac{2}{x^2}$</li><li>$y = \sqrt[3]{x^2}$</li></ol>
+<ans><ol class="qlist">
+<li>$4x^{-3} \to -12x^{-4} = -\dfrac{12}{x^4}$</li><li>$6x^{1/2} \to 3x^{-1/2} = \dfrac{3}{\sqrt x}$</li><li>$2x - x^{-2} + 4x^{-3} = 2x - \dfrac1{x^2} + \dfrac4{x^3}$</li><li>$x^{2/3} \to \tfrac23x^{-1/3} = \dfrac{2}{3\sqrt[3]{x}}$</li>
+</ol></ans></ex>
+
+<h2 id="s4">ดิฟผลคูณและผลหาร</h2>
+<div class="box warn"><div class="box-t">❌ ข้อผิดพลาดยอดฮิต</div><p>$\dfrac{d}{dx}[f\cdot g] \ne f'\cdot g'$ — ดิฟผลคูณ <b>ไม่ใช่</b> เอาดิฟมาคูณกัน! เช่น $x\cdot x = x^2$ ดิฟได้ $2x$ แต่ $1 \cdot 1 = 1$</p></div>
+<div class="fgrid">
+<div class="fcard"><h4>ดิฟผลคูณ</h4>$$\frac{d}{dx}(\text{หน้า}\cdot\text{หลัง}) = \text{หน้า}\cdot\text{หลัง}' + \text{หลัง}\cdot\text{หน้า}'$$</div>
+<div class="fcard"><h4>ดิฟผลหาร</h4>$$\frac{d}{dx}\left(\frac{\text{บน}}{\text{ล่าง}}\right) = \frac{\text{ล่าง}\cdot\text{บน}' - \text{บน}\cdot\text{ล่าง}'}{(\text{ล่าง})^2}$$<p>ท่องว่า “<b>ล่างดิฟบน ลบ บนดิฟล่าง ส่วนล่างกำลังสอง</b>”</p></div>
+</div>
+<ex t="ดิฟผลคูณ" lv="2">
+<ol class="qlist"><li>$\dfrac{d}{dx}(x+2)(3x^5+x)$</li><li>$\dfrac{d}{dx}(3x^5+2x)(-x^3+2x^2)$</li><li>$\dfrac{d}{dx}(-4x^3)(-2x^3-x-5)$</li></ol>
+<ans>
+<p><b>a)</b> $(x+2)(15x^4+1) + (3x^5+x)(1) = 15x^5 + 30x^4 + x + 2 + 3x^5 + x$ = <span class="final">$18x^5 + 30x^4 + 2x + 2$</span></p>
+<p><b>b)</b> $(3x^5+2x)(-3x^2+4x) + (-x^3+2x^2)(15x^4+2)$</p>
+$$= (-9x^7 + 12x^6 - 6x^3 + 8x^2) + (-15x^7 + 30x^6 - 2x^3 + 4x^2)$$
+<p>= <span class="final">$-24x^7 + 42x^6 - 8x^3 + 12x^2$</span></p>
+<p><b>c)</b> $(-4x^3)(-6x^2-1) + (-2x^3-x-5)(-12x^2) = (24x^5 + 4x^3) + (24x^5 + 12x^3 + 60x^2)$ = <span class="final">$48x^5 + 16x^3 + 60x^2$</span></p>
+<p>💡 <b>ตรวจแบบที่ 2</b>: กระจายก่อนแล้วดิฟ เช่น (a) $(x+2)(3x^5+x) = 3x^6 + 6x^5 + x^2 + 2x$ ดิฟได้ $18x^5 + 30x^4 + 2x + 2$ ✓ เหมือนกัน</p>
+</ans></ex>
+<ex t="ดิฟผลหาร" lv="2">
+<ol class="qlist"><li>$\dfrac{d}{dx}\left(\dfrac{x^2-2x+5}{x^2-3x}\right)$</li><li>$\dfrac{d}{dx}\left(\dfrac{x^3-4x^2}{2x^2}\right)$</li><li>$\dfrac{d}{dx}\left(\dfrac{3x^4-5x^3+1}{x^2}\right)$</li><li>$\dfrac{d}{dx}\left(\dfrac{2x+1}{x-3}\right)$</li></ol>
+<ans>
+<p><b>a)</b> $$\frac{(x^2-3x)(2x-2) - (x^2-2x+5)(2x-3)}{(x^2-3x)^2} = \frac{(2x^3-8x^2+6x) - (2x^3-7x^2+16x-15)}{(x^2-3x)^2} = \frac{-x^2-10x+15}{(x^2-3x)^2}$$</p>
+<p><b>b)</b> ลดรูปก่อนง่ายกว่า: $\dfrac{x^3-4x^2}{2x^2} = \dfrac{x}{2} - 2$ → ดิฟได้ <span class="final">1/2</span> (ใช้สูตรผลหารก็ได้ $\frac{2x^4}{4x^4} = \frac12$ เท่ากัน)</p>
+<p><b>c)</b> แยกพจน์: $3x^2 - 5x + x^{-2}$ → <span class="final">$6x - 5 - \dfrac{2}{x^3}$</span></p>
+<p><b>d)</b> $\dfrac{(x-3)(2) - (2x+1)(1)}{(x-3)^2} = $ <span class="final">$\dfrac{-7}{(x-3)^2}$</span></p>
+</ans></ex>
+<div class="box tip"><div class="box-t">🧠 ทริค: ถ้าตัวส่วนเป็นพจน์เดียว แยกเศษส่วนก่อน</div><p>$\dfrac{3x^4 - 5x^3 + 1}{x^2} = 3x^2 - 5x + x^{-2}$ แล้วใช้สูตรยกกำลังทีละตัว เร็วกว่าและพลาดน้อยกว่าสูตรผลหารมาก</p></div>
+
+<h2 id="s5">กฎลูกโซ่ (Chain Rule)</h2>
+<p>ใช้เมื่อเจอ <b>“ฟังก์ชันซ้อนฟังก์ชัน”</b> เช่น $(x^2+2x)^4$ — ถ้าจะกระจายยกกำลังสี่คงเหนื่อยมาก</p>
+<div class="box formula"><div class="box-t">⛓️ กฎลูกโซ่</div>
+<p>ถ้า $y = f(u)$ และ $u = g(x)$ แล้ว $$\frac{dy}{dx} = \frac{dy}{du}\cdot\frac{du}{dx}$$</p>
+<p><b>ทางลัด</b>: <span class="hl">ดิฟก้อนนอก (ไส้ในอยู่เหมือนเดิม) × ดิฟไส้ใน</span></p>
+$$\frac{d}{dx}[\,\text{ก้อน}\,]^n = n[\,\text{ก้อน}\,]^{n-1}\cdot\frac{d}{dx}[\,\text{ก้อน}\,]$$</div>
+<div class="machine"><div class="io">$(x^2+2x)^4$</div><div class="arr">➜</div><div class="mbox" style="font-size:15px">$4(x^2+2x)^3$<small>ดิฟก้อนนอก</small></div><div class="arr">×</div><div class="mbox" style="font-size:15px;background:linear-gradient(135deg,var(--coral),#c2412f);box-shadow:0 6px 0 #8f2a1f">$(2x+2)$<small>ดิฟไส้ใน</small></div></div>
+<ex t="กฎลูกโซ่แบบเต็ม" lv="1">
+<p>หาอนุพันธ์ของ $y = (x+5)^3$ โดยใช้กฎลูกโซ่</p>
+<ans>
+<p>ให้ $u = x + 5$ จะได้ $y = u^3$ · $\dfrac{dy}{du} = 3u^2$ · $\dfrac{du}{dx} = 1$</p>
+<p>$\dfrac{dy}{dx} = 3u^2\cdot 1 = $ <span class="final">$3(x+5)^2$</span></p>
+</ans></ex>
+<ex t="ทางลัดกฎลูกโซ่" lv="2">
+<ol class="qlist"><li>$\dfrac{d}{dx}(x^2+2x)^4$</li><li>$\dfrac{d}{dx}(x^3-3x^2)^3$</li><li>$\dfrac{d}{dx}(x^4-4x^3+2x)^3$</li><li>$\dfrac{d}{dx}(5-2x)^7$</li><li>$\dfrac{d}{dx}\sqrt{x^2+1}$</li><li>$\dfrac{d}{dx}\dfrac{1}{(3x-1)^2}$</li></ol>
+<ans><ol class="qlist">
+<li>$4(x^2+2x)^3(2x+2) = 8(x+1)(x^2+2x)^3$</li>
+<li>$3(x^3-3x^2)^2(3x^2-6x)$</li>
+<li>$3(x^4-4x^3+2x)^2(4x^3-12x^2+2)$</li>
+<li>$7(5-2x)^6\cdot(-2) = -14(5-2x)^6$ &nbsp;<small>(อย่าลืมดิฟไส้ใน −2!)</small></li>
+<li>$(x^2+1)^{1/2} \to \tfrac12(x^2+1)^{-1/2}\cdot 2x = \dfrac{x}{\sqrt{x^2+1}}$</li>
+<li>$(3x-1)^{-2} \to -2(3x-1)^{-3}\cdot 3 = \dfrac{-6}{(3x-1)^3}$</li>
+</ol></ans></ex>
+
+<h2 id="s6">ดิฟฟังก์ชันประกอบ $(f\circ g)'$</h2>
+<div class="box formula"><div class="box-t">🔗 สูตร (คือกฎลูกโซ่ในอีกรูปแบบ)</div>
+$$(f\circ g)'(x) = f'(g(x))\cdot g'(x)$$
+<p>ขั้นตอน: หา $f'$ และ $g'$ ก่อน → เอา $g(x)$ ไปแทนใน $f'$ → คูณด้วย $g'(x)$</p></div>
+<ex t="ฟังก์ชันประกอบ" lv="2">
+<p>กำหนด $f(x) = 2x^2 + 3$ และ $g(x) = 3x + 5$ จงหา $(f\circ g)'(x)$ และ $(g\circ f)'(x)$</p>
+<ans>
+<p>$f'(x) = 4x$, $g'(x) = 3$</p>
+<p>$(f\circ g)'(x) = f'(g(x))\cdot g'(x) = 4(3x+5)\cdot 3 = $ <span class="final">$12(3x+5)$</span></p>
+<p>$(g\circ f)'(x) = g'(f(x))\cdot f'(x) = 3\cdot 4x = $ <span class="final">$12x$</span> &nbsp;(เพราะ $g'$ เป็นค่าคงที่ 3 แทนอะไรก็ได้ 3)</p>
+</ans></ex>
+<ex t="ฟังก์ชันประกอบ (ฝึกต่อ)" lv="2">
+<ol class="qlist"><li>$f(x) = x^2 - 3,\ g(x) = 2x^2 + 3x + 5$</li><li>$f(x) = 2x - 3,\ g(x) = 5x^3$</li><li>$f(x) = 3x^2 - 3,\ g(x) = x^2 + 3x$</li></ol>
+<p>จงหา $(f\circ g)'(x)$ และ $(g\circ f)'(x)$ ของแต่ละข้อ</p>
+<ans>
+<p><b>a)</b> $f' = 2x,\ g' = 4x+3$ → $(f\circ g)' = 2(2x^2+3x+5)(4x+3)$ · $(g\circ f)' = [4(x^2-3)+3](2x) = (4x^2-9)(2x)$</p>
+<p><b>b)</b> $f' = 2,\ g' = 15x^2$ → $(f\circ g)' = 2\cdot15x^2 = 30x^2$ · $(g\circ f)' = 15(2x-3)^2\cdot 2 = 30(2x-3)^2$</p>
+<p><b>c)</b> $f' = 6x,\ g' = 2x+3$ → $(f\circ g)' = 6(x^2+3x)(2x+3)$ · $(g\circ f)' = [2(3x^2-3)+3](6x) = (6x^2-3)(6x) = 36x^3 - 18x$</p>
+</ans></ex>
+
+<h2 id="s7">อนุพันธ์อันดับสูง</h2>
+<p>ดิฟซ้ำไปเรื่อย ๆ ได้: $f'(x) = \dfrac{dy}{dx}$ (อันดับ 1), $f''(x) = \dfrac{d^2y}{dx^2}$ (อันดับ 2), $f'''(x) = \dfrac{d^3y}{dx^3}$ (อันดับ 3)</p>
+<div class="vs3 vs">
+<div class="neu"><h4>📍 ตำแหน่ง $s(t)$</h4><p>รถอยู่ตรงไหน</p></div>
+<div class="warm"><h4>🚗 ความเร็ว $v(t) = s'(t)$</h4><p>ตำแหน่งเปลี่ยนเร็วแค่ไหน</p></div>
+<div class="good"><h4>🚀 ความเร่ง $a(t) = s''(t)$</h4><p>ความเร็วเปลี่ยนเร็วแค่ไหน</p></div>
+</div>
+<ex t="อนุพันธ์อันดับ 1, 2, 3" lv="1">
+<ol class="qlist"><li>$f(x) = 5x^3 - 10x^2 + 3x$</li><li>$f(x) = 5x^4 - 10x^3 + 3x - 7$</li><li>$f(x) = 10x^5 - 7x^3 - 3x^2 - x$</li></ol>
+<ans>
+<p><b>a)</b> $f' = 15x^2 - 20x + 3$ · $f'' = 30x - 20$ · $f''' = 30$</p>
+<p><b>b)</b> $f' = 20x^3 - 30x^2 + 3$ · $f'' = 60x^2 - 60x$ · $f''' = 120x - 60$</p>
+<p><b>c)</b> $f' = 50x^4 - 21x^2 - 6x - 1$ · $f'' = 200x^3 - 42x - 6$ · $f''' = 600x^2 - 42$</p>
+</ans></ex>
+<ex t="การเคลื่อนที่" lv="2">
+<p>วัตถุเคลื่อนที่โดยมีตำแหน่ง $s(t) = t^3 - 6t^2 + 9t$ เมตร ($t$ วินาที) จงหาความเร็วและความเร่งที่ $t = 2$ และหาว่าวัตถุหยุดนิ่งเมื่อใด</p>
+<ans>
+<p>$v(t) = 3t^2 - 12t + 9$ → $v(2) = 12 - 24 + 9 = -3$ ม./วินาที (เคลื่อนที่ถอยหลัง)</p>
+<p>$a(t) = 6t - 12$ → $a(2) = 0$ ม./วินาที²</p>
+<p>หยุดนิ่งเมื่อ $v = 0$: $3(t^2 - 4t + 3) = 3(t-1)(t-3) = 0$ → <span class="final">t = 1 และ t = 3 วินาที</span></p>
+</ans></ex>
+
+<py>from sympy import symbols, diff, simplify, sqrt, factor
+x = symbols('x')
+print(diff((x + 2)*(3*x**5 + x), x).expand())
+print(factor(diff((x**2 - 2*x + 5)/(x**2 - 3*x), x)))
+print(diff((x**2 + 2*x)**4, x))
+print(diff(sqrt(x**2 + 1), x))
+print(diff(5*x**3 - 10*x**2 + 3*x, x, 2))   # อนุพันธ์อันดับ 2</py>
+
+<review>
+<part>อัตราการเปลี่ยนแปลงและนิยาม</part>
+<q>จงหาอัตราการเปลี่ยนแปลงเฉลี่ยของ $f(x) = x^3 - 2x$ เมื่อ x เปลี่ยนจาก 1 เป็น 3<sol><p>$f(3) = 21,\ f(1) = -1$ → $\dfrac{21 - (-1)}{2} = 11$</p></sol></q>
+<q h="ใช้นิยามลิมิต">จงใช้นิยามหาอนุพันธ์ของ $f(x) = 4x^2 + x$<sol>$$f'(x) = \lim_{h\to0}\frac{4(x+h)^2 + (x+h) - 4x^2 - x}{h} = \lim_{h\to0}\frac{8xh + 4h^2 + h}{h} = \lim_{h\to0}(8x + 4h + 1) = 8x + 1$$</sol></q>
+<part>สูตรพื้นฐาน</part>
+<q>จงหา $y'$ เมื่อ (ก) $y = 7x^6 - 3x^4 + x - 12$ (ข) $y = \tfrac13x^6 + \tfrac12x^4 - 5$ (ค) $y = \pi^2$<sol><p>(ก) $42x^5 - 12x^3 + 1$ (ข) $2x^5 + 2x^3$ (ค) 0 ($\pi^2$ เป็นค่าคงที่)</p></sol></q>
+<q>จงหา $y'$ เมื่อ $y = \dfrac{3}{x^2} + 4\sqrt x - \dfrac{1}{x}$<sol><p>$3x^{-2} + 4x^{1/2} - x^{-1}$ → $-6x^{-3} + 2x^{-1/2} + x^{-2} = -\dfrac{6}{x^3} + \dfrac{2}{\sqrt x} + \dfrac{1}{x^2}$</p></sol></q>
+<part>ผลคูณ ผลหาร</part>
+<q h="ผลคูณ">จงหา $\dfrac{d}{dx}(2x^2 - 1)(x^3 + 4x)$<sol><p>$(2x^2-1)(3x^2+4) + (x^3+4x)(4x) = 6x^4 + 5x^2 - 4 + 4x^4 + 16x^2 = 10x^4 + 21x^2 - 4$</p></sol></q>
+<q h="ผลหาร">จงหา $\dfrac{d}{dx}\left(\dfrac{x^2}{x+1}\right)$<sol><p>$\dfrac{(x+1)(2x) - x^2(1)}{(x+1)^2} = \dfrac{x^2 + 2x}{(x+1)^2}$</p></sol></q>
+<q h="ลดรูปก่อน">จงหา $\dfrac{d}{dx}\left(\dfrac{x^5 + 2x^3 - x}{x}\right)$<sol><p>$= x^4 + 2x^2 - 1$ (เมื่อ $x \ne 0$) → $4x^3 + 4x$</p></sol></q>
+<part>กฎลูกโซ่และฟังก์ชันประกอบ</part>
+<q>จงหา $\dfrac{d}{dx}(3x^2 - 5x + 1)^5$<sol><p>$5(3x^2 - 5x + 1)^4(6x - 5)$</p></sol></q>
+<q>จงหา $\dfrac{d}{dx}\sqrt{4x^3 + 1}$<sol><p>$\tfrac12(4x^3+1)^{-1/2}\cdot 12x^2 = \dfrac{6x^2}{\sqrt{4x^3+1}}$</p></sol></q>
+<q h="ผลคูณ + ลูกโซ่">จงหา $\dfrac{d}{dx}\,x^2(x+1)^3$<sol><p>$x^2\cdot 3(x+1)^2 + (x+1)^3\cdot 2x = x(x+1)^2(3x + 2x + 2) = x(x+1)^2(5x+2)$</p></sol></q>
+<q>กำหนด $f(x) = x^3$ และ $g(x) = 2x - 1$ จงหา $(f\circ g)'(x)$, $(g\circ f)'(x)$ และ $(f\circ g)'(1)$<sol><p>$(f\circ g)' = 3(2x-1)^2\cdot 2 = 6(2x-1)^2$ · $(g\circ f)' = 2\cdot 3x^2 = 6x^2$ · $(f\circ g)'(1) = 6$</p></sol></q>
+<part>อนุพันธ์อันดับสูง</part>
+<q>จงหา $f'''(x)$ ของ $f(x) = 2x^5 - x^4 + 3x^2 - 9$<sol><p>$f' = 10x^4 - 4x^3 + 6x$ · $f'' = 40x^3 - 12x^2 + 6$ · $f''' = 120x^2 - 24x$</p></sol></q>
+<q>ลูกบอลถูกโยนขึ้นด้วยความสูง $h(t) = -5t^2 + 30t + 2$ เมตร จงหาความเร็วเมื่อ $t = 1$ และความเร่ง<sol><p>$v = h' = -10t + 30$ → $v(1) = 20$ ม./วินาที · $a = h'' = -10$ ม./วินาที² (คือแรงโน้มถ่วงโดยประมาณ)</p></sol></q>
+</review>
