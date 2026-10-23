@@ -1,12 +1,46 @@
-// ---------- เมนูสำหรับจอมือถือ ----------
+// ---------- เมนูด้านซ้าย: คลิกชื่อบทเพื่อกาง/พับหัวข้อย่อย (ใช้ <details> จึงไม่เปลี่ยนหน้า) ----------
 (function () {
-  var btn = document.getElementById("menuBtn");
-  var side = document.getElementById("sidebar");
-  if (!btn || !side) return;
-  btn.addEventListener("click", function () { side.classList.toggle("open"); });
-  side.querySelectorAll("nav a").forEach(function (a) {
-    a.addEventListener("click", function () { side.classList.remove("open"); });
+  var nav = document.querySelector(".course-nav");
+  if (!nav) return;
+  var aside = nav.closest("aside");
+  var toggle = aside.querySelector(".nav-toggle");
+
+  // จอเล็ก: ปุ่มเปิด/ปิดสารบัญ
+  if (toggle) toggle.addEventListener("click", function () {
+    var open = aside.classList.toggle("nav-open");
+    toggle.setAttribute("aria-expanded", String(open));
   });
+  nav.addEventListener("click", function (e) {
+    if (e.target.closest(".nav-topics a") && aside.classList.contains("nav-open")) {
+      aside.classList.remove("nav-open");
+      if (toggle) toggle.setAttribute("aria-expanded", "false");
+    }
+  });
+
+  // คงตำแหน่งเลื่อนของเมนูไว้เมื่อคลิกไปหน้าอื่น
+  var KEY = "course-nav-scroll";
+  function save() { try { sessionStorage.setItem(KEY, String(aside.scrollTop)); } catch (e) {} }
+  nav.addEventListener("click", function (e) { if (e.target.closest("a")) save(); });
+  addEventListener("pagehide", save);
+  var current = nav.querySelector(".nav-chapter[open]"), saved = null;
+  try { saved = sessionStorage.getItem(KEY); } catch (e) {}
+  if (saved !== null) aside.scrollTop = Number(saved);
+  else if (current && aside.scrollHeight > aside.clientHeight) aside.scrollTop = current.offsetTop - 90;
+
+  // ไฮไลต์หัวข้อย่อยที่กำลังอ่านอยู่
+  if (!current || !("IntersectionObserver" in window)) return;
+  var links = [];
+  current.querySelectorAll('.nav-topics a[href^="#"]').forEach(function (a) {
+    var t = document.getElementById(a.getAttribute("href").slice(1));
+    if (t && t.id !== "lesson-content") links.push([t, a]);
+  });
+  var visible = new Set();
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) visible.add(e.target); else visible.delete(e.target); });
+    var first = links.find(function (l) { return visible.has(l[0]); });
+    links.forEach(function (l) { l[1].classList.toggle("is-active", !!first && l === first); });
+  }, { rootMargin: "0px 0px -60% 0px" });
+  links.forEach(function (l) { obs.observe(l[0]); });
 })();
 
 // ---------- แสดงสูตรคณิตศาสตร์ด้วย KaTeX ----------
@@ -59,11 +93,11 @@
     var pre = block.querySelector("pre.py");
     if (!head || !pre) return;
     var btn = document.createElement("button");
-    btn.type = "button"; btn.className = "copy-btn"; btn.textContent = "📋 คัดลอก";
+    btn.type = "button"; btn.className = "copy-btn"; btn.textContent = "คัดลอก";
     btn.addEventListener("click", function () {
       copy(pre.textContent, function () {
-        btn.textContent = "✓ คัดลอกแล้ว"; btn.classList.add("copied");
-        setTimeout(function () { btn.textContent = "📋 คัดลอก"; btn.classList.remove("copied"); }, 1500);
+        btn.textContent = "คัดลอกแล้ว ✓"; btn.classList.add("copied");
+        setTimeout(function () { btn.textContent = "คัดลอก"; btn.classList.remove("copied"); }, 1500);
       });
     });
     head.appendChild(btn);
@@ -78,7 +112,7 @@
     btn.addEventListener("click", function () {
       var open = ans.classList.toggle("show");
       btn.classList.toggle("open", open);
-      btn.textContent = open ? "🙈 ซ่อนเฉลย" : "👀 ดูเฉลย";
+      btn.textContent = open ? "ซ่อนเฉลย" : "ดูเฉลย";
     });
   });
 })();
@@ -107,8 +141,8 @@
       });
       var text = "คำถามท้ายบท — " + document.title.split(" — ")[0] + "\n" + lines.join("\n").replace(/^\n/, "");
       window.__copyText(text, function () {
-        btn.textContent = "✓ คัดลอกแล้ว"; btn.classList.add("copied");
-        setTimeout(function () { btn.textContent = "📋 คัดลอกคำถามทั้งหมด"; btn.classList.remove("copied"); }, 1600);
+        btn.textContent = "คัดลอกแล้ว ✓"; btn.classList.add("copied");
+        setTimeout(function () { btn.textContent = "คัดลอกคำถามทั้งหมด"; btn.classList.remove("copied"); }, 1600);
       });
     });
   });
@@ -128,7 +162,7 @@
     var input = form.querySelector("input"), msg = form.querySelector(".review-msg");
     function show(on) {
       box.classList.toggle("unlocked", on);
-      btn.textContent = on ? "🙈 ซ่อนเฉลย" : "🔑 ดูเฉลย";
+      btn.textContent = on ? "ซ่อนเฉลย" : "ดูเฉลย";
       form.hidden = true;
     }
     btn.addEventListener("click", function () {
@@ -148,21 +182,4 @@
       else { msg.textContent = "รหัสผ่านไม่ถูกต้อง"; input.select(); }
     });
   });
-})();
-
-// ---------- ไฮไลต์หัวข้อย่อยที่กำลังอ่านในเมนูด้านข้าง ----------
-(function () {
-  var links = document.querySelectorAll(".subnav a");
-  if (!links.length || !("IntersectionObserver" in window)) return;
-  var map = {};
-  links.forEach(function (a) { map[a.getAttribute("href").slice(1)] = a; });
-  var obs = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (e.isIntersecting && map[e.target.id]) {
-        links.forEach(function (a) { a.classList.remove("here"); });
-        map[e.target.id].classList.add("here");
-      }
-    });
-  }, { rootMargin: "0px 0px -75% 0px" });
-  Object.keys(map).forEach(function (id) { var el = document.getElementById(id); if (el) obs.observe(el); });
 })();

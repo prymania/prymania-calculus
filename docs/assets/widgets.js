@@ -4,8 +4,8 @@
 // ============================================================
 (function () {
   "use strict";
-  var C = { grape: "#6C4CE0", coral: "#FF6B5B", mint: "#12B5A0", mango: "#E39B00", sky: "#2F80ED", rose: "#E04A6E",
-    ink: "#231E3D", mute: "#8A85A3", grid: "#EEEAF6", axis: "#5F5A7A" };
+  var C = { grape: "#5B45C9", coral: "#E0533F", mint: "#14A08E", mango: "#E39B00", sky: "#2F80ED", rose: "#E04A6E",
+    ink: "#17202D", mute: "#8492A6", grid: "#EDF0F4", axis: "#6B7789" };
 
   // ---------- ตัวแปลงนิพจน์คณิตศาสตร์ (รองรับ ^, ลบหน้าเลข, คูณแบบไม่ต้องเขียน *, |x|) ----------
   var FN = { sqrt: Math.sqrt, abs: Math.abs, sin: Math.sin, cos: Math.cos, tan: Math.tan, ln: Math.log, log: Math.log, exp: Math.exp };
@@ -380,7 +380,7 @@
     var ia = inp(row2, "a =", "0"), ib = inp(row2, "b =", "2");
     var r = slider(u.ctl, "จุดสัมผัส x₀", -3, 3, 0.01, 1);
     var pre = el("div", { "class": "presets" });
-    ["x^2", "x^3 - 3x", "-x^2 + 6x + 10", "x^4/4 - x^3 + x^2 + 4", "(x^2-1)/(x-1)", "1/x", "sqrt(x)", "|x|", "sin(x)", "2x^3 - 3x^2 - 12x + 5"].forEach(function (s) {
+    ["x^2", "x^3 - 3x", "-(x^2) + 6x + 10", "x^4/4 - x^3 + x^2 + 4", "(x^2-1)/(x-1)", "1/x", "sqrt(x)", "|x|", "sin(x)", "2x^3 - 3x^2 - 12x + 5"].forEach(function (s) {
       var b = el("button", { type: "button" }, s); b.addEventListener("click", function () { fi.value = s; draw(true); }); pre.appendChild(b);
     });
     u.body.appendChild(pre);
@@ -410,7 +410,123 @@
     r.addEventListener("input", function () { draw(); }); onResize(function () { draw(); }); draw(true);
   }
 
-  var W = { approach: approach, secant: secant, tangent: tangent, riemann: riemann, playground: playground };
+  function button(ctl, label, cls) {
+    var b = el("button", { type: "button" }, label); if (cls) b.className = cls; ctl.appendChild(b); return b;
+  }
+
+  // ---------- 6) หารากด้วยการแบ่งครึ่งช่วง (bisection) ----------
+  function bisection(box) {
+    var d = box.dataset, f = compile(d.f), A = parseFloat(d.a), B = parseFloat(d.b);
+    var xr = nums(d.x, [A - (B - A) * 0.2, B + (B - A) * 0.2]), yr = nums(d.y, null) || autoY(f, xr);
+    var u = shell(box, d.title || "หารากด้วยการแบ่งครึ่งช่วง (เหมือน binary search)");
+    var P = new Plot(u.cv, xr, yr), lo, hi, n;
+    var bStep = button(u.ctl, "แบ่งครึ่ง 1 ครั้ง"), bReset = button(u.ctl, "เริ่มใหม่", "alt");
+    function reset() { lo = A; hi = B; n = 0; draw(); }
+    function draw() {
+      var mid = (lo + hi) / 2, fm = f(mid);
+      P.clear();
+      P.ctx.fillStyle = "rgba(47,128,237,.10)"; P.ctx.fillRect(P.X(lo), P.pt, P.X(hi) - P.X(lo), P.h - P.pt - P.pb);
+      P.line(lo, yr[0], lo, yr[1], C.sky, 1.4, [4, 4]); P.line(hi, yr[0], hi, yr[1], C.sky, 1.4, [4, 4]);
+      P.curve(f, C.grape, 2.8);
+      P.dot(lo, f(lo), f(lo) < 0 ? C.rose : C.mint); P.dot(hi, f(hi), f(hi) < 0 ? C.rose : C.mint);
+      P.dot(mid, 0, C.mango, false, 6);
+      P.done();
+      u.out.innerHTML = "<span>ครั้งที่ " + n + "</span><span>ช่วง [" + fmt(lo, 6) + ", " + fmt(hi, 6) + "]</span>" +
+        '<span class="hot">กว้าง ' + fmt(hi - lo, 6) + "</span>" +
+        "<span>จุดกึ่งกลาง " + fmt(mid, 6) + " → f = " + fmt(fm, 5) + "</span>";
+    }
+    bStep.addEventListener("click", function () {
+      var mid = (lo + hi) / 2;
+      if (f(lo) * f(mid) <= 0) hi = mid; else lo = mid;
+      n++; draw();
+    });
+    bReset.addEventListener("click", reset);
+    u.ctl.appendChild(el("span", { "class": "wnote" }, "จุดเขียว = f บวก · จุดชมพู = f ลบ · รากต้องอยู่ระหว่างจุดที่เครื่องหมายต่างกันเสมอ"));
+    onResize(draw); reset();
+  }
+
+  // ---------- 7) gradient descent: กลิ้งลงหาจุดต่ำสุด ----------
+  function gradient(box) {
+    var d = box.dataset, f = compile(d.f), x0 = parseFloat(d.x0), xr = nums(d.x, [-2, 8]), yr = nums(d.y, null) || autoY(f, xr);
+    var u = shell(box, d.title || "Gradient descent: ก้าวสวนทางกับความชัน");
+    var P = new Plot(u.cv, xr, yr), path;
+    var r = slider(u.ctl, "ขนาดก้าว (learning rate)", 0.02, 1.1, 0.01, d.lr || 0.1);
+    var b1 = button(u.ctl, "ก้าว 1 ครั้ง"), b10 = button(u.ctl, "ก้าว 10 ครั้ง"), b0 = button(u.ctl, "เริ่มใหม่", "alt");
+    function reset() { path = [x0]; draw(); }
+    function step(k) {
+      for (var i = 0; i < k; i++) {
+        var x = path[path.length - 1], nx = x - parseFloat(r.value) * deriv(f, x);
+        if (!isFinite(nx) || Math.abs(nx) > 1e6) break;
+        path.push(nx);
+      }
+      draw();
+    }
+    function draw() {
+      var x = path[path.length - 1], m = deriv(f, x);
+      P.clear();
+      P.curve(f, C.grape, 2.8);
+      for (var i = 1; i < path.length; i++) P.line(path[i - 1], f(path[i - 1]), path[i], f(path[i]), C.coral, 1.6, [4, 3]);
+      path.forEach(function (p, i) { if (i < path.length - 1) P.dot(p, f(p), C.coral, true, 3.5); });
+      P.dot(x, f(x), C.coral, false, 8);
+      P.done();
+      var off = x < xr[0] || x > xr[1];
+      u.out.innerHTML = "<span>ก้าวที่ " + (path.length - 1) + "</span><span>x = " + fmt(x, 4) + "</span>" +
+        '<span class="hot">f(x) = ' + fmt(f(x), 4) + "</span>" + "<span>ความชัน f′(x) = " + fmt(m, 4) + "</span>" +
+        (off ? '<span class="neg">หลุดออกนอกกราฟ — ก้าวใหญ่เกินไป!</span>' : Math.abs(m) < 1e-3 ? '<span class="pos">ถึงจุดต่ำสุดแล้ว (ความชัน ≈ 0)</span>' : "");
+    }
+    b1.addEventListener("click", function () { step(1); });
+    b10.addEventListener("click", function () { step(10); });
+    b0.addEventListener("click", reset); r.addEventListener("input", reset);
+    u.ctl.appendChild(el("span", { "class": "wnote" }, "กฎ: x ใหม่ = x − (ขนาดก้าว) × f′(x) · ลองปรับขนาดก้าวให้เล็กมาก กลาง ๆ และใหญ่เกิน 1"));
+    onResize(draw); reset();
+  }
+
+  // ---------- 8) ตัวละครกระโดด: ตำแหน่ง ความเร็ว ความเร่ง ----------
+  function jump(box) {
+    var d = box.dataset, area = d.area === "1";
+    var u = shell(box, d.title || "ตัวละครกระโดด: ความสูง ความเร็ว และความเร่ง");
+    var rv = slider(u.ctl, "ความเร็วตอนกระโดด v₀", 2, 15, 0.5, d.v0 || 10);
+    var rg = slider(u.ctl, "แรงโน้มถ่วง g", 1, 20, 0.1, d.g || 9.8);
+    var rt = slider(u.ctl, "เวลา t", 0, 1, 0.001, 0.4);
+    var bPlay = button(u.ctl, "▶ กระโดด!"), timer = null;
+    function draw() {
+      var v0 = parseFloat(rv.value), g = parseFloat(rg.value), T = 2 * v0 / g, t = parseFloat(rt.value) * T;
+      var y = function (s) { return v0 * s - g * s * s / 2; }, v = function (s) { return v0 - g * s; };
+      var top = Math.max(v0, v0 * v0 / (2 * g));
+      var P = new Plot(u.cv, [0, T * 1.08], [-v0 * 1.15, top * 1.15]);
+      P.clear();
+      if (area) {
+        P.fillBetween(function (s) { return s <= t ? Math.max(v(s), 0) : 0; }, 0, t, C.coral, 0.22);
+        P.fillBetween(function (s) { return s <= t ? Math.min(v(s), 0) : 0; }, 0, t, C.rose, 0.22);
+      }
+      P.curve(function () { return -g; }, C.mint, 2, [6, 5], 0, T);
+      P.curve(v, C.coral, 2.2, null, 0, T);
+      P.curve(y, C.grape, 3, null, 0, T);
+      P.line(t, -v0 * 1.15, t, top * 1.15, C.mute, 1, [3, 4]);
+      P.dot(t, v(t), C.coral, false, 5);
+      P.dot(t, y(t), C.grape, false, 9);
+      P.text("ความสูง y(t)", T * 0.5, y(T * 0.5), C.grape, "center", -12);
+      P.text("ความเร็ว v(t)", T * 0.06, v(T * 0.06), C.coral, "left", -10);
+      P.text("ความเร่ง a = −g", T * 0.98, -g, C.mint, "right", -8);
+      P.done();
+      u.out.innerHTML = "<span>t = " + fmt(t, 3) + " วินาที</span>" +
+        '<span class="hot">สูง y = ' + fmt(y(t), 3) + " ม.</span>" +
+        '<span class="' + (v(t) >= 0 ? "pos" : "neg") + '">ความเร็ว v = ' + fmt(v(t), 3) + " ม./วิ " + (Math.abs(v(t)) < 0.05 ? "(จุดสูงสุด!)" : v(t) > 0 ? "(กำลังขึ้น)" : "(กำลังตก)") + "</span>" +
+        "<span>ความเร่ง a = " + fmt(-g, 2) + " ม./วิ²</span><span>ลอยกลางอากาศ " + fmt(T, 3) + " วินาที · สูงสุด " + fmt(v0 * v0 / (2 * g), 3) + " ม.</span>";
+    }
+    bPlay.addEventListener("click", function () {
+      clearInterval(timer); rt.value = 0; var start = performance.now();
+      timer = setInterval(function () {
+        var p = Math.min((performance.now() - start) / 1600, 1); rt.value = p; draw();
+        if (p >= 1) clearInterval(timer);
+      }, 16);
+    });
+    [rv, rg, rt].forEach(function (r) { r.addEventListener("input", draw); });
+    onResize(draw); draw();
+  }
+
+  var W = { approach: approach, secant: secant, tangent: tangent, riemann: riemann, playground: playground,
+    bisection: bisection, gradient: gradient, jump: jump };
   function init() {
     document.querySelectorAll(".widget[data-w]").forEach(function (box) {
       try { W[box.dataset.w](box); } catch (e) { box.innerHTML = '<div class="widget-body">⚠ widget error: ' + e.message + "</div>"; }

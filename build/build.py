@@ -20,37 +20,29 @@ SRC = os.path.join(HERE, "src")
 OUT = os.path.join(os.path.dirname(HERE), "docs")
 
 PAGES = [
-    dict(file="index.html", title="หน้าแรก / ภาพรวม", group=0, icon="🏠"),
+    dict(file="index.html", title="หน้าแรก / ภาพรวม", group=0),
     dict(file="01-function.html", no=1, group=1, sym="f(x)", title="ฟังก์ชัน กราฟ และความชัน",
-         kicker="CHAPTER 01 · ปูพื้นฐาน", sub="ฟังก์ชันคืออะไร โดเมนและเรนจ์ การหาค่าฟังก์ชัน ฟังก์ชันประกอบ ความชันและสมการเส้นตรง",
-         img="icon/thinking.png"),
+         kicker="CHAPTER 01 · ปูพื้นฐาน", sub="ฟังก์ชันคืออะไร โดเมนและเรนจ์ การหาค่าฟังก์ชัน ฟังก์ชันประกอบ ความชันและสมการเส้นตรง"),
     dict(file="02-limit.html", no=2, group=1, sym="lim", title="ลิมิตของฟังก์ชัน",
-         kicker="CHAPTER 02 · Exam 1", sub="แนวคิดของลิมิต การแทนค่า ทฤษฎีบทลิมิต รูปแบบ 0/0 การแยกตัวประกอบ คอนจูเกต ลิมิตซ้าย–ขวา และลิมิตที่อนันต์",
-         img="icon/nap.png"),
+         kicker="CHAPTER 02 · Exam 1", sub="แนวคิดของลิมิต การแทนค่า ทฤษฎีบทลิมิต รูปแบบ 0/0 การแยกตัวประกอบ คอนจูเกต ลิมิตซ้าย–ขวา และลิมิตที่อนันต์"),
     dict(file="03-continuity.html", no=3, group=1, sym="⌒", title="ความต่อเนื่องของฟังก์ชัน",
-         kicker="CHAPTER 03 · Exam 1", sub="เงื่อนไข 3 ข้อของความต่อเนื่อง ชนิดของจุดไม่ต่อเนื่อง ฟังก์ชันหลายช่วง และการหาค่า k ให้ฟังก์ชันต่อเนื่อง",
-         img="icon/drink.png"),
+         kicker="CHAPTER 03 · Exam 1", sub="เงื่อนไข 3 ข้อของความต่อเนื่อง ชนิดของจุดไม่ต่อเนื่อง ฟังก์ชันหลายช่วง และการหาค่า k ให้ฟังก์ชันต่อเนื่อง"),
     dict(file="04-derivative.html", no=4, group=2, sym="d/dx", title="อนุพันธ์และสูตรการดิฟ",
-         kicker="CHAPTER 04 · Midterm", sub="อัตราการเปลี่ยนแปลงเฉลี่ยและขณะใด ๆ นิยามอนุพันธ์ สูตรการดิฟ ผลคูณ ผลหาร กฎลูกโซ่ ฟังก์ชันประกอบ และอนุพันธ์อันดับสูง",
-         img="icon/electricity.png"),
+         kicker="CHAPTER 04 · Midterm", sub="อัตราการเปลี่ยนแปลงเฉลี่ยและขณะใด ๆ นิยามอนุพันธ์ สูตรการดิฟ ผลคูณ ผลหาร กฎลูกโซ่ ฟังก์ชันประกอบ และอนุพันธ์อันดับสูง"),
     dict(file="05-derivative-app.html", no=5, group=2, sym="f′", title="ความชัน เส้นสัมผัส และค่าสูงสุด–ต่ำสุด",
-         kicker="CHAPTER 05 · Midterm", sub="ความชันเส้นโค้ง สมการเส้นสัมผัส ฟังก์ชันเพิ่ม–ลด จุดวิกฤต ค่าสูงสุด–ต่ำสุดสัมพัทธ์และสัมบูรณ์",
-         img="icon/worker.png"),
+         kicker="CHAPTER 05 · Midterm", sub="ความชันเส้นโค้ง สมการเส้นสัมผัส ฟังก์ชันเพิ่ม–ลด จุดวิกฤต ค่าสูงสุด–ต่ำสุดสัมพัทธ์และสัมบูรณ์"),
     dict(file="06-optimization.html", no=6, group=2, sym="max", title="โจทย์ปัญหาค่าเหมาะที่สุด",
-         kicker="CHAPTER 06 · Midterm", sub="ใช้อนุพันธ์แก้ปัญหาจริง: พื้นที่มากที่สุด รายได้สูงสุด กำไรสูงสุด ปริมาตรกล่อง และการเคลื่อนที่",
-         img="icon/worker5.png"),
+         kicker="CHAPTER 06 · Midterm", sub="ใช้อนุพันธ์แก้ปัญหาจริง: พื้นที่มากที่สุด รายได้สูงสุด กำไรสูงสุด ปริมาตรกล่อง และการเคลื่อนที่"),
     dict(file="07-indefinite.html", no=7, group=3, sym="∫", title="อินทิกรัลไม่จำกัดเขต",
-         kicker="CHAPTER 07 · Final", sub="ปฏิยานุพันธ์ สูตรอินทิกรัล การจัดรูปก่อนอินทิเกรต การหาค่าคงที่ C และการแทนค่า (เสริม)",
-         img="icon/drink2.png"),
+         kicker="CHAPTER 07 · Final", sub="ปฏิยานุพันธ์ สูตรอินทิกรัล การจัดรูปก่อนอินทิเกรต การหาค่าคงที่ C และการแทนค่า (เสริม)"),
     dict(file="08-definite-area.html", no=8, group=3, sym="∫ₐᵇ", title="อินทิกรัลจำกัดเขตและพื้นที่",
-         kicker="CHAPTER 08 · Final", sub="ทฤษฎีบทหลักมูล พื้นที่ใต้เส้นโค้ง พื้นที่ใต้แกน x กราฟตัดแกน x และพื้นที่ระหว่างเส้นโค้ง",
-         img="icon/well-done2.png"),
+         kicker="CHAPTER 08 · Final", sub="ทฤษฎีบทหลักมูล พื้นที่ใต้เส้นโค้ง พื้นที่ใต้แกน x กราฟตัดแกน x และพื้นที่ระหว่างเส้นโค้ง"),
     dict(file="appendix-a-formulas.html", group=4, letter="ก", sym="Σ", title="สรุปสูตร (Cheat Sheet)",
-         kicker="APPENDIX A", sub="รวมสูตรสำคัญทั้งเล่มไว้ในหน้าเดียว — เปิดทวนก่อนสอบ", img="icon/awesome.png"),
+         kicker="APPENDIX A", sub="รวมสูตรสำคัญทั้งเล่มไว้ในหน้าเดียว — เปิดทวนก่อนสอบ"),
     dict(file="appendix-b-playground.html", group=4, letter="ข", sym="y=?", title="ห้องทดลองกราฟ",
-         kicker="APPENDIX B", sub="พิมพ์ฟังก์ชันเอง ดูกราฟ อนุพันธ์ เส้นสัมผัส และพื้นที่ใต้กราฟแบบโต้ตอบ", img="icon/you-did-it.png"),
+         kicker="APPENDIX B", sub="พิมพ์ฟังก์ชันเอง ดูกราฟ อนุพันธ์ เส้นสัมผัส และพื้นที่ใต้กราฟแบบโต้ตอบ"),
 ]
-GROUPS = {0: "เริ่มต้นที่นี่", 1: "ส่วนที่ 1 · ลิมิต (Exam 1)", 2: "ส่วนที่ 2 · อนุพันธ์ (Midterm)",
+GROUPS = {1: "ส่วนที่ 1 · ลิมิต (Exam 1)", 2: "ส่วนที่ 2 · อนุพันธ์ (Midterm)",
           3: "ส่วนที่ 3 · อินทิกรัล (Final)", 4: "ภาคผนวก"}
 LEVEL = {"1": "⭐ ง่าย", "2": "⭐⭐ ปานกลาง", "3": "⭐⭐⭐ ท้าทาย"}
 
@@ -262,9 +254,9 @@ def transform(src, chap):
         title = m.group(1) or "ตรวจคำตอบด้วย Python (SymPy)"
         code = m.group(2).strip("\n")
         out = run_py(code)
-        res = '<div class="code"><div class="code-head"><span><span class="dots"><i></i><i></i><i></i></span>%s</span></div><pre class="py">%s</pre>' % (esc(title), esc(code))
+        res = '<div class="code"><div class="code-head"><span class="code-file">%s</span></div><pre class="py">%s</pre>' % (esc(title), esc(code))
         if out:
-            res += '<div class="out"><div class="out-t">▸ ผลลัพธ์เมื่อรัน</div><pre>%s</pre></div>' % esc(out)
+            res += '<div class="out"><div class="out-t">ผลลัพธ์เมื่อรัน</div><pre>%s</pre></div>' % esc(out)
         return res + "</div>"
     src = re.sub(r'<py(?: t="([^"]*)")?>(.*?)</py>', py_block, src, flags=re.S)
 
@@ -291,7 +283,7 @@ def transform(src, chap):
         if "<ans>" in body:
             q, a = body.split("<ans>", 1)
             a = a.replace("</ans>", "")
-            ans = '<button type="button" class="ans-btn">👀 ดูเฉลย</button><div class="answer"><div class="answer-t">✅ เฉลย</div>%s</div>' % a
+            ans = '<button type="button" class="ans-btn">ดูเฉลย</button><div class="answer"><div class="answer-t">เฉลย</div>%s</div>' % a
         else:
             q, ans = body, ""
         lv = LEVEL.get(attrs.get("lv", ""), "")
@@ -316,11 +308,13 @@ def transform(src, chap):
                     inner += ' <span class="hint">(%s)</span>' % hint
             return "<li>%s</li>" % inner
         body = re.sub(r'<q(?: h="([^"]*)")?>(.*?)</q>', q, body, flags=re.S)
-        return ('<div class="review" id="review"><div class="review-head"><img src="icon/thinking.png" alt=""><h2>คำถามท้ายบท</h2>'
-                '<button type="button" class="review-copy">📋 คัดลอกคำถามทั้งหมด</button><button type="button" class="review-key">🔑 ดูเฉลย</button></div>'
-                '<form class="review-lock" hidden><label>รหัสผ่านสำหรับดูเฉลย</label><input type="password" autocomplete="off" placeholder="รหัสผ่าน">'
+        return ('<section class="review" id="review"><h2>คำถามท้ายบท</h2>'
+                '<p class="review-note">ลองทำเองก่อนทุกข้อ แล้วค่อยกด “ดูเฉลย” (ต้องใช้รหัสผ่านจากผู้สอน)</p>'
+                '<div class="review-actions"><button type="button" class="review-key">ดูเฉลย</button>'
+                '<button type="button" class="review-copy">คัดลอกคำถามทั้งหมด</button></div>'
+                '<form class="review-lock" hidden><label>รหัสผ่านสำหรับดูเฉลย<input type="password" autocomplete="off" placeholder="รหัสผ่าน"></label>'
                 '<button type="submit">ตกลง</button><span class="review-msg"></span></form>'
-                '<p style="font-size:14px;color:var(--mute)">ลองทำเองก่อนทุกข้อ แล้วค่อยกด 🔑 ดูเฉลย (ต้องใช้รหัสผ่านจากผู้สอน)</p><ol>%s</ol></div>') % body
+                '<ol>%s</ol></section>') % body
     src = re.sub(r"<review>(.*?)</review>", review_block, src, flags=re.S)
 
     # --- หัวข้อ h2: ใส่เลข + เก็บรายการ
@@ -338,22 +332,28 @@ def transform(src, chap):
 
 
 # ============================================================ page template
-def sidebar(cur, heads, has_review):
-    o = []
+def tag(p):
+    return "%02d" % p["no"] if p.get("no") else p["letter"]
+
+
+def sidebar(cur, toc):
+    """เมนูด้านซ้าย: ทุกบทเป็น <details> คลิกชื่อบทเพื่อกางหัวข้อย่อย (toc[file] = [(id, เลข, ชื่อ)])"""
+    o = ['<button class="nav-toggle" type="button" aria-expanded="false">☰ สารบัญทุกบท</button>',
+         '<nav class="course-nav" aria-label="สารบัญรายวิชา">']
     for gk, gname in GROUPS.items():
-        o.append('<div class="navgroup"><div class="navgroup-t">%s</div>' % gname)
+        o.append('<p class="nav-label">%s</p>' % gname)
         for p in PAGES:
             if p["group"] != gk:
                 continue
-            tag = p.get("icon") or ("%02d" % p["no"] if p.get("no") else p.get("letter"))
-            act = ' class="active"' if p is cur else ""
-            o.append('<a href="%s"%s><span class="no">%s</span>%s</a>' % (p["file"], act, tag, p["title"]))
-            if p is cur and heads:
-                sub = "".join('<a href="#%s"><span class="sno">%s</span>%s</a>' % (h, s or "•", t) for h, s, t in heads)
-                if has_review:
-                    sub += '<a href="#review"><span class="sno">✎</span>คำถามท้ายบท</a>'
-                o.append('<div class="subnav">%s</div>' % sub)
-        o.append("</div>")
+            here = p is cur
+            base = "" if here else p["file"]
+            links = ['<a href="%s"><span class="toc-number">%s</span>ภาพรวมของบท</a>' % (
+                "#lesson-content" if here else p["file"], p.get("no") or p["letter"])]
+            links += ['<a href="%s#%s"><span class="toc-number">%s</span>%s</a>' % (base, h, s or "•", t) for h, s, t in toc.get(p["file"], [])]
+            o.append('<details class="nav-chapter" name="course-nav"%s><summary%s><span class="nav-number">%s</span>'
+                     '<span class="nav-title">%s</span></summary><div class="nav-topics">%s</div></details>' % (
+                         " open" if here else "", ' aria-current="page"' if here else "", tag(p), p["title"], "".join(links)))
+    o.append("</nav>")
     return "\n".join(o)
 
 
@@ -364,27 +364,30 @@ TEMPLATE = """<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title} — Calculus Lecture Note</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;800&display=swap">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700&family=Bai+Jamjuree:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="assets/katex/katex.min.css">
 <link rel="stylesheet" href="assets/style.css">
 <script defer src="assets/katex/katex.min.js"></script>
 <script defer src="assets/katex/contrib/auto-render.min.js"></script>
+<script>document.documentElement.classList.add("js");</script>
 </head>
 <body>
-<button id="menuBtn" aria-label="menu">☰ เมนู</button>
-<aside class="sidebar" id="sidebar">
-  <div class="brand"><a href="index.html"><span class="logo">∫</span><span class="t1">Mathematics for<br>Computer Science 2</span><span class="t2">1204105 · Calculus · Lecture Note</span></a></div>
-  <nav>
+<a class="skip-link" href="#lesson-content">ข้ามไปเนื้อหา</a>
+<div class="lesson-shell">
+<aside class="lesson-sidebar" aria-label="เมนูบทเรียน">
+  <a class="lesson-brand" href="index.html"><span class="brand-mark" aria-hidden="true">∫</span><span><span class="brand-title">Calculus<br>by Prymania</span><span class="brand-caption">1204105 · LECTURE NOTES</span></span></a>
 {nav}
-  </nav>
-  <img src="{img}" alt="" class="sidebar-img">
+  <div class="sidebar-bottom">1204105 Mathematics for Computer Science 2</div>
 </aside>
-<main class="content">
+<main class="lesson-main" id="lesson-content">
+{utility}
 {head}
 {body}
 {pager}
-<footer>1204105 Mathematics for Computer Science 2 (Calculus) · Calculus by Prymania · วิทยาการคอมพิวเตอร์ ม.มหาสารคาม</footer>
+<footer class="lesson-footer">1204105 Mathematics for Computer Science 2 (Calculus) · Calculus by Prymania · วิทยาการคอมพิวเตอร์ ม.มหาสารคาม</footer>
 </main>
+</div>
 <script src="assets/password.js"></script>
 <script defer src="assets/nav.js"></script>
 <script defer src="assets/widgets.js"></script>
@@ -394,7 +397,9 @@ TEMPLATE = """<!DOCTYPE html>
 
 
 def build():
-    for i, p in enumerate(PAGES):
+    # รอบแรก: แปลงทุกหน้า เพื่อให้เมนูด้านซ้ายของทุกหน้ามีหัวข้อย่อยของทุกบท
+    bodies, toc = {}, {}
+    for p in PAGES:
         path = os.path.join(SRC, p["file"])
         if not os.path.exists(path):
             print("skip (no source):", p["file"])
@@ -403,25 +408,29 @@ def build():
             raw = fh.read()
         _plot_id[0] = 0
         body, heads = transform(raw, p.get("no"))
-        has_review = 'id="review"' in body
+        body = body.replace("<!--TOC-->", "")
+        if 'id="review"' in body:
+            heads.append(("review", "ฝึก", "คำถามท้ายบท"))
+        bodies[p["file"]], toc[p["file"]] = body, heads
+
+    for i, p in enumerate(PAGES):
+        if p["file"] not in bodies:
+            continue
+        body, heads = bodies[p["file"]], toc[p["file"]]
         if p.get("no") or p.get("letter"):
-            head = ('<div class="page-head" data-sym="%s"><span class="kicker">%s</span><h1>%s</h1><p class="sub">%s</p></div>' % (
-                esc(p.get("sym", "")), p["kicker"], ("บทที่ %d · " % p["no"] if p.get("no") else "ภาคผนวก %s · " % p["letter"]) + p["title"], p["sub"]))
-            if heads and len(heads) > 2:
-                toc = "".join('<li><a href="#%s"><span class="sno">%s</span>%s</a></li>' % (h, s, t) for h, s, t in heads)
-                if has_review:
-                    toc += '<li><a href="#review"><span class="sno">✎</span>คำถามท้ายบท</a></li>'
-                body = body.replace("<!--TOC-->", '<div class="pagetoc"><div class="pagetoc-t">📑 ในบทนี้</div><ul>%s</ul></div>' % toc, 1)
+            label = "บทที่ %d" % p["no"] if p.get("no") else "ภาคผนวก %s" % p["letter"]
+            utility = '<div class="utility-row"><a href="index.html">← สารบัญรายวิชา</a><span class="utility-code">1204105 · %s</span></div>' % label
+            head = ('<header class="lesson-header"><p class="lesson-kicker">%s</p><h1>%s</h1><p>%s</p></header>' % (
+                p["kicker"], p["title"], p["sub"]))
         else:
-            head = ""
+            utility = head = ""
         prev_p = PAGES[i - 1] if i > 0 else None
         next_p = PAGES[i + 1] if i + 1 < len(PAGES) else None
-        pager = '<div class="pager">%s%s</div>' % (
-            '<a class="pg" href="%s">← %s</a>' % (prev_p["file"], prev_p["title"]) if prev_p else "",
-            '<a class="pg next" href="%s">%s →</a>' % (next_p["file"], next_p["title"]) if next_p else "")
+        pager = '<nav class="lesson-pager" aria-label="บทก่อนหน้าและถัดไป">%s%s</nav>' % (
+            '<a class="pager-link secondary" href="%s">← %s</a>' % (prev_p["file"], prev_p["title"]) if prev_p else "<span></span>",
+            '<a class="pager-link" href="%s">%s →</a>' % (next_p["file"], next_p["title"]) if next_p else "")
         title = ("บทที่ %d · %s" % (p["no"], p["title"])) if p.get("no") else p["title"]
-        out = TEMPLATE.format(title=title, nav=sidebar(p, heads, has_review), img=p.get("img", "icon/me_cat.png"),
-                              head=head, body=body, pager=pager)
+        out = TEMPLATE.format(title=title, nav=sidebar(p, toc), utility=utility, head=head, body=body, pager=pager)
         with open(os.path.join(OUT, p["file"]), "w", encoding="utf-8", newline="\n") as fh:
             fh.write(out)
         n_ex = body.count('class="ex"')

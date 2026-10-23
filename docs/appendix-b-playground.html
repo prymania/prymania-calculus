@@ -5,44 +5,41 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ห้องทดลองกราฟ — Calculus Lecture Note</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;800&display=swap">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700&family=Bai+Jamjuree:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="assets/katex/katex.min.css">
 <link rel="stylesheet" href="assets/style.css">
 <script defer src="assets/katex/katex.min.js"></script>
 <script defer src="assets/katex/contrib/auto-render.min.js"></script>
+<script>document.documentElement.classList.add("js");</script>
 </head>
 <body>
-<button id="menuBtn" aria-label="menu">☰ เมนู</button>
-<aside class="sidebar" id="sidebar">
-  <div class="brand"><a href="index.html"><span class="logo">∫</span><span class="t1">Mathematics for<br>Computer Science 2</span><span class="t2">1204105 · Calculus · Lecture Note</span></a></div>
-  <nav>
-<div class="navgroup"><div class="navgroup-t">เริ่มต้นที่นี่</div>
-<a href="index.html"><span class="no">🏠</span>หน้าแรก / ภาพรวม</a>
-</div>
-<div class="navgroup"><div class="navgroup-t">ส่วนที่ 1 · ลิมิต (Exam 1)</div>
-<a href="01-function.html"><span class="no">01</span>ฟังก์ชัน กราฟ และความชัน</a>
-<a href="02-limit.html"><span class="no">02</span>ลิมิตของฟังก์ชัน</a>
-<a href="03-continuity.html"><span class="no">03</span>ความต่อเนื่องของฟังก์ชัน</a>
-</div>
-<div class="navgroup"><div class="navgroup-t">ส่วนที่ 2 · อนุพันธ์ (Midterm)</div>
-<a href="04-derivative.html"><span class="no">04</span>อนุพันธ์และสูตรการดิฟ</a>
-<a href="05-derivative-app.html"><span class="no">05</span>ความชัน เส้นสัมผัส และค่าสูงสุด–ต่ำสุด</a>
-<a href="06-optimization.html"><span class="no">06</span>โจทย์ปัญหาค่าเหมาะที่สุด</a>
-</div>
-<div class="navgroup"><div class="navgroup-t">ส่วนที่ 3 · อินทิกรัล (Final)</div>
-<a href="07-indefinite.html"><span class="no">07</span>อินทิกรัลไม่จำกัดเขต</a>
-<a href="08-definite-area.html"><span class="no">08</span>อินทิกรัลจำกัดเขตและพื้นที่</a>
-</div>
-<div class="navgroup"><div class="navgroup-t">ภาคผนวก</div>
-<a href="appendix-a-formulas.html"><span class="no">ก</span>สรุปสูตร (Cheat Sheet)</a>
-<a href="appendix-b-playground.html" class="active"><span class="no">ข</span>ห้องทดลองกราฟ</a>
-<div class="subnav"><a href="#s1"><span class="sno">•</span>ภารกิจชวนลอง</a><a href="#s2"><span class="sno">•</span>กราฟโต้ตอบอื่น ๆ ในเว็บนี้</a></div>
-</div>
-  </nav>
-  <img src="icon/you-did-it.png" alt="" class="sidebar-img">
+<a class="skip-link" href="#lesson-content">ข้ามไปเนื้อหา</a>
+<div class="lesson-shell">
+<aside class="lesson-sidebar" aria-label="เมนูบทเรียน">
+  <a class="lesson-brand" href="index.html"><span class="brand-mark" aria-hidden="true">∫</span><span><span class="brand-title">Calculus<br>by Prymania</span><span class="brand-caption">1204105 · LECTURE NOTES</span></span></a>
+<button class="nav-toggle" type="button" aria-expanded="false">☰ สารบัญทุกบท</button>
+<nav class="course-nav" aria-label="สารบัญรายวิชา">
+<p class="nav-label">ส่วนที่ 1 · ลิมิต (Exam 1)</p>
+<details class="nav-chapter" name="course-nav"><summary><span class="nav-number">01</span><span class="nav-title">ฟังก์ชัน กราฟ และความชัน</span></summary><div class="nav-topics"><a href="01-function.html"><span class="toc-number">1</span>ภาพรวมของบท</a><a href="01-function.html#s1"><span class="toc-number">1.1</span>ฟังก์ชันคืออะไร</a><a href="01-function.html#s2"><span class="toc-number">1.2</span>โดเมนและเรนจ์</a><a href="01-function.html#s3"><span class="toc-number">1.3</span>การหาค่าฟังก์ชันและฟังก์ชันประกอบ</a><a href="01-function.html#s4"><span class="toc-number">1.4</span>ความชันและสมการเส้นตรง</a><a href="01-function.html#s5"><span class="toc-number">1.5</span>ฟังก์ชันพื้นฐานที่ต้องรู้จักหน้าตา</a><a href="01-function.html#review"><span class="toc-number">ฝึก</span>คำถามท้ายบท</a></div></details>
+<details class="nav-chapter" name="course-nav"><summary><span class="nav-number">02</span><span class="nav-title">ลิมิตของฟังก์ชัน</span></summary><div class="nav-topics"><a href="02-limit.html"><span class="toc-number">2</span>ภาพรวมของบท</a><a href="02-limit.html#s1"><span class="toc-number">2.1</span>ลิมิตคืออะไร — “เข้าใกล้” ไม่ใช่ “เท่ากับ”</a><a href="02-limit.html#s2"><span class="toc-number">2.2</span>หาลิมิตโดยการแทนค่าโดยตรง</a><a href="02-limit.html#s3"><span class="toc-number">2.3</span>ทฤษฎีบทของลิมิต</a><a href="02-limit.html#s4"><span class="toc-number">2.4</span>เมื่อแทนค่าแล้วเจอปัญหา: แผนที่ตัดสินใจ</a><a href="02-limit.html#s5"><span class="toc-number">2.5</span>เครื่องมือที่ 1: แยกตัวประกอบ</a><a href="02-limit.html#s6"><span class="toc-number">2.6</span>เครื่องมือที่ 2: คูณด้วยคอนจูเกต (เมื่อเจอรากที่สอง)</a><a href="02-limit.html#s7"><span class="toc-number">2.7</span>ลิมิตซ้าย ลิมิตขวา</a><a href="02-limit.html#s8"><span class="toc-number">2.8</span>ลิมิตที่อนันต์และลิมิตอนันต์ เสริม</a><a href="02-limit.html#review"><span class="toc-number">ฝึก</span>คำถามท้ายบท</a></div></details>
+<details class="nav-chapter" name="course-nav"><summary><span class="nav-number">03</span><span class="nav-title">ความต่อเนื่องของฟังก์ชัน</span></summary><div class="nav-topics"><a href="03-continuity.html"><span class="toc-number">3</span>ภาพรวมของบท</a><a href="03-continuity.html#s1"><span class="toc-number">3.1</span>ความต่อเนื่องคืออะไร</a><a href="03-continuity.html#s2"><span class="toc-number">3.2</span>หน้าตาของจุดไม่ต่อเนื่อง</a><a href="03-continuity.html#s3"><span class="toc-number">3.3</span>ตรวจความต่อเนื่องทีละข้อ</a><a href="03-continuity.html#s4"><span class="toc-number">3.4</span>หาค่า k ที่ทำให้ฟังก์ชันต่อเนื่อง</a><a href="03-continuity.html#s5"><span class="toc-number">3.5</span>ฟังก์ชันไหนต่อเนื่องบ้าง (ภาพรวม)</a><a href="03-continuity.html#s6"><span class="toc-number">3.6</span>ความต่อเนื่องช่วยหาคำตอบของสมการ เสริม</a><a href="03-continuity.html#review"><span class="toc-number">ฝึก</span>คำถามท้ายบท</a></div></details>
+<p class="nav-label">ส่วนที่ 2 · อนุพันธ์ (Midterm)</p>
+<details class="nav-chapter" name="course-nav"><summary><span class="nav-number">04</span><span class="nav-title">อนุพันธ์และสูตรการดิฟ</span></summary><div class="nav-topics"><a href="04-derivative.html"><span class="toc-number">4</span>ภาพรวมของบท</a><a href="04-derivative.html#s1"><span class="toc-number">4.1</span>อัตราการเปลี่ยนแปลงเฉลี่ย</a><a href="04-derivative.html#s2"><span class="toc-number">4.2</span>อัตราการเปลี่ยนแปลงขณะใด ๆ = อนุพันธ์</a><a href="04-derivative.html#s3"><span class="toc-number">4.3</span>สูตรการดิฟพื้นฐาน</a><a href="04-derivative.html#s4"><span class="toc-number">4.4</span>ดิฟผลคูณและผลหาร</a><a href="04-derivative.html#s5"><span class="toc-number">4.5</span>กฎลูกโซ่ (Chain Rule)</a><a href="04-derivative.html#s6"><span class="toc-number">4.6</span>ดิฟฟังก์ชันประกอบ $(f\circ g)'$</a><a href="04-derivative.html#s7"><span class="toc-number">4.7</span>อนุพันธ์อันดับสูง</a><a href="04-derivative.html#review"><span class="toc-number">ฝึก</span>คำถามท้ายบท</a></div></details>
+<details class="nav-chapter" name="course-nav"><summary><span class="nav-number">05</span><span class="nav-title">ความชัน เส้นสัมผัส และค่าสูงสุด–ต่ำสุด</span></summary><div class="nav-topics"><a href="05-derivative-app.html"><span class="toc-number">5</span>ภาพรวมของบท</a><a href="05-derivative-app.html#s1"><span class="toc-number">5.1</span>ความชันของเส้นโค้ง</a><a href="05-derivative-app.html#s2"><span class="toc-number">5.2</span>สมการเส้นสัมผัส (Tangent line)</a><a href="05-derivative-app.html#s3"><span class="toc-number">5.3</span>ฟังก์ชันเพิ่ม ฟังก์ชันลด และจุดวิกฤต</a><a href="05-derivative-app.html#s4"><span class="toc-number">5.4</span>ทดสอบสูงสุด–ต่ำสุดสัมพัทธ์</a><a href="05-derivative-app.html#s5"><span class="toc-number">5.5</span>ค่าสูงสุด–ต่ำสุดสัมบูรณ์บนช่วงปิด</a><a href="05-derivative-app.html#review"><span class="toc-number">ฝึก</span>คำถามท้ายบท</a></div></details>
+<details class="nav-chapter" name="course-nav"><summary><span class="nav-number">06</span><span class="nav-title">โจทย์ปัญหาค่าเหมาะที่สุด</span></summary><div class="nav-topics"><a href="06-optimization.html"><span class="toc-number">6</span>ภาพรวมของบท</a><a href="06-optimization.html#s1"><span class="toc-number">6.1</span>สูตรสำเร็จ 5 ขั้น</a><a href="06-optimization.html#s2"><span class="toc-number">6.2</span>ปัญหาพื้นที่และปริมาตร</a><a href="06-optimization.html#s3"><span class="toc-number">6.3</span>ปัญหาตัวเลข</a><a href="06-optimization.html#s4"><span class="toc-number">6.4</span>ปัญหาธุรกิจ: รายได้และกำไร</a><a href="06-optimization.html#s5"><span class="toc-number">6.5</span>ปัญหาการเคลื่อนที่</a><a href="06-optimization.html#s6"><span class="toc-number">6.6</span>Gradient descent: ให้คอมพิวเตอร์เดินหาจุดต่ำสุดเอง เสริม</a><a href="06-optimization.html#review"><span class="toc-number">ฝึก</span>คำถามท้ายบท</a></div></details>
+<p class="nav-label">ส่วนที่ 3 · อินทิกรัล (Final)</p>
+<details class="nav-chapter" name="course-nav"><summary><span class="nav-number">07</span><span class="nav-title">อินทิกรัลไม่จำกัดเขต</span></summary><div class="nav-topics"><a href="07-indefinite.html"><span class="toc-number">7</span>ภาพรวมของบท</a><a href="07-indefinite.html#s1"><span class="toc-number">7.1</span>อินทิกรัล = ดิฟย้อนกลับ</a><a href="07-indefinite.html#s2"><span class="toc-number">7.2</span>สูตรอินทิกรัล</a><a href="07-indefinite.html#s3"><span class="toc-number">7.3</span>จัดรูปก่อนอินทิเกรต</a><a href="07-indefinite.html#s4"><span class="toc-number">7.4</span>หาค่าคงที่ C — หาฟังก์ชันจริงจากอนุพันธ์</a><a href="07-indefinite.html#s5"><span class="toc-number">7.5</span>การอินทิเกรตโดยการแทนค่า เสริม</a><a href="07-indefinite.html#review"><span class="toc-number">ฝึก</span>คำถามท้ายบท</a></div></details>
+<details class="nav-chapter" name="course-nav"><summary><span class="nav-number">08</span><span class="nav-title">อินทิกรัลจำกัดเขตและพื้นที่</span></summary><div class="nav-topics"><a href="08-definite-area.html"><span class="toc-number">8</span>ภาพรวมของบท</a><a href="08-definite-area.html#s1"><span class="toc-number">8.1</span>อินทิกรัลจำกัดเขต</a><a href="08-definite-area.html#s2"><span class="toc-number">8.2</span>อินทิกรัล = พื้นที่ใต้เส้นโค้ง</a><a href="08-definite-area.html#s3"><span class="toc-number">8.3</span>พื้นที่ใต้แกน x</a><a href="08-definite-area.html#s4"><span class="toc-number">8.4</span>เมื่อกราฟตัดแกน x — ต้องแบ่งช่วง!</a><a href="08-definite-area.html#s5"><span class="toc-number">8.5</span>พื้นที่ระหว่างเส้นโค้ง</a><a href="08-definite-area.html#review"><span class="toc-number">ฝึก</span>คำถามท้ายบท</a></div></details>
+<p class="nav-label">ภาคผนวก</p>
+<details class="nav-chapter" name="course-nav"><summary><span class="nav-number">ก</span><span class="nav-title">สรุปสูตร (Cheat Sheet)</span></summary><div class="nav-topics"><a href="appendix-a-formulas.html"><span class="toc-number">ก</span>ภาพรวมของบท</a><a href="appendix-a-formulas.html#s1"><span class="toc-number">•</span>พีชคณิตที่ต้องใช้</a><a href="appendix-a-formulas.html#s2"><span class="toc-number">•</span>ลิมิตและความต่อเนื่อง</a><a href="appendix-a-formulas.html#s3"><span class="toc-number">•</span>อนุพันธ์</a><a href="appendix-a-formulas.html#s4"><span class="toc-number">•</span>การประยุกต์อนุพันธ์</a><a href="appendix-a-formulas.html#s5"><span class="toc-number">•</span>อินทิกรัล</a></div></details>
+<details class="nav-chapter" name="course-nav" open><summary aria-current="page"><span class="nav-number">ข</span><span class="nav-title">ห้องทดลองกราฟ</span></summary><div class="nav-topics"><a href="#lesson-content"><span class="toc-number">ข</span>ภาพรวมของบท</a><a href="#s1"><span class="toc-number">•</span>ภารกิจชวนลอง</a><a href="#s2"><span class="toc-number">•</span>กราฟโต้ตอบอื่น ๆ ในเว็บนี้</a></div></details>
+</nav>
+  <div class="sidebar-bottom">1204105 Mathematics for Computer Science 2</div>
 </aside>
-<main class="content">
-<div class="page-head" data-sym="y=?"><span class="kicker">APPENDIX B</span><h1>ภาคผนวก ข · ห้องทดลองกราฟ</h1><p class="sub">พิมพ์ฟังก์ชันเอง ดูกราฟ อนุพันธ์ เส้นสัมผัส และพื้นที่ใต้กราฟแบบโต้ตอบ</p></div>
+<main class="lesson-main" id="lesson-content">
+<div class="utility-row"><a href="index.html">← สารบัญรายวิชา</a><span class="utility-code">1204105 · ภาคผนวก ข</span></div>
+<header class="lesson-header"><p class="lesson-kicker">APPENDIX B</p><h1>ห้องทดลองกราฟ</h1><p>พิมพ์ฟังก์ชันเอง ดูกราฟ อนุพันธ์ เส้นสัมผัส และพื้นที่ใต้กราฟแบบโต้ตอบ</p></header>
 <div class="box idea"><div class="box-t">🧪 วิธีใช้</div>
 <p>พิมพ์ฟังก์ชันในช่อง <b>f(x)</b> แล้วกด Enter (หรือคลิกนอกช่อง) — ใช้ <code>^</code> แทนยกกำลัง คูณไม่ต้องใส่ <code>*</code> ก็ได้ เช่น <code>2x^3 - 3x^2 - 12x + 5</code>
 รองรับ <code>sqrt( )</code> <code>|x|</code> <code>abs( )</code> <code>sin cos tan exp ln</code> <code>pi e</code></p>
@@ -63,12 +60,16 @@
 <a class="tcard" href="02-limit.html#s1"><span class="num">02</span><b>x เข้าใกล้ a จากสองฝั่ง</b><span>เห็นลิมิตแบบสด ๆ</span></a>
 <a class="tcard p2" href="04-derivative.html#s2"><span class="num">04</span><b>เส้นตัด → เส้นสัมผัส</b><span>ที่มาของนิยามอนุพันธ์</span></a>
 <a class="tcard p2" href="05-derivative-app.html#s2"><span class="num">05</span><b>ลากเส้นสัมผัสไปตามกราฟ</b><span>ช่วงเพิ่ม–ลด จุดวิกฤต</span></a>
+<a class="tcard" href="03-continuity.html#s6"><span class="num">03</span><b>หารากด้วยการแบ่งครึ่ง</b><span>ทฤษฎีบทค่าระหว่างกลาง = binary search</span></a>
+<a class="tcard p2" href="06-optimization.html#s6"><span class="num">06</span><b>Gradient descent</b><span>ปรับ learning rate แล้วดูลูกบอลกลิ้งหาจุดต่ำสุด</span></a>
+<a class="tcard p3" href="07-indefinite.html#s4"><span class="num">07</span><b>ตัวละครกระโดด</b><span>ความเร่ง → ความเร็ว → ความสูง</span></a>
 <a class="tcard p3" href="08-definite-area.html#s2"><span class="num">08</span><b>ผลรวมรีมันน์</b><span>สี่เหลี่ยมยิ่งมาก ยิ่งใกล้พื้นที่จริง</span></a>
 </div>
 
-<div class="pager"><a class="pg" href="appendix-a-formulas.html">← สรุปสูตร (Cheat Sheet)</a></div>
-<footer>1204105 Mathematics for Computer Science 2 (Calculus) · Calculus by Prymania · วิทยาการคอมพิวเตอร์ ม.มหาสารคาม</footer>
+<nav class="lesson-pager" aria-label="บทก่อนหน้าและถัดไป"><a class="pager-link secondary" href="appendix-a-formulas.html">← สรุปสูตร (Cheat Sheet)</a></nav>
+<footer class="lesson-footer">1204105 Mathematics for Computer Science 2 (Calculus) · Calculus by Prymania · วิทยาการคอมพิวเตอร์ ม.มหาสารคาม</footer>
 </main>
+</div>
 <script src="assets/password.js"></script>
 <script defer src="assets/nav.js"></script>
 <script defer src="assets/widgets.js"></script>
