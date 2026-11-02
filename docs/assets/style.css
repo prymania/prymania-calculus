@@ -269,6 +269,38 @@ svg .pt-closed { stroke: #fff; stroke-width: 1.5; }
 .review .rv-ans li { margin: 2px 0; border: 0; padding: 0; }
 .review .rv-ans li::before { content: none; }
 
+/* ---------- Bonus card (<bonus> ใน build) ---------- */
+.bonus { margin: 22px 0; border: 2px dashed #E8C35A; border-radius: 12px; background: #FFF5ED; padding: 14px 18px 12px; }
+.bonus-t { display: inline-block; margin-bottom: 6px; border-radius: 999px; background: #FCF6BD; padding: 2px 14px; color: #7a5a00; font: 700 15px var(--f-display); }
+.bonus > p { margin: 4px 0 8px; }
+.bonus ul, .bonus ol { margin: 4px 0 8px; padding-left: 22px; }
+.bonus .plotrow { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+.bonus-key { margin-top: 10px; border: 1px solid #bfe3cc; border-radius: 10px; background: #fff; padding: 10px 14px; }
+.bonus-key p { margin: 4px 0; }
+
+/* ---------- Pastel theme (หน้าที่ build ด้วย pastel=True) ----------
+   สีจากชุด Cotton Candy / Blue chalk / Cosmos ใน designil-pastel-palette.pdf */
+.pastel { --hl-yellow: #FCF6BD; --hl-pink: #FFBBDA; --g1: #E3EBFD; --g2: #FCEEE2; --g3: #E7DCFC; --g4: #F8D5F8; }
+/* ไฮไลต์เต็มบรรทัดแบบปากกาเน้นข้อความ */
+.pastel .term, .pastel .hl { border-radius: 4px; padding: 1px 4px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.pastel .term { background: var(--hl-yellow); }
+.pastel .hl { background: var(--hl-pink); font-weight: 600; }
+/* คำถามท้ายบท: ลงสีพื้นตามหัวข้อย่อย */
+.pastel .review ol > li.g1 { background: var(--g1); }
+.pastel .review ol > li.g2 { background: var(--g2); }
+.pastel .review ol > li.g3 { background: var(--g3); }
+.pastel .review ol > li.g4 { background: var(--g4); }
+.pastel .review ol > li:not(.part) { border-color: transparent; }
+/* หัวข้อย่อยของคำถามท้ายบท: ทุกหัวข้อสีเดียวกัน (mint) แยกจากสีพื้นของข้อ */
+.pastel .review ol > li.part { display: inline-block; border-radius: 999px; background: #D0F4DE; padding: 3px 16px; color: var(--fg); font: 700 16.5px/1.5 var(--f-display); }
+/* การ์ดเปรียบเทียบซ้าย–ขวา: แต่ละฝั่งลงสีพื้นต่างกัน */
+/* ซ้าย = มิ้นต์ Granny Apple #D0F4DE (เป็นฟังก์ชัน) / ฟ้า Baby Blue #E3EBFD (โดเมน) · ขวา = ชมพู Misty Rose #FEE5E0 ทั้งคู่ */
+.pastel .vs .good { background: #D0F4DE; border-color: #b5e3c6; border-top-color: var(--mint); }
+.pastel .vs .neu { background: #E3EBFD; border-color: #c8d6f5; border-top-color: var(--grape); }
+.pastel .vs .bad, .pastel .vs .warm { background: #FEE5E0; border-color: #f5c9c0; border-top-color: var(--rose); }
+.pastel .review ol > li.part + li { margin-top: 6px; }
+.pastel .rv-ans { background: #fff; }
+
 /* ---------- Index: chapter cards ---------- */
 .part-t { margin: 22px 0 6px; color: var(--muted); font: 600 13px var(--f-display); }
 .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 8px 0; }

@@ -11,6 +11,8 @@
   <sign>{dict}</sign>                 → ตารางเครื่องหมาย f'(x) บนเส้นจำนวน
   <py t="ชื่อ">code</py>               → การ์ดโค้ด Python ที่รันจริงตอน build แล้วแสดงผลลัพธ์
   <review><part>หัวข้อ</part><q h="คำใบ้">คำถาม<sol>เฉลย</sol></q></review>
+  <bonus>โจทย์<key>แนวคำตอบ</key></bonus>   → การ์ด "⭐ โบนัส บท.ลำดับ" (ไม่เกิน 3 ใบต่อบท)
+                                       แนวคำตอบรวมไว้ที่ docs/assets/bonus.html (ไม่มีลิงก์จากหน้าใด)
 """
 import ast, contextlib, html, io, math, os, re, sys
 import numpy as np
@@ -21,7 +23,7 @@ OUT = os.path.join(os.path.dirname(HERE), "docs")
 
 PAGES = [
     dict(file="index.html", title="หน้าแรก / ภาพรวม", group=0),
-    dict(file="01-function.html", no=1, group=1, sym="f(x)", title="ฟังก์ชัน กราฟ และความชัน",
+    dict(file="01-function.html", no=1, group=1, pastel=True, sym="f(x)", title="ฟังก์ชัน กราฟ และความชัน",
          kicker="CHAPTER 01 · ปูพื้นฐาน", sub="ฟังก์ชันคืออะไร โดเมนและเรนจ์ การหาค่าฟังก์ชัน ฟังก์ชันประกอบ ความชันและสมการเส้นตรง"),
     dict(file="02-limit.html", no=2, group=1, sym="lim", title="ลิมิตของฟังก์ชัน",
          kicker="CHAPTER 02 · Exam 1", sub="แนวคิดของลิมิต การแทนค่า ทฤษฎีบทลิมิต รูปแบบ 0/0 การแยกตัวประกอบ คอนจูเกต ลิมิตซ้าย–ขวา และลิมิตที่อนันต์"),
@@ -247,7 +249,7 @@ def run_py(code):
 
 # ============================================================ page transforms
 def transform(src, chap):
-    counters = {"ex": 0, "fig": 0}
+    counters = {"ex": 0, "fig": 0, "bonus": 0}
     prefix = str(chap) + "." if chap else ""
 
     def py_block(m):
@@ -292,11 +294,20 @@ def transform(src, chap):
             no, no, attrs.get("t", ""), lv, q, ans)
     src = re.sub(r"<ex((?:\s+\w+=\"[^\"]*\")*)>(.*?)</ex>", ex_block, src, flags=re.S)
 
+    def bonus_block(m):
+        counters["bonus"] += 1
+        no = "%s%d" % (prefix, counters["bonus"])
+        q, _, key = m.group(1).partition("<key>")
+        BONUSES.append((no, q.strip(), key.replace("</key>", "").strip()))
+        return '<div class="bonus" id="bonus%s"><div class="bonus-t">⭐ โบนัส %s</div>%s</div>' % (no, no, q.strip())
+    src = re.sub(r"<bonus>(.*?)</bonus>", bonus_block, src, flags=re.S)
+
     def review_block(m):
         body = m.group(1)
-        body = re.sub(r"<part>(.*?)</part>", r'<li class="part">\1</li>', body, flags=re.S)
 
         def q(mm):
+            # g1, g2, … = หัวข้อย่อย (<part>) ที่ข้อนี้อยู่ ใช้ลงสีพื้นหลังทีละกลุ่ม (วนทุก 4 สี)
+            group = (body[:mm.start()].count("<part>") - 1) % 4 + 1
             hint = mm.group(1)
             inner = mm.group(2).replace("<sol>", '<div class="rv-ans">').replace("</sol>", "</div>")
             if hint:
@@ -306,8 +317,11 @@ def transform(src, chap):
                     inner = a.rstrip() + ' <span class="hint">(%s)</span><div class="rv-ans">' % hint + b
                 else:
                     inner += ' <span class="hint">(%s)</span>' % hint
-            return "<li>%s</li>" % inner
+            return '<li class="g%d">%s</li>' % (group, inner)
         body = re.sub(r'<q(?: h="([^"]*)")?>(.*?)</q>', q, body, flags=re.S)
+        parts = iter(range(10 ** 6))
+        body = re.sub(r"<part>(.*?)</part>",
+                      lambda pm: '<li class="part g%d">%s</li>' % (next(parts) % 4 + 1, pm.group(1)), body, flags=re.S)
         return ('<section class="review" id="review"><h2>คำถามท้ายบท</h2>'
                 '<p class="review-note">ลองทำเองก่อนทุกข้อ แล้วค่อยกด “ดูเฉลย” (ต้องใช้รหัสผ่านจากผู้สอน)</p>'
                 '<div class="review-actions"><button type="button" class="review-key">ดูเฉลย</button>'
@@ -317,17 +331,21 @@ def transform(src, chap):
                 '<ol>%s</ol></section>') % body
     src = re.sub(r"<review>(.*?)</review>", review_block, src, flags=re.S)
 
-    # --- หัวข้อ h2: ใส่เลข + เก็บรายการ
+    # --- หัวข้อ h2: ใส่เลข + เก็บรายการ (การ์ดโบนัสแทรกในรายการตามตำแหน่งที่อยู่ในหน้า)
     heads = []
+    n_sec = [0]
 
     def h2(m):
+        if m.group(3):   # การ์ดโบนัส
+            heads.append((m.group(3), "⭐", "โบนัส " + m.group(4)))
+            return m.group(0)
         hid, text = m.group(1), m.group(2)
-        k = len(heads) + 1
-        sec = "%s%d" % (prefix, k) if chap else ""
+        n_sec[0] += 1
+        sec = "%s%d" % (prefix, n_sec[0]) if chap else ""
         heads.append((hid, sec, re.sub(r"<[^>]+>", "", text)))
         badge = '<span class="sec">%s</span> ' % sec if sec else ""
         return '<h2 id="%s">%s%s</h2>' % (hid, badge, text)
-    src = re.sub(r'<h2 id="([^"]+)">(.*?)</h2>', h2, src)
+    src = re.sub(r'<h2 id="([^"]+)">(.*?)</h2>|<div class="bonus" id="(bonus[^"]+)"><div class="bonus-t">⭐ โบนัส ([^<]+)</div>', h2, src)
     return src, heads
 
 
@@ -380,7 +398,7 @@ TEMPLATE = """<!DOCTYPE html>
 {nav}
   <div class="sidebar-bottom">1204105 Mathematics for Computer Science 2</div>
 </aside>
-<main class="lesson-main" id="lesson-content">
+<main class="lesson-main{theme}" id="lesson-content">
 {utility}
 {head}
 {body}
@@ -396,9 +414,53 @@ TEMPLATE = """<!DOCTYPE html>
 """
 
 
+BONUSES = []   # (เลขโบนัส, โจทย์, แนวคำตอบ) เก็บระหว่างแปลงหน้า แล้วเขียนรวมเป็น assets/bonus.html
+
+BONUS_PAGE = """<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>แนวคำตอบโบนัส — Calculus Lecture Note</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700&family=Bai+Jamjuree:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="katex/katex.min.css">
+<link rel="stylesheet" href="style.css">
+<script defer src="katex/katex.min.js"></script>
+<script defer src="katex/contrib/auto-render.min.js"></script>
+<script defer src="nav.js"></script>
+</head>
+<body>
+<main class="lesson-main pastel">
+<header class="lesson-header"><p class="lesson-kicker">สำหรับผู้สอน</p><h1>แนวคำตอบโบนัส</h1>
+<p>โจทย์โบนัสส่วนใหญ่เป็นคำถามปลายเปิด แนวคำตอบด้านล่างคือตัวอย่างคำตอบที่ถูกและเกณฑ์ช่วยตัดสิน ไม่ใช่คำตอบเดียวที่ยอมรับ</p></header>
+{body}
+<footer class="lesson-footer">1204105 Mathematics for Computer Science 2 (Calculus) · หน้านี้ไม่มีลิงก์จากเว็บบทเรียน</footer>
+</main>
+</body>
+</html>
+"""
+
+
+def write_bonus_page():
+    chapters = {p["no"]: p["title"] for p in PAGES if p.get("no")}
+    parts, current = [], None
+    for no, q, key in BONUSES:
+        ch = int(no.split(".")[0])
+        if ch != current:
+            current = ch
+            parts.append('<h2>บทที่ %d · %s</h2>' % (ch, chapters.get(ch, "")))
+        parts.append('<div class="bonus"><div class="bonus-t">⭐ โบนัส %s</div>%s'
+                     '<div class="bonus-key"><div class="answer-t">แนวคำตอบ</div>%s</div></div>' % (no, q, key))
+    with open(os.path.join(OUT, "assets", "bonus.html"), "w", encoding="utf-8", newline="\n") as fh:
+        fh.write(BONUS_PAGE.replace("{body}", "\n".join(parts)))
+    print("✓ assets/bonus.html            bonus=%d" % len(BONUSES))
+
+
 def build():
     # รอบแรก: แปลงทุกหน้า เพื่อให้เมนูด้านซ้ายของทุกหน้ามีหัวข้อย่อยของทุกบท
     bodies, toc = {}, {}
+    BONUSES.clear()
     for p in PAGES:
         path = os.path.join(SRC, p["file"])
         if not os.path.exists(path):
@@ -430,12 +492,14 @@ def build():
             '<a class="pager-link secondary" href="%s">← %s</a>' % (prev_p["file"], prev_p["title"]) if prev_p else "<span></span>",
             '<a class="pager-link" href="%s">%s →</a>' % (next_p["file"], next_p["title"]) if next_p else "")
         title = ("บทที่ %d · %s" % (p["no"], p["title"])) if p.get("no") else p["title"]
-        out = TEMPLATE.format(title=title, nav=sidebar(p, toc), utility=utility, head=head, body=body, pager=pager)
+        out = TEMPLATE.format(title=title, nav=sidebar(p, toc), utility=utility, head=head, body=body, pager=pager,
+                              theme=" pastel" if p.get("pastel") else "")
         with open(os.path.join(OUT, p["file"]), "w", encoding="utf-8", newline="\n") as fh:
             fh.write(out)
         n_ex = body.count('class="ex"')
         n_q = len(re.findall(r'class="rv-ans"', body))
         print("✓ %-28s  sections=%-2d examples=%-3d review=%d" % (p["file"], len(heads), n_ex, n_q))
+    write_bonus_page()
 
 
 if __name__ == "__main__":
