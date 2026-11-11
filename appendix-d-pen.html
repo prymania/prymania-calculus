@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>วิธีใช้ปากกาเขียนบนหน้าเว็บ — Calculus Lecture Note</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700&family=Bai+Jamjuree:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/katex/katex.min.css">
+<link rel="stylesheet" href="assets/style.css">
+<script defer src="assets/katex/katex.min.js"></script>
+<script defer src="assets/katex/contrib/auto-render.min.js"></script>
+<script>document.documentElement.classList.add("js");try{if(localStorage.getItem("side-collapsed")==="1")document.documentElement.classList.add("side-collapsed");if(localStorage.getItem("big-text")==="1")document.documentElement.classList.add("big-text");if(localStorage.getItem("dark")==="1")document.documentElement.classList.add("dark")}catch(e){}</script>
+</head>
+<body>
+<a class="skip-link" href="#lesson-content">ข้ามไปเนื้อหา</a>
+<div class="lesson-shell">
+<button class="side-show" type="button" aria-label="แสดงเมนูบทเรียน">☰ เมนู</button>
+<aside class="lesson-sidebar" aria-label="เมนูบทเรียน">
+  <button class="side-hide" type="button" aria-label="ซ่อนเมนู" title="ซ่อนเมนู">«</button>
+  <a class="lesson-brand" href="index.html"><span class="brand-mark" aria-hidden="true">∫</span><span><span class="brand-title">Calculus<br>by Prymania</span><span class="brand-caption">1204105 · LECTURE NOTES</span></span></a>
+<button class="nav-toggle" type="button" aria-expanded="false">☰ สารบัญทุกบท</button>
+<nav class="course-nav" aria-label="สารบัญรายวิชา">
+<p class="nav-label">ส่วนที่ 1 · ลิมิต</p>
+<details class="nav-chapter" name="course-nav"><summary><span class="nav-number">01</span><a class="nav-title" href="01-function.html">ฟังก์ชัน กราฟ และความชัน</a></summary><div class="nav-topics"><a href="01-function.html#s1"><span class="toc-number">1.1</span>ฟังก์ชันคืออะไร</a><a href="01-function.html#s2"><span class="toc-number">1.2</span>โดเมนและเรนจ์</a><a href="01-function.html#bonus1.1"><span class="toc-number">⭐</span>โบนัส 1.1</a><a href="01-function.html#s3"><span class="toc-number">1.3</span>การหาค่าฟังก์ชันและฟังก์ชันประกอบ</a><a href="01-function.html#bonus1.2"><span class="toc-number">⭐</span>โบนัส 1.2</a><a href="01-function.html#s4"><span class="toc-number">1.4</span>ความชันและสมการเส้นตรง</a><a href="01-function.html#s5"><span class="toc-number">1.5</span>ฟังก์ชันพื้นฐานที่ต้องรู้จักหน้าตา</a><a href="01-function.html#bonus1.3"><span class="toc-number">⭐</span>โบนัส 1.3</a><a href="01-function.html#review"><span class="toc-number">ฝึก</span>คำถามท้ายบท</a><a href="01-function.html#quiz"><span class="toc-number">📝</span>เก็บคะแนนท้ายบท</a></div></details>
+<details class="nav-chapter" name="course-nav"><summary><span class="nav-number">02</span><a class="nav-title" href="02-limit.html">ลิมิตของฟังก์ชัน</a></summary><div class="nav-topics"><a href="02-limit.html#s1"><span class="toc-number">2.1</span>ลิมิตคืออะไร — “เข้าใกล้” ไม่ใช่ “เท่ากับ”</a><a href="02-limit.html#bonus2.1"><span class="toc-number">⭐</span>โบนัส 2.1</a><a href="02-limit.html#s2"><span class="toc-number">2.2</span>หาลิมิตโดยการแทนค่าโดยตรง</a><a href="02-limit.html#s3"><span class="toc-number">2.3</span>ทฤษฎีบทของลิมิต</a><a href="02-limit.html#s4"><span class="toc-number">2.4</span>เมื่อแทนค่าแล้วเจอปัญหา: แผนที่ตัดสินใจ</a><a href="02-limit.html#s5"><span class="toc-number">2.5</span>เครื่องมือที่ 1: แยกตัวประกอบ</a><a href="02-limit.html#s6"><span class="toc-number">2.6</span>เครื่องมือที่ 2: คูณด้วยคอนจูเกต (เมื่อเจอรากที่สอง)</a><a href="02-limit.html#bonus2.2"><span class="toc-number">⭐</span>โบนัส 2.2</a><a href="02-limit.html#s7"><span class="toc-number">2.7</span>ลิมิตซ้าย ลิมิตขวา</a><a href="02-limit.html#s8"><span class="toc-number">2.8</span>ลิมิตที่อนันต์และลิมิตอนันต์ เสริม</a><a href="02-limit.html#bonus2.3"><span class="toc-number">⭐</span>โบนัส 2.3</a><a href="02-limit.html#review"><span class="toc-number">ฝึก</span>คำถามท้ายบท</a><a href="02-limit.html#quiz"><span class="toc-number">📝</span>เก็บคะแนนท้ายบท</a></div></details>
+<details class="nav-chapter" name="course-nav"><summary><span class="nav-number">03</span><a class="nav-title" href="03-continuity.html">ความต่อเนื่องของฟังก์ชัน</a></summary><div class="nav-topics"><a href="03-continuity.html#s1"><span class="toc-number">3.1</span>ความต่อเนื่องคืออะไร</a><a href="03-continuity.html#s2"><span class="toc-number">3.2</span>หน้าตาของจุดไม่ต่อเนื่อง</a><a href="03-continuity.html#bonus3.1"><span class="toc-number">⭐</span>โบนัส 3.1</a><a href="03-continuity.html#s3"><span class="toc-number">3.3</span>ตรวจความต่อเนื่องทีละข้อ</a><a href="03-continuity.html#s4"><span class="toc-number">3.4</span>หาค่า k ที่ทำให้ฟังก์ชันต่อเนื่อง</a><a href="03-continuity.html#bonus3.2"><span class="toc-number">⭐</span>โบนัส 3.2</a><a href="03-continuity.html#s5"><span class="toc-number">3.5</span>ฟังก์ชันไหนต่อเนื่องบ้าง (ภาพรวม)</a><a href="03-continuity.html#s6"><span class="toc-number">3.6</span>ความต่อเนื่องช่วยหาคำตอบของสมการ เสริม</a><a href="03-continuity.html#bonus3.3"><span class="toc-number">⭐</span>โบนัส 3.3</a><a href="03-continuity.html#review"><span class="toc-number">ฝึก</span>คำถามท้ายบท</a><a href="03-continuity.html#quiz"><span class="toc-number">📝</span>เก็บคะแนนท้ายบท</a></div></details>
+<p class="nav-label">ส่วนที่ 2 · อนุพันธ์</p>
+<details class="nav-chapter" name="course-nav"><summary><span class="nav-number">04</span><a class="nav-title" href="04-derivative.html">อนุพันธ์และสูตรการดิฟ</a></summary><div class="nav-topics"><a href="04-derivative.html#s1"><span class="toc-number">4.1</span>อัตราการเปลี่ยนแปลงเฉลี่ย</a><a href="04-derivative.html#s2"><span class="toc-number">4.2</span>อัตราการเปลี่ยนแปลงขณะใด ๆ = อนุพันธ์</a><a href="04-derivative.html#bonus4.1"><span class="toc-number">⭐</span>โบนัส 4.1</a><a href="04-derivative.html#s3"><span class="toc-number">4.3</span>สูตรการดิฟพื้นฐาน</a><a href="04-derivative.html#s4"><span class="toc-number">4.4</span>ดิฟผลคูณและผลหาร</a><a href="04-derivative.html#bonus4.2"><span class="toc-number">⭐</span>โบนัส 4.2</a><a href="04-derivative.html#s5"><span class="toc-number">4.5</span>กฎลูกโซ่ (Chain Rule)</a><a href="04-derivative.html#bonus4.3"><span class="toc-number">⭐</span>โบนัส 4.3</a><a href="04-derivative.html#s6"><span class="toc-number">4.6</span>ดิฟฟังก์ชันประกอบ $(f\circ g)'$</a><a href="04-derivative.html#s7"><span class="toc-number">4.7</span>อนุพันธ์อันดับสูง</a><a href="04-derivative.html#review"><span class="toc-number">ฝึก</span>คำถามท้ายบท</a><a href="04-derivative.html#quiz"><span class="toc-number">📝</span>เก็บคะแนนท้ายบท</a></div></details>
+<details class="nav-chapter" name="course-nav"><summary><span class="nav-number">05</span><a class="nav-title" href="05-derivative-app.html">ความชัน เส้นสัมผัส และค่าสูงสุด–ต่ำสุด</a></summary><div class="nav-topics"><a href="05-derivative-app.html#s1"><span class="toc-number">5.1</span>ความชันของเส้นโค้ง</a><a href="05-derivative-app.html#bonus5.1"><span class="toc-number">⭐</span>โบนัส 5.1</a><a href="05-derivative-app.html#s2"><span class="toc-number">5.2</span>สมการเส้นสัมผัส (Tangent line)</a><a href="05-derivative-app.html#bonus5.2"><span class="toc-number">⭐</span>โบนัส 5.2</a><a href="05-derivative-app.html#s3"><span class="toc-number">5.3</span>ฟังก์ชันเพิ่ม ฟังก์ชันลด และจุดวิกฤต</a><a href="05-derivative-app.html#s4"><span class="toc-number">5.4</span>ทดสอบสูงสุด–ต่ำสุดสัมพัทธ์</a><a href="05-derivative-app.html#s5"><span class="toc-number">5.5</span>ค่าสูงสุด–ต่ำสุดสัมบูรณ์บนช่วงปิด</a><a href="05-derivative-app.html#bonus5.3"><span class="toc-number">⭐</span>โบนัส 5.3</a><a href="05-derivative-app.html#review"><span class="toc-number">ฝึก</span>คำถามท้ายบท</a><a href="05-derivative-app.html#quiz"><span class="toc-number">📝</span>เก็บคะแนนท้ายบท</a></div></details>
+<details class="nav-chapter" name="course-nav"><summary><span class="nav-number">06</span><a class="nav-title" href="06-optimization.html">โจทย์ปัญหาค่าเหมาะที่สุด</a></summary><div class="nav-topics"><a href="06-optimization.html#s1"><span class="toc-number">6.1</span>สูตรสำเร็จ 5 ขั้น</a><a href="06-optimization.html#s2"><span class="toc-number">6.2</span>ปัญหาพื้นที่และปริมาตร</a><a href="06-optimization.html#bonus6.1"><span class="toc-number">⭐</span>โบนัส 6.1</a><a href="06-optimization.html#s3"><span class="toc-number">6.3</span>ปัญหาตัวเลข</a><a href="06-optimization.html#s4"><span class="toc-number">6.4</span>ปัญหาธุรกิจ: รายได้และกำไร</a><a href="06-optimization.html#bonus6.2"><span class="toc-number">⭐</span>โบนัส 6.2</a><a href="06-optimization.html#s5"><span class="toc-number">6.5</span>ปัญหาการเคลื่อนที่</a><a href="06-optimization.html#s6"><span class="toc-number">6.6</span>Gradient descent: ให้คอมพิวเตอร์เดินหาจุดต่ำสุดเอง เสริม</a><a href="06-optimization.html#bonus6.3"><span class="toc-number">⭐</span>โบนัส 6.3</a><a href="06-optimization.html#review"><span class="toc-number">ฝึก</span>คำถามท้ายบท</a><a href="06-optimization.html#quiz"><span class="toc-number">📝</span>เก็บคะแนนท้ายบท</a></div></details>
+<p class="nav-label">ส่วนที่ 3 · อินทิกรัล</p>
+<details class="nav-chapter" name="course-nav"><summary><span class="nav-number">07</span><a class="nav-title" href="07-indefinite.html">อินทิกรัลไม่จำกัดเขต</a></summary><div class="nav-topics"><a href="07-indefinite.html#s1"><span class="toc-number">7.1</span>อินทิกรัล = ดิฟย้อนกลับ</a><a href="07-indefinite.html#bonus7.1"><span class="toc-number">⭐</span>โบนัส 7.1</a><a href="07-indefinite.html#s2"><span class="toc-number">7.2</span>สูตรอินทิกรัล</a><a href="07-indefinite.html#s3"><span class="toc-number">7.3</span>จัดรูปก่อนอินทิเกรต</a><a href="07-indefinite.html#s4"><span class="toc-number">7.4</span>หาค่าคงที่ C — หาฟังก์ชันจริงจากอนุพันธ์</a><a href="07-indefinite.html#bonus7.2"><span class="toc-number">⭐</span>โบนัส 7.2</a><a href="07-indefinite.html#bonus7.3"><span class="toc-number">⭐</span>โบนัส 7.3</a><a href="07-indefinite.html#s5"><span class="toc-number">7.5</span>การอินทิเกรตโดยการแทนค่า เสริม</a><a href="07-indefinite.html#review"><span class="toc-number">ฝึก</span>คำถามท้ายบท</a><a href="07-indefinite.html#quiz"><span class="toc-number">📝</span>เก็บคะแนนท้ายบท</a></div></details>
+<details class="nav-chapter" name="course-nav"><summary><span class="nav-number">08</span><a class="nav-title" href="08-definite-area.html">อินทิกรัลจำกัดเขตและพื้นที่</a></summary><div class="nav-topics"><a href="08-definite-area.html#s1"><span class="toc-number">8.1</span>อินทิกรัลจำกัดเขต</a><a href="08-definite-area.html#s2"><span class="toc-number">8.2</span>อินทิกรัล = พื้นที่ใต้เส้นโค้ง</a><a href="08-definite-area.html#bonus8.1"><span class="toc-number">⭐</span>โบนัส 8.1</a><a href="08-definite-area.html#s3"><span class="toc-number">8.3</span>พื้นที่ใต้แกน x</a><a href="08-definite-area.html#s4"><span class="toc-number">8.4</span>เมื่อกราฟตัดแกน x — ต้องแบ่งช่วง!</a><a href="08-definite-area.html#bonus8.2"><span class="toc-number">⭐</span>โบนัส 8.2</a><a href="08-definite-area.html#s5"><span class="toc-number">8.5</span>พื้นที่ระหว่างเส้นโค้ง</a><a href="08-definite-area.html#bonus8.3"><span class="toc-number">⭐</span>โบนัส 8.3</a><a href="08-definite-area.html#review"><span class="toc-number">ฝึก</span>คำถามท้ายบท</a><a href="08-definite-area.html#quiz"><span class="toc-number">📝</span>เก็บคะแนนท้ายบท</a></div></details>
+<p class="nav-label">ภาคผนวก</p>
+<details class="nav-chapter" name="course-nav"><summary><span class="nav-number">A</span><a class="nav-title" href="appendix-a-formulas.html">สรุปสูตร (Cheat Sheet)</a></summary><div class="nav-topics"><a href="appendix-a-formulas.html#s1"><span class="toc-number">•</span>พีชคณิตที่ต้องใช้</a><a href="appendix-a-formulas.html#s2"><span class="toc-number">•</span>ลิมิตและความต่อเนื่อง</a><a href="appendix-a-formulas.html#s3"><span class="toc-number">•</span>อนุพันธ์</a><a href="appendix-a-formulas.html#s4"><span class="toc-number">•</span>การประยุกต์อนุพันธ์</a><a href="appendix-a-formulas.html#s5"><span class="toc-number">•</span>อินทิกรัล</a></div></details>
+<details class="nav-chapter" name="course-nav"><summary><span class="nav-number">B</span><a class="nav-title" href="appendix-b-playground.html">ห้องทดลองกราฟ</a></summary><div class="nav-topics"><a href="appendix-b-playground.html#s1"><span class="toc-number">•</span>ภารกิจชวนลอง</a><a href="appendix-b-playground.html#s2"><span class="toc-number">•</span>กราฟโต้ตอบอื่น ๆ ในเว็บนี้</a></div></details>
+<details class="nav-chapter" name="course-nav"><summary><span class="nav-number">C</span><a class="nav-title" href="appendix-c-course.html">เกณฑ์คะแนน</a></summary><div class="nav-topics"><a href="appendix-c-course.html#s1"><span class="toc-number">•</span>คะแนนมาจากไหน</a><a href="appendix-c-course.html#s2"><span class="toc-number">•</span>เกณฑ์การตัดเกรด</a><a href="appendix-c-course.html#s3"><span class="toc-number">•</span>ข้อตกลงในชั้นเรียน</a><a href="appendix-c-course.html#s4"><span class="toc-number">•</span>เรียนอย่างไรให้รอด</a></div></details>
+<details class="nav-chapter" name="course-nav" open><summary aria-current="page"><span class="nav-number">D</span><a class="nav-title" href="#lesson-content">วิธีใช้ปากกาเขียนบนหน้าเว็บ</a></summary><div class="nav-topics"><a href="#s1"><span class="toc-number">•</span>เปิดใช้ปากกา</a><a href="#s2"><span class="toc-number">•</span>ปุ่มในแถบเครื่องมือ</a><a href="#s5"><span class="toc-number">•</span>กระดานทด (กระดาษเปล่า)</a><a href="#s3"><span class="toc-number">•</span>การบันทึกและสำรองหมึก</a><a href="#s4"><span class="toc-number">•</span>ข้อควรรู้</a></div></details>
+</nav>
+  <figure class="side-photo"><img src="icon/prymania.jpg" alt="อ. พรทิวา ปะวะระ (อ. พราย)" width="360" height="480" loading="lazy"><figcaption>อ. พรทิวา ปะวะระ (อ. พราย)</figcaption></figure>
+  <div class="sidebar-bottom">1204105 Mathematics for Computer Science 2</div>
+</aside>
+<main class="lesson-main pastel" id="lesson-content">
+<div class="utility-row"><a href="index.html">← สารบัญรายวิชา</a><span class="utility-code">1204105 · ภาคผนวก D</span></div>
+<header class="lesson-header"><p class="lesson-kicker">APPENDIX D · HOW TO</p><h1>วิธีใช้ปากกาเขียนบนหน้าเว็บ</h1><p>เขียน ไฮไลต์ และจดโน้ตทับบทเรียนด้วย Apple Pencil หรือเมาส์ พร้อมวิธีบันทึกและสำรองหมึก</p></header>
+
+<div class="box idea"><div class="box-t">✏️ ลองได้เลยบนหน้านี้</div>
+<p>กดปุ่ม <b>✏️</b> มุมขวาบนของจอ แล้วลองเขียนทับหน้านี้ได้ทันที</p>
+<p>บน iPad ใช้ Apple Pencil เขียน ส่วนนิ้วเลื่อนและซูมหน้าได้ตามปกติ บนคอมใช้เมาส์ลากเพื่อเขียน</p></div>
+
+<h2 id="s1">เปิดใช้ปากกา</h2>
+<div class="pen-steps">
+  <div class="pen-step"><b>1</b><div><h4>กด ✏️</h4><p>ปุ่มอยู่มุมขวาบน (มือถืออยู่มุมขวาล่าง)<br>แถบเครื่องมือจะเปิดออกมา</p></div></div>
+  <div class="pen-step"><b>2</b><div><h4>เลือกสี แล้วเขียน</h4><p>Apple Pencil หรือเมาส์ = เขียน<br>นิ้ว = เลื่อนหน้า ซูม และแตะปุ่มในหน้า</p></div></div>
+  <div class="pen-step"><b>3</b><div><h4>กด ✕ เมื่อเขียนเสร็จ</h4><p>หมึกยังแสดงอยู่และบันทึกไว้แล้ว<br>หน้าเว็บกลับมาใช้งานได้ตามปกติ</p></div></div>
+</div>
+
+<h2 id="s2">ปุ่มในแถบเครื่องมือ</h2>
+<div class="pen-demo" aria-hidden="true">
+  <span class="pd-pen" style="background:#17202d"></span><span class="pd-pen" style="background:#e0533f"></span><span class="pd-pen" style="background:#2f80ed"></span><span class="pd-pen" style="background:#14a08e"></span>
+  <span class="pd-hl" style="background:#FFD6EE"></span><span class="pd-hl" style="background:#CED1F8"></span><span class="pd-hl" style="background:#EAFF4F"></span>
+  <span class="pd-ico">🧽</span><span class="pd-ico">↶</span><span class="pd-ico">📒</span><span class="pd-ico">🗑</span><span class="pd-ico">⬇️</span><span class="pd-ico">⬆️</span><span class="pd-ico pd-x">✕</span>
+</div>
+<table class="tbl">
+<tr><th>ปุ่ม</th><th>ใช้ทำอะไร</th></tr>
+<tr><td>⚫ 🔴 🔵 🟢</td><td>ปากกา 4 สี แตะครั้งเดียวเพื่อเลือก สีที่เลือกอยู่จะมีวงรอบ</td></tr>
+<tr><td>ไฮไลต์ ชมพู · ม่วง · เหลือง</td><td>ปากกาเส้นหนาสีอ่อน ใช้ระบายทับข้อความ ตัวหนังสือข้างใต้ยังอ่านชัด</td></tr>
+<tr><td>🧽 ยางลบ</td><td>แตะหรือลากผ่านเส้นไหน เส้นนั้นหายทั้งเส้น<br>แตะ 🧽 อีกครั้ง หรือแตะสี เพื่อกลับไปเขียน</td></tr>
+<tr><td>↶ ย้อนกลับ</td><td>ลบเส้นล่าสุดทีละเส้น</td></tr>
+<tr><td>📒 กระดานทด</td><td>เปิดกระดาษเปล่าเต็มจอทับบทเรียน (ดูหัวข้อถัดไป) แตะอีกครั้งเพื่อกลับไปบทเรียน</td></tr>
+<tr><td>🗑 ล้างหน้า</td><td>ลบหมึกทั้งหมดของหน้านี้ ต้องแตะ <b>2 ครั้ง</b> กันกดพลาด</td></tr>
+<tr><td>⬇️ สำรอง</td><td>บันทึกหมึกของ<b>ทุกหน้า</b>เป็นไฟล์ .json (ดูหัวข้อถัดไป)</td></tr>
+<tr><td>⬆️ นำกลับ</td><td>โหลดหมึกจากไฟล์สำรองกลับเข้ามา</td></tr>
+<tr><td>✕</td><td>ปิดโหมดปากกา (หมึกยังแสดงอยู่)</td></tr>
+</table>
+
+<div class="box tip"><div class="box-t">🔍 โหมดฉายจอ (ปุ่ม A+ ข้าง ✏️)</div>
+<p>แตะ <b>A+</b> เพื่อขยายตัวหนังสือและสูตรทั้งหน้า 125% ให้นิสิตหลังห้องอ่านออก แตะ <b>A−</b> เพื่อกลับขนาดปกติ</p>
+<p>หมึกขยายตามเนื้อหา เขียนในโหมดไหนก็ตรงตำแหน่งทั้งสองโหมด · เบราว์เซอร์จำค่าไว้ทุกหน้า</p></div>
+
+<div class="box tip"><div class="box-t">🌙 โหมดมืด (ปุ่ม 🌙 ข้าง A+)</div>
+<ul>
+<li>แตะ <b>🌙</b> เปลี่ยนเป็นพื้นเข้ม ตัวหนังสือขาว ไม่แสบตาเวลาฉายในห้องมืด · แตะ <b>☀️</b> กลับเป็นโหมดสว่าง</li>
+<li>กราฟยังใช้สีเดิม (ชมพู เขียว เหลือง ฟ้า) แต่สว่างขึ้นให้เห็นชัดบนพื้นเข้ม</li>
+<li>ปากกาดำจะแสดงเป็น<b>สีขาว</b> และไฮไลต์จะโปร่งขึ้นให้อ่านตัวหนังสือได้ · กระดานทด 📒 กลายเป็นกระดานดำ</li>
+<li>เบราว์เซอร์จำค่าไว้ทุกหน้า และนิสิตเลือกโหมดของตัวเองได้</li>
+</ul></div>
+
+<div class="box tip"><div class="box-t">💡 ซ่อนเมนูซ้ายให้มีที่เขียนมากขึ้น</div>
+<p>บน iPad และคอม กด <b>«</b> ข้างโลโก้เพื่อซ่อนเมนูซ้าย และกด <b>☰ เมนู</b> มุมซ้ายบนเพื่อแสดงกลับ</p>
+<p>ซ่อนหรือแสดงเมนูแล้ว หมึกยังอยู่ตรงตำแหน่งเดิมบนเนื้อหา</p></div>
+
+<h2 id="s5">กระดานทด (กระดาษเปล่า)</h2>
+<p>ใช้เมื่อต้องการพื้นที่เขียนเยอะ เช่น แก้โจทย์ยาว หรือวาดกราฟ โดยไม่ต้องเขียนทับเนื้อหา</p>
+<div class="pen-demo" aria-hidden="true"><span class="pd-ico">≡</span><span class="pd-ico">‹</span><span class="pd-ico" style="width:auto;padding:0 6px;font:600 13px var(--f-mono)">2/3</span><span class="pd-ico">›</span><span class="pd-ico">＋</span></div>
+<table class="tbl">
+<tr><th>ปุ่ม (ขึ้นเฉพาะตอนเปิดกระดาน)</th><th>ใช้ทำอะไร</th></tr>
+<tr><td>≡ ▦ ▢ ชนิดกระดาษ</td><td>แตะเพื่อสลับ เส้นบรรทัด → ตาราง (เหมาะกับวาดกราฟ) → กระดาษว่าง</td></tr>
+<tr><td>‹ 2/3 ›</td><td>เปลี่ยนหน้า ตัวเลขบอกหน้าปัจจุบัน/จำนวนหน้าทั้งหมด</td></tr>
+<tr><td>＋ เพิ่มหน้า</td><td>เพิ่มหน้าใหม่ต่อจากหน้าที่เปิดอยู่</td></tr>
+<tr><td>🗑 บนกระดาน</td><td>หน้ามีหมึก → ล้างหน้านั้น · หน้าว่าง → <b>ลบหน้าทิ้ง</b> (แตะ 2 ครั้งทั้งสองกรณี)</td></tr>
+</table>
+<div class="kv">
+<span>แยกตามบท</span><span>กระดานของแต่ละบทแยกกัน เปิดกระดานในบทที่ 4 จะเห็นเฉพาะหน้าที่เขียนในบทที่ 4</span>
+<span>บันทึกอัตโนมัติ</span><span>เหมือนหมึกบนบทเรียน และ ⬇️ สำรองกระดานไปด้วย</span>
+<span>เลื่อนกระดาษ</span><span>ใช้นิ้วเลื่อนขึ้นลง กระดาษแต่ละหน้ายาวพอเขียนได้หลายจอ</span>
+<span>ปิดปากกา (✕)</span><span>ออกจากกระดานกลับไปบทเรียนด้วย</span>
+</div>
+
+<h2 id="s3">การบันทึกและสำรองหมึก</h2>
+<p>หมึก<b>บันทึกอัตโนมัติ</b>ทุกเส้น แยกตามหน้า ปิดแล้วเปิดหน้าเดิมอีกครั้งหมึกยังอยู่</p>
+<p>แต่หมึกเก็บอยู่ใน<b>เบราว์เซอร์ของเครื่องที่เขียน</b>เท่านั้น ไม่ได้ขึ้นเว็บ คนอื่นจึงไม่เห็น และอาจหายได้ถ้าล้างข้อมูลเบราว์เซอร์</p>
+
+<div class="cards">
+<div class="pen-card save"><h4>⬇️ สำรองเป็นไฟล์</h4><ol>
+<li>เปิดโหมดปากกา แล้วแตะ ⬇️ (กดจากหน้าไหนก็ได้)</li>
+<li>iPad: Safari ถามว่าจะดาวน์โหลดไหม → กด <b>ดาวน์โหลด</b></li>
+<li>ไฟล์ชื่อ <code>calculus-ink-ปี-เดือน-วัน.json</code> อยู่ในแอป <b>ไฟล์ (Files) → ดาวน์โหลด</b></li>
+<li>แนะนำให้ย้ายไปเก็บใน iCloud Drive หรือ Google Drive</li>
+</ol></div>
+<div class="pen-card load"><h4>⬆️ นำหมึกกลับ</h4><ol>
+<li>เปิดโหมดปากกา แล้วแตะ ⬆️</li>
+<li>เลือกไฟล์ <code>.json</code> ที่สำรองไว้</li>
+<li>หมึกทุกหน้าในไฟล์จะกลับมา</li>
+<li><b>หมึกในไฟล์จะแทนที่</b>หมึกของหน้าเดียวกันที่มีอยู่ในเครื่อง</li>
+</ol></div>
+</div>
+
+<div class="box note"><div class="box-t">📌 ควรสำรองเมื่อไร</div>
+<div class="kv">
+<span>กันหมึกหาย</span><span>กด ⬇️ หลังสอนเสร็จทุกคาบ เพราะ Safari อาจล้างข้อมูลของเว็บที่ไม่ได้เปิดนานหลายวัน</span>
+<span>ย้ายเครื่อง</span><span>เขียนเตรียมบนคอม → ⬇️ → ส่งไฟล์ไป iPad → ⬆️ บน iPad</span>
+<span>ใช้ซ้ำเทอมหน้า</span><span>เก็บไฟล์ไว้ เทอมหน้ากด ⬆️ หมึกกลับมาครบ</span>
+</div></div>
+
+<h2 id="s4">ข้อควรรู้</h2>
+<div class="box warn"><div class="box-t">⚠️ ก่อนใช้สอนจริง</div><ul>
+<li><b>ตำแหน่งหมึกผูกกับการจัดหน้าตอนเขียน</b>: ถ้าหมุนจอ หรือเปิด/ปิดเฉลยที่อยู่<b>เหนือ</b>จุดที่เขียน หมึกจะเลื่อนไม่ตรงเนื้อหา ถ้าเปิดหน้าตอนจอกว้างต่างจากตอนเขียน จะมีข้อความเตือน</li>
+<li><b>นำกลับ = แทนที่</b>: ถ้าในเครื่องมีหมึกใหม่ที่ยังไม่ได้สำรอง ให้กด ⬇️ ก่อน แล้วค่อยกด ⬆️</li>
+<li><b>พิมพ์เป็น PDF ได้</b>: หมึกจะติดไปด้วย แต่แถบเครื่องมือไม่ติด</li>
+<li>ถ้าปุ่มหรือการเขียนทำงานแปลก ๆ หลังเว็บอัปเดต ให้รีเฟรชหน้า (คอม: Ctrl+F5)</li>
+</ul></div>
+
+<nav class="lesson-pager" aria-label="บทก่อนหน้าและถัดไป"><a class="pager-link secondary" href="appendix-c-course.html">← เกณฑ์คะแนน</a></nav>
+<footer class="lesson-footer">1204105 Mathematics for Computer Science 2 (Calculus) · Calculus by Prymania · วิทยาการคอมพิวเตอร์ ม.มหาสารคาม</footer>
+</main>
+</div>
+<script defer src="assets/nav.js"></script>
+<script defer src="assets/widgets.js"></script>
+<script defer src="assets/ink.js"></script>
+</body>
+</html>
