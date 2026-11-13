@@ -2659,6 +2659,7 @@ svg .pt-closed {
   /* ปุ่มสีหลัก: ใช้น้ำเงินเข้มพอให้ตัวหนังสือขาวอ่านชัด */
   html.dark .review-lock button,
   html.dark .quiz-btn,
+  html.dark .gc-dash,
   html.dark .wctl button:not(.alt),
   html.dark .pager-link:not(.secondary) {
     background: var(--btn);
@@ -2666,6 +2667,7 @@ svg .pt-closed {
   }
   html.dark .review-lock button:hover,
   html.dark .quiz-btn:hover,
+  html.dark .gc-dash:hover,
   html.dark .pager-link:not(.secondary):hover {
     background: var(--btn-hover);
   }
@@ -2937,4 +2939,29 @@ svg .pt-closed {
       linear-gradient(#2d3d38 1px, transparent 1px),
       linear-gradient(90deg, #2d3d38 1px, transparent 1px);
   }
+}
+
+/* ---------- ภาคผนวก E: สถิติผู้เข้าชม (widgets.js → stats, GoatCounter) ---------- */
+.gc-msg { margin: 0; color: var(--muted); }
+.gc-tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-bottom: 18px; }
+.gc-tile { border: 1px solid var(--line); border-radius: 10px; background: var(--soft); padding: 10px 14px; }
+.gc-tile span { display: block; color: var(--muted); font-size: 14px; }
+.gc-tile b { display: block; color: var(--accent); font: 700 28px/1.25 var(--f-display); }
+.gc-chart { display: flex; height: 170px; align-items: flex-end; gap: 4px; border-bottom: 1px solid var(--line); padding-top: 18px; }
+.gc-col { display: flex; flex: 1 1 0; min-width: 0; height: 100%; flex-direction: column; justify-content: flex-end; align-items: center; }
+.gc-col i { display: block; width: 72%; min-height: 2px; border-radius: 3px 3px 0 0; background: var(--sky); }
+.gc-col.today i { background: var(--mint); }
+.gc-v { color: var(--muted); font: 500 11px var(--f-mono); white-space: nowrap; }
+.gc-days { display: flex; gap: 4px; margin-top: 4px; }
+.gc-days span { flex: 1 1 0; min-width: 0; color: var(--muted); font-size: 11px; text-align: center; white-space: nowrap; }
+.gc-days span:last-child { color: var(--mint2); font-weight: 600; }
+table.tbl td.gc-n { font-family: var(--f-mono); text-align: right; white-space: nowrap; }
+.gc-dash { display: inline-flex; min-height: 42px; align-items: center; border-radius: 8px; background: var(--accent); padding: 8px 16px; color: #fff !important; font: 600 15px var(--f-body); text-decoration: none; }
+.gc-dash:hover { background: #174a96; }
+@media (max-width: 560px) {
+  .gc-tiles { gap: 6px; }
+  .gc-tile { padding: 8px 10px; }
+  .gc-tile b { font-size: 22px; }
+  .gc-chart, .gc-days { gap: 2px; }
+  .gc-v, .gc-days span { font-size: 9px; }
 }

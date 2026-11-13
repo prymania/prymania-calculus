@@ -538,8 +538,54 @@
     onResize(draw); draw();
   }
 
+  // ---------- สถิติผู้เข้าชม (ภาคผนวก E) · <div class="widget" data-w="stats" data-gc="https://CODE.goatcounter.com"> ----------
+  // ใช้ตัวนับสาธารณะของ GoatCounter (/counter/PATH.json, server cache ~4 ชม., วันตามเวลา UTC)
+  // ?start=D&end=D รวมชั่วโมง 00:00 ของวันถัดไปด้วย → ดึงยอดสะสม "ตั้งแต่วัน D" แล้วลบกันทีละวันแทน
+  function stats(box) {
+    var base = box.dataset.gc, dir = location.pathname.replace(/[^\/]*$/, ""), DAYS = 14;
+    var TH_M = ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."];
+    function get(path, start) {
+      return fetch(base + "/counter/" + encodeURIComponent(path) + ".json" + (start ? "?start=" + start : ""))
+        .then(function (r) {
+          if (r.status === 404) return 0;   // หน้านี้ยังไม่มีคนเข้า
+          if (!r.ok) throw new Error("HTTP " + r.status);
+          return r.json().then(function (j) { return parseInt(String(j.count).replace(/\D/g, ""), 10) || 0; });
+        });
+    }
+    function fmt(n) { return n.toLocaleString("en-US"); }
+    var now = new Date(), days = [];
+    for (var i = DAYS - 1; i >= 0; i--) days.push(new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() - i)));
+    box.innerHTML = '<div class="widget-head">📊 ผู้เข้าชมเว็บ <span class="tag">' + DAYS + ' วันล่าสุด</span></div>' +
+      '<div class="widget-body"><p class="gc-msg">กำลังโหลดสถิติ…</p></div>';
+    var body = box.querySelector(".widget-body");
+    Promise.all([get("TOTAL")].concat(days.map(function (d) { return get("TOTAL", d.toISOString().slice(0, 10)); })))
+      .then(function (r) {
+        var total = r[0], cum = r.slice(1), daily = cum.map(function (c, k) { return c - (k + 1 < cum.length ? cum[k + 1] : 0); });
+        var max = Math.max.apply(null, daily.concat([1]));
+        var tiles = [["วันนี้", daily[DAYS - 1]], ["7 วันล่าสุด", cum[DAYS - 7]], ["ทั้งหมด", total]];
+        body.innerHTML = '<div class="gc-tiles">' + tiles.map(function (t) {
+            return '<div class="gc-tile"><span>' + t[0] + '</span><b>' + fmt(t[1]) + '</b></div>';
+          }).join("") + '</div>' +
+          '<div class="gc-chart" role="img" aria-label="จำนวนผู้เข้าชมรายวัน ' + DAYS + ' วันล่าสุด">' + daily.map(function (n, k) {
+            return '<div class="gc-col' + (k === DAYS - 1 ? " today" : "") + '" title="' + days[k].getUTCDate() + " " + TH_M[days[k].getUTCMonth()] + ": " + fmt(n) + ' คน">' +
+              '<span class="gc-v">' + (n ? fmt(n) : "") + '</span><i style="height:' + (n / max * 100).toFixed(1) + '%"></i></div>';
+          }).join("") + '</div>' +
+          '<div class="gc-days">' + days.map(function (d, k) {
+            return '<span>' + (k === DAYS - 1 ? "วันนี้" : d.getUTCDate() + (k === 0 || d.getUTCDate() === 1 ? " " + TH_M[d.getUTCMonth()] : "")) + '</span>';
+          }).join("") + '</div>';
+      })
+      .catch(function () {
+        body.innerHTML = '<p class="gc-msg">⚠ โหลดสถิติไม่ได้ — ต้องต่ออินเทอร์เน็ต และบางครั้ง ad blocker บล็อกไว้</p>';
+      });
+    // ตารางแยกรายบท: <tr data-gc-path="01-function.html"> … <td class="gc-n"></td>
+    document.querySelectorAll("[data-gc-path]").forEach(function (tr) {
+      var cell = tr.querySelector(".gc-n"), f = tr.dataset.gcPath;
+      get(dir + (f === "index.html" ? "" : f)).then(function (n) { cell.textContent = fmt(n); }, function () { cell.textContent = "–"; });
+    });
+  }
+
   var W = { approach: approach, secant: secant, tangent: tangent, riemann: riemann, playground: playground,
-    bisection: bisection, gradient: gradient, jump: jump };
+    bisection: bisection, gradient: gradient, jump: jump, stats: stats };
   function init() {
     document.querySelectorAll(".widget[data-w]").forEach(function (box) {
       try { W[box.dataset.w](box); } catch (e) { box.innerHTML = '<div class="widget-body">⚠ widget error: ' + e.message + "</div>"; }
