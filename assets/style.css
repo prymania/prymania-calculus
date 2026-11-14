@@ -2012,6 +2012,13 @@ svg .pt-closed {
   cursor: crosshair;
   pointer-events: auto;
 }
+/* ☝️ เขียนด้วยนิ้ว: ไม่ให้เบราว์เซอร์เลื่อน/ซูมเมื่อแตะชั้นหมึก (ink.js เลื่อนหน้าเองเมื่อแตะสองนิ้ว) */
+.ink-on.ink-finger-on .ink-layer {
+  touch-action: none;
+}
+.ink-bar button[hidden] {
+  display: none;
+}
 .ink-on body {
   -webkit-user-select: none;
   user-select: none;

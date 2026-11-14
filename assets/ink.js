@@ -1,5 +1,7 @@
 // ---------- ปากกาเขียนทับหน้าเว็บ (สำหรับสอนด้วย iPad + Apple Pencil) ----------
 // • กด ✏️ เพื่อเปิดโหมดปากกา: Apple Pencil / เมาส์ = เขียน · นิ้ว = เลื่อน/ซูมหน้าตามปกติของ iPad
+// • ☝️ เขียนด้วยนิ้ว (มือถือ/แท็บเล็ตที่ไม่มีปากกา): นิ้วเดียว = เขียน · สองนิ้ว = เลื่อนหน้า
+//   มือถือเปิดให้เอง · iPad ปิดไว้ (ใช้ Pencil) · ถ้าเจอ Pencil ระหว่างโหมดนิ้วที่ระบบเปิดให้ จะปิดให้เอง · จำค่าที่ผู้ใช้กดเองไว้ใน localStorage "ink-finger"
 // • 📒 กระดานทด: กระดาษเต็มจอทับบทเรียน (เส้นบรรทัด / ตาราง / ว่าง) มีหลายหน้า แยกตามบท
 // • หมึกบันทึกอัตโนมัติในเบราว์เซอร์เครื่องนั้น (localStorage คีย์ "ink:<ไฟล์>" และ "ink:board:<ไฟล์>")
 // • ⬇️ สำรองหมึกทุกหน้า (รวมกระดาน) เป็นไฟล์ .json · ⬆️ นำไฟล์สำรองกลับเข้ามา
@@ -20,7 +22,13 @@
     { c: "#EAFF4F", w: 18, o: 1, h: 1, label: "ไฮไลต์เหลืองสะท้อนแสง" }
   ];
   var PAPERS = [["lines", "≡", "เส้นบรรทัด"], ["grid", "▦", "ตาราง"], ["blank", "▢", "กระดาษว่าง"]];
-  var st = { on: false, pen: 0, eraser: false, board: false };
+  var st = { on: false, pen: 0, eraser: false, board: false, finger: false };
+  var TOUCH = !!(window.matchMedia && matchMedia("(any-pointer: coarse)").matches);
+  var fingerPref = null;   // "1" / "0" = ผู้ใช้เลือกเอง · null = ให้ระบบเลือก
+  try { fingerPref = localStorage.getItem("ink-finger"); } catch (e) {}
+  // ไม่ได้เลือกเอง: เปิดโหมดนิ้วให้เฉพาะจอสัมผัสที่ไม่มีเมาส์ และจอเล็กแบบมือถือ (iPad ใช้ Pencil เขียน นิ้วเลื่อน)
+  st.finger = fingerPref ? fingerPref === "1" :
+    TOUCH && !matchMedia("(any-pointer: fine)").matches && Math.min(screen.width, screen.height) < 600;
 
   function getJSON(k) { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } }
   function plainStrokes(a) { return a.map(function (s) { return { c: s.c, w: s.w, o: s.o, p: s.p }; }); }
@@ -89,6 +97,7 @@
       return '<button type="button" class="ink-pen" data-i="' + i + '" title="' + p.label + '" aria-label="' + p.label + '">' +
         '<span' + (p.h ? ' class="hl"' : "") + ' style="background:' + p.c + '"></span></button>';
     }).join("") +
+    '<button type="button" class="ink-finger" title="เขียนด้วยนิ้ว (สองนิ้ว = เลื่อนหน้า)" aria-label="เขียนด้วยนิ้ว" aria-pressed="false">☝️</button>' +
     '<button type="button" class="ink-eraser" title="ยางลบ (แตะเส้นที่จะลบ)" aria-label="ยางลบ">🧽</button>' +
     '<button type="button" class="ink-undo" title="ย้อนกลับ" aria-label="ย้อนกลับ">↶</button>' +
     '<button type="button" class="ink-board-btn" title="กระดานทด (กระดาษเปล่า)" aria-label="เปิดกระดานทด" aria-pressed="false">📒</button>' +
@@ -118,6 +127,11 @@
     toggle.setAttribute("aria-label", st.on ? "ปิดโหมดปากกา" : "เปิดโหมดปากกา");
     bar.querySelectorAll(".ink-pen").forEach(function (b) { b.classList.toggle("active", !st.eraser && +b.dataset.i === st.pen); });
     $(".ink-eraser").classList.toggle("active", st.eraser);
+    html.classList.toggle("ink-finger-on", st.finger);
+    var fb = $(".ink-finger");
+    fb.hidden = !TOUCH;
+    fb.classList.toggle("active", st.finger);
+    fb.setAttribute("aria-pressed", String(st.finger));
     var bb = $(".ink-board-btn");
     bb.classList.toggle("active", st.board);
     bb.setAttribute("aria-pressed", String(st.board));
@@ -170,7 +184,8 @@
     var r = S.host.getBoundingClientRect(), z = (S.host.offsetWidth && r.width / S.host.offsetWidth) || 1;
     return [Math.round((e.clientX - r.left) / z * 10) / 10, Math.round((e.clientY - r.top) / z * 10) / 10];
   }
-  function canDraw(e) { return e.pointerType === "pen" || e.pointerType === "mouse"; }   // นิ้ว (touch) ปล่อยให้เบราว์เซอร์เลื่อน/ซูม
+  // นิ้ว (touch) ปล่อยให้เบราว์เซอร์เลื่อน/ซูม ยกเว้นเปิดโหมด ☝️ เขียนด้วยนิ้ว
+  function canDraw(e) { return e.pointerType === "pen" || e.pointerType === "mouse" || (st.finger && e.pointerType === "touch"); }
   function segDist(q, a, b) {   // ระยะจากจุด q ถึงส่วนของเส้นตรง ab
     var vx = b[0] - a[0], vy = b[1] - a[1], L = vx * vx + vy * vy;
     var t = L ? Math.max(0, Math.min(1, ((q[0] - a[0]) * vx + (q[1] - a[1]) * vy) / L)) : 0;
@@ -193,9 +208,29 @@
     for (var i = 0; i < e.changedTouches.length; i++) if (e.changedTouches[i].touchType === "stylus") return true;
     return false;
   }
+  // โหมดนิ้ว: CSS ปิดการเลื่อนของเบราว์เซอร์บนชั้นหมึก (touch-action: none) จึงเลื่อนหน้าเองเมื่อแตะสองนิ้ว
+  var touches = {}, panning = false;
+  function nTouch() { return Object.keys(touches).length; }
+  function setFinger(on, byUser) {
+    st.finger = on;
+    if (byUser) { fingerPref = on ? "1" : "0"; try { localStorage.setItem("ink-finger", fingerPref); } catch (e) {} }
+    refreshBar();
+  }
   function wire(surf) {
     var svg = surf.svg;
     svg.addEventListener("pointerdown", function (e) {
+      if (st.on && e.pointerType === "pen" && st.finger && !fingerPref) {   // เจอ Pencil → นิ้วกลับไปเลื่อนหน้า
+        setFinger(false);
+        say("พบปากกา: Pencil เขียน · นิ้วเลื่อนหน้า (แตะ ☝️ ถ้าอยากเขียนด้วยนิ้ว)", 4000);
+      }
+      if (st.on && st.finger && e.pointerType === "touch" && S === surf) {
+        touches[e.pointerId] = e.clientY;
+        if (nTouch() >= 2) {   // นิ้วที่สองลง = เลื่อนหน้า: ทิ้งเส้นที่เพิ่งเริ่ม
+          if (cur) { cur.el.remove(); cur = null; }
+          eraseOn = false; panning = true; e.preventDefault();
+          return;
+        }
+      }
       if (!st.on || S !== surf || !canDraw(e)) return;
       e.preventDefault();
       try { svg.setPointerCapture(e.pointerId); } catch (err) {}
@@ -205,6 +240,13 @@
       draw(cur);
     });
     svg.addEventListener("pointermove", function (e) {
+      if (panning) {
+        if (touches[e.pointerId] == null) return;
+        var dy = (e.clientY - touches[e.pointerId]) / nTouch();
+        touches[e.pointerId] = e.clientY;
+        if (S === board) sheet.scrollTop -= dy; else window.scrollBy(0, -dy);
+        return;
+      }
       if (eraseOn) { if (eraseAt(pt(e))) S.save(); return; }
       if (!cur) return;
       var evs = e.getCoalescedEvents ? e.getCoalescedEvents() : [e];
@@ -214,7 +256,9 @@
       });
       cur.el.setAttribute("d", pathD(cur.p));
     });
-    function end() {
+    function end(e) {
+      if (e && e.pointerType === "touch") delete touches[e.pointerId];
+      if (panning) { if (!nTouch()) panning = false; return; }
       if (eraseOn) { eraseOn = false; return; }
       if (!cur) return;
       S.strokes().push(cur); cur = null; S.save();
@@ -222,7 +266,7 @@
     svg.addEventListener("pointerup", end);
     svg.addEventListener("pointercancel", end);
     ["touchstart", "touchmove"].forEach(function (t) {
-      svg.addEventListener(t, function (e) { if (st.on && stylus(e)) e.preventDefault(); }, { passive: false });
+      svg.addEventListener(t, function (e) { if (st.on && (st.finger || stylus(e))) e.preventDefault(); }, { passive: false });
     });
   }
   wire(lesson);
@@ -231,7 +275,7 @@
   // แตะสั้น ๆ ด้วยนิ้วบนบทเรียนระหว่างโหมดปากกา → ส่งต่อไปยังปุ่ม/ลิงก์ที่อยู่ใต้ชั้นหมึก (เช่น ดูเฉลย)
   var tap = null, lsvg = lesson.svg;
   lsvg.addEventListener("pointerdown", function (e) {
-    if (st.on && e.pointerType === "touch") tap = { id: e.pointerId, x: e.clientX, y: e.clientY, t: Date.now() };
+    if (st.on && !st.finger && e.pointerType === "touch") tap = { id: e.pointerId, x: e.clientX, y: e.clientY, t: Date.now() };
   });
   lsvg.addEventListener("pointerup", function (e) {
     if (!tap || e.pointerId !== tap.id) return;
@@ -316,7 +360,11 @@
     st.on = !st.on;
     if (!st.on && st.board) openBoard(false);   // ปิดปากกา = ออกจากกระดานด้วย
     refreshBar();
-    if (st.on) say("โหมดปากกา: Pencil เขียน · นิ้วเลื่อน/ซูมได้ตามปกติ");
+    if (st.on) say(st.finger ? "โหมดปากกา: นิ้วเดียวเขียน · สองนิ้วเลื่อนหน้า" : "โหมดปากกา: Pencil เขียน · นิ้วเลื่อน/ซูมได้ตามปกติ", 3500);
+  });
+  $(".ink-finger").addEventListener("click", function () {
+    setFinger(!st.finger, true);
+    say(st.finger ? "เขียนด้วยนิ้ว: นิ้วเดียวเขียน · สองนิ้วเลื่อนหน้า" : "นิ้วกลับไปเลื่อน/ซูมหน้า (เขียนด้วย Pencil)", 3500);
   });
   bar.querySelectorAll(".ink-pen").forEach(function (b) {
     b.addEventListener("click", function () { st.pen = +b.dataset.i; st.eraser = false; refreshBar(); });
