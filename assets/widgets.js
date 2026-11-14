@@ -584,8 +584,101 @@
     });
   }
 
+  // ---------- ส่งข้อความถึงอาจารย์ (ภาคผนวก F) · <div class="widget" data-w="feedback" data-url="WEB_APP_EXEC_URL"><form class="fb-form">… ----------
+  // ฟอร์มเขียนไว้ใน src แล้ว widget นี้แค่ผูกการทำงาน · POST แบบ x-www-form-urlencoded (ไม่มี preflight) ไป Apps Script
+  // ปุ่มท้ายบทลิงก์มาที่ #ask-N → เลือก "บทที่ N" ให้และเลื่อนมาที่ฟอร์ม · ร่างที่ยังไม่ส่งจำไว้ใน localStorage
+  function feedback(box) {
+    var url = box.dataset.url, form = box.querySelector("form"), msg = form.msg, btn = form.querySelector("button[type=submit]");
+    var status = form.querySelector(".fb-status"), count = form.querySelector(".fb-count"), KEY = "fb-draft", MAX = 2000;
+    function say(t, kind) { status.textContent = t; status.className = "fb-status" + (kind ? " " + kind : ""); }
+    function upd() { count.textContent = msg.value.length + " / " + MAX; }
+    try { var d = localStorage.getItem(KEY); if (d && !msg.value) msg.value = d; } catch (e) {}
+    upd();
+    msg.addEventListener("input", function () { upd(); try { localStorage.setItem(KEY, msg.value); } catch (e) {} });
+    function fromHash() {
+      var m = /^#ask-(\d+)$/.exec(location.hash);
+      if (!m) return;
+      form.chapter.value = "บทที่ " + m[1];
+      box.scrollIntoView({ block: "start" });
+    }
+    fromHash();
+    window.addEventListener("hashchange", fromHash);
+    if (!url) { btn.disabled = true; say("⚠ ระบบส่งข้อความยังไม่เปิด", "err"); return; }
+    form.addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      if (msg.value.trim().length < 3) { say("พิมพ์ข้อความก่อนนะ", "err"); msg.focus(); return; }
+      btn.disabled = true; btn.textContent = "กำลังส่ง…"; say("");
+      fetch(url, { method: "POST", body: new URLSearchParams(new FormData(form)) })
+        .then(function (r) { return r.json(); })
+        .then(function (j) {
+          if (!j.ok) throw new Error(j.error || "ส่งไม่สำเร็จ");
+          msg.value = ""; upd();
+          try { localStorage.removeItem(KEY); } catch (e) {}
+          say("✓ ส่งแล้ว ขอบคุณนะ อาจารย์จะอ่านทุกข้อความ", "ok");
+        })
+        .catch(function (e) {
+          say("⚠ " + (e instanceof TypeError ? "ส่งไม่ได้ ตรวจอินเทอร์เน็ตแล้วลองใหม่" : e.message) + " (ข้อความยังอยู่ในช่อง ไม่หาย)", "err");
+        })
+        .then(function () { btn.disabled = false; btn.textContent = "ส่งข้อความ"; });
+    });
+  }
+
+  // ---------- คำถามที่พบบ่อย (ภาคผนวก F) · <div class="widget" data-w="faq" data-url="WEB_APP_EXEC_URL"> ----------
+  // GET ?action=faq → {ok, items:[{type, chapter, q, a, date}]} เฉพาะข้อที่อาจารย์ติ๊กในชีต · ข้อความใส่ด้วย textContent (กัน HTML) แล้วให้ KaTeX แปลง $…$
+  function faq(box) {
+    var url = box.dataset.url;
+    box.innerHTML = '<div class="widget-head">📚 คำถามที่พบบ่อย <span class="tag faq-n"></span></div>' +
+      '<div class="widget-body"><div class="faq-ctl"></div><div class="faq-list"><p class="gc-msg">กำลังโหลดคำถาม…</p></div></div>';
+    var list = box.querySelector(".faq-list"), ctl = box.querySelector(".faq-ctl");
+    if (!url) { list.innerHTML = '<p class="gc-msg">ยังไม่มีคำถามที่พบบ่อย</p>'; return; }
+    function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+    function math(e) {
+      if (window.renderMathInElement) renderMathInElement(e, {
+        delimiters: [{ left: "$$", right: "$$", display: true }, { left: "$", right: "$", display: false }], throwOnError: false });
+    }
+    fetch(url + "?action=faq").then(function (r) { return r.json(); }).then(function (j) {
+      var items = (j && j.items) || [];
+      box.querySelector(".faq-n").textContent = items.length + " ข้อ";
+      if (!items.length) { list.innerHTML = '<p class="gc-msg">ยังไม่มีคำถามที่ตอบไว้ ถามเป็นคนแรกได้เลย</p>'; return; }
+      var chs = [];
+      items.forEach(function (it) { if (it.chapter && chs.indexOf(it.chapter) < 0) chs.push(it.chapter); });
+      chs.sort(function (a, b) { return a.localeCompare(b, "th", { numeric: true }); });
+      var sel = el("select"), q = el("input");
+      sel.setAttribute("aria-label", "เลือกบท"); q.type = "search"; q.placeholder = "ค้นคำถาม…"; q.setAttribute("aria-label", "ค้นคำถาม");
+      sel.appendChild(el("option", null, "ทุกบท")).value = "";
+      chs.forEach(function (c) { sel.appendChild(el("option", null, c)).value = c; });
+      ctl.appendChild(sel); ctl.appendChild(q);
+      var m = /^#ask-(\d+)$/.exec(location.hash);
+      if (m && chs.indexOf("บทที่ " + m[1]) >= 0) sel.value = "บทที่ " + m[1];
+      list.innerHTML = "";
+      var rows = items.map(function (it) {
+        var d = el("details", "faq-item"), s = el("summary");
+        s.appendChild(el("span", "faq-chip", it.chapter || "ทั่วไป"));
+        s.appendChild(el("span", "faq-q", it.q));
+        d.appendChild(s);
+        var a = el("div", "faq-a"); a.appendChild(el("div", "faq-at", "อาจารย์ตอบ" + (it.date ? " · " + it.date : "")));
+        a.appendChild(el("div", "faq-text", it.a));
+        d.appendChild(a); list.appendChild(d);
+        return { d: d, it: it, text: (it.q + " " + it.a).toLowerCase() };
+      });
+      var none = list.appendChild(el("p", "gc-msg", "ไม่พบคำถามที่ตรงกับที่เลือก"));
+      function filter() {
+        var c = sel.value, t = q.value.trim().toLowerCase(), n = 0;
+        rows.forEach(function (r) {
+          var show = (!c || r.it.chapter === c) && (!t || r.text.indexOf(t) >= 0);
+          r.d.hidden = !show; if (show) n++;
+        });
+        none.hidden = n > 0;
+      }
+      sel.addEventListener("change", filter); q.addEventListener("input", filter);
+      filter(); math(list);
+    }).catch(function () {
+      list.innerHTML = '<p class="gc-msg">⚠ โหลดคำถามไม่ได้ ต้องต่ออินเทอร์เน็ต ลองรีเฟรชอีกครั้ง</p>';
+    });
+  }
+
   var W = { approach: approach, secant: secant, tangent: tangent, riemann: riemann, playground: playground,
-    bisection: bisection, gradient: gradient, jump: jump, stats: stats };
+    bisection: bisection, gradient: gradient, jump: jump, stats: stats, feedback: feedback, faq: faq };
   function init() {
     document.querySelectorAll(".widget[data-w]").forEach(function (box) {
       try { W[box.dataset.w](box); } catch (e) { box.innerHTML = '<div class="widget-body">⚠ widget error: ' + e.message + "</div>"; }

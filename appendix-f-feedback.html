@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ส่งข้อความถึงอาจารย์ — Calculus Lecture Note</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700&family=Bai+Jamjuree:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/katex/katex.min.css">
+<link rel="stylesheet" href="assets/style.css?v=b4c70c69">
+<script defer src="assets/katex/katex.min.js"></script>
+<script defer src="assets/katex/contrib/auto-render.min.js"></script>
+<script>document.documentElement.classList.add("js");try{if(localStorage.getItem("side-collapsed")==="1")document.documentElement.classList.add("side-collapsed");if(localStorage.getItem("big-text")==="1")document.documentElement.classList.add("big-text");if(localStorage.getItem("dark")==="1")document.documentElement.classList.add("dark")}catch(e){}</script>
+</head>
+<body>
+<a class="skip-link" href="#lesson-content">ข้ามไปเนื้อหา</a>
+<div class="lesson-shell">
+<button class="side-show" type="button" aria-label="แสดงเมนูบทเรียน">☰ เมนู</button>
+<aside class="lesson-sidebar" aria-label="เมนูบทเรียน">
+  <button class="side-hide" type="button" aria-label="ซ่อนเมนู" title="ซ่อนเมนู">«</button>
+  <a class="lesson-brand" href="index.html"><span class="brand-mark" aria-hidden="true">∫</span><span><span class="brand-title">Calculus<br>by Prymania</span><span class="brand-caption">1204105 · LECTURE NOTES</span></span></a>
+<button class="nav-toggle" type="button" aria-expanded="false">☰ สารบัญทุกบท</button>
+<nav class="course-nav" aria-label="สารบัญรายวิชา">
+<p class="nav-label">ส่วนที่ 1 · ลิมิต</p>
+<details class="nav-chapter" name="course-nav"><summary><span class="nav-number">01</span><a class="nav-title" href="01-function.html">ฟังก์ชัน กราฟ และความชัน</a></summary><div class="nav-topics"><a href="01-function.html#s1"><span class="toc-number">1.1</span>ฟังก์ชันคืออะไร</a><a href="01-function.html#s2"><span class="toc-number">1.2</span>โดเมนและเรนจ์</a><a href="01-function.html#bonus1.1"><span class="toc-number">⭐</span>โบนัส 1.1</a><a href="01-function.html#s3"><span class="toc-number">1.3</span>การหาค่าฟังก์ชันและฟังก์ชันประกอบ</a><a href="01-function.html#bonus1.2"><span class="toc-number">⭐</span>โบนัส 1.2</a><a href="01-function.html#s4"><span class="toc-number">1.4</span>ความชันและสมการเส้นตรง</a><a href="01-function.html#s5"><span class="toc-number">1.5</span>ฟังก์ชันพื้นฐานที่ต้องรู้จักหน้าตา</a><a href="01-function.html#bonus1.3"><span class="toc-number">⭐</span>โบนัส 1.3</a><a href="01-function.html#review"><span class="toc-number">ฝึก</span>คำถามท้ายบท</a><a href="01-function.html#quiz"><span class="toc-number">📝</span>เก็บคะแนนท้ายบท</a></div></details>
+<details class="nav-chapter" name="course-nav"><summary><span class="nav-number">02</span><a class="nav-title" href="02-limit.html">ลิมิตของฟังก์ชัน</a></summary><div class="nav-topics"><a href="02-limit.html#s1"><span class="toc-number">2.1</span>ลิมิตคืออะไร — “เข้าใกล้” ไม่ใช่ “เท่ากับ”</a><a href="02-limit.html#bonus2.1"><span class="toc-number">⭐</span>โบนัส 2.1</a><a href="02-limit.html#s2"><span class="toc-number">2.2</span>หาลิมิตโดยการแทนค่าโดยตรง</a><a href="02-limit.html#s3"><span class="toc-number">2.3</span>ทฤษฎีบทของลิมิต</a><a href="02-limit.html#s4"><span class="toc-number">2.4</span>เมื่อแทนค่าแล้วเจอปัญหา: แผนที่ตัดสินใจ</a><a href="02-limit.html#s5"><span class="toc-number">2.5</span>เครื่องมือที่ 1: แยกตัวประกอบ</a><a href="02-limit.html#s6"><span class="toc-number">2.6</span>เครื่องมือที่ 2: คูณด้วยคอนจูเกต (เมื่อเจอรากที่สอง)</a><a href="02-limit.html#bonus2.2"><span class="toc-number">⭐</span>โบนัส 2.2</a><a href="02-limit.html#s7"><span class="toc-number">2.7</span>ลิมิตซ้าย ลิมิตขวา</a><a href="02-limit.html#s8"><span class="toc-number">2.8</span>ลิมิตที่อนันต์และลิมิตอนันต์ เสริม</a><a href="02-limit.html#bonus2.3"><span class="toc-number">⭐</span>โบนัส 2.3</a><a href="02-limit.html#review"><span class="toc-number">ฝึก</span>คำถามท้ายบท</a><a href="02-limit.html#quiz"><span class="toc-number">📝</span>เก็บคะแนนท้ายบท</a></div></details>
+<details class="nav-chapter" name="course-nav"><summary><span class="nav-number">03</span><a class="nav-title" href="03-continuity.html">ความต่อเนื่องของฟังก์ชัน</a></summary><div class="nav-topics"><a href="03-continuity.html#s1"><span class="toc-number">3.1</span>ความต่อเนื่องคืออะไร</a><a href="03-continuity.html#s2"><span class="toc-number">3.2</span>หน้าตาของจุดไม่ต่อเนื่อง</a><a href="03-continuity.html#bonus3.1"><span class="toc-number">⭐</span>โบนัส 3.1</a><a href="03-continuity.html#s3"><span class="toc-number">3.3</span>ตรวจความต่อเนื่องทีละข้อ</a><a href="03-continuity.html#s4"><span class="toc-number">3.4</span>หาค่า k ที่ทำให้ฟังก์ชันต่อเนื่อง</a><a href="03-continuity.html#bonus3.2"><span class="toc-number">⭐</span>โบนัส 3.2</a><a href="03-continuity.html#s5"><span class="toc-number">3.5</span>ฟังก์ชันไหนต่อเนื่องบ้าง (ภาพรวม)</a><a href="03-continuity.html#s6"><span class="toc-number">3.6</span>ความต่อเนื่องช่วยหาคำตอบของสมการ เสริม</a><a href="03-continuity.html#bonus3.3"><span class="toc-number">⭐</span>โบนัส 3.3</a><a href="03-continuity.html#review"><span class="toc-number">ฝึก</span>คำถามท้ายบท</a><a href="03-continuity.html#quiz"><span class="toc-number">📝</span>เก็บคะแนนท้ายบท</a></div></details>
+<p class="nav-label">ส่วนที่ 2 · อนุพันธ์</p>
+<details class="nav-chapter" name="course-nav"><summary><span class="nav-number">04</span><a class="nav-title" href="04-derivative.html">อนุพันธ์และสูตรการดิฟ</a></summary><div class="nav-topics"><a href="04-derivative.html#s1"><span class="toc-number">4.1</span>อัตราการเปลี่ยนแปลงเฉลี่ย</a><a href="04-derivative.html#s2"><span class="toc-number">4.2</span>อัตราการเปลี่ยนแปลงขณะใด ๆ = อนุพันธ์</a><a href="04-derivative.html#bonus4.1"><span class="toc-number">⭐</span>โบนัส 4.1</a><a href="04-derivative.html#s3"><span class="toc-number">4.3</span>สูตรการดิฟพื้นฐาน</a><a href="04-derivative.html#s4"><span class="toc-number">4.4</span>ดิฟผลคูณและผลหาร</a><a href="04-derivative.html#bonus4.2"><span class="toc-number">⭐</span>โบนัส 4.2</a><a href="04-derivative.html#s5"><span class="toc-number">4.5</span>กฎลูกโซ่ (Chain Rule)</a><a href="04-derivative.html#bonus4.3"><span class="toc-number">⭐</span>โบนัส 4.3</a><a href="04-derivative.html#s6"><span class="toc-number">4.6</span>ดิฟฟังก์ชันประกอบ $(f\circ g)'$</a><a href="04-derivative.html#s7"><span class="toc-number">4.7</span>อนุพันธ์อันดับสูง</a><a href="04-derivative.html#review"><span class="toc-number">ฝึก</span>คำถามท้ายบท</a><a href="04-derivative.html#quiz"><span class="toc-number">📝</span>เก็บคะแนนท้ายบท</a></div></details>
+<details class="nav-chapter" name="course-nav"><summary><span class="nav-number">05</span><a class="nav-title" href="05-derivative-app.html">ความชัน เส้นสัมผัส และค่าสูงสุด–ต่ำสุด</a></summary><div class="nav-topics"><a href="05-derivative-app.html#s1"><span class="toc-number">5.1</span>ความชันของเส้นโค้ง</a><a href="05-derivative-app.html#bonus5.1"><span class="toc-number">⭐</span>โบนัส 5.1</a><a href="05-derivative-app.html#s2"><span class="toc-number">5.2</span>สมการเส้นสัมผัส (Tangent line)</a><a href="05-derivative-app.html#bonus5.2"><span class="toc-number">⭐</span>โบนัส 5.2</a><a href="05-derivative-app.html#s3"><span class="toc-number">5.3</span>ฟังก์ชันเพิ่ม ฟังก์ชันลด และจุดวิกฤต</a><a href="05-derivative-app.html#s4"><span class="toc-number">5.4</span>ทดสอบสูงสุด–ต่ำสุดสัมพัทธ์</a><a href="05-derivative-app.html#s5"><span class="toc-number">5.5</span>ค่าสูงสุด–ต่ำสุดสัมบูรณ์บนช่วงปิด</a><a href="05-derivative-app.html#bonus5.3"><span class="toc-number">⭐</span>โบนัส 5.3</a><a href="05-derivative-app.html#review"><span class="toc-number">ฝึก</span>คำถามท้ายบท</a><a href="05-derivative-app.html#quiz"><span class="toc-number">📝</span>เก็บคะแนนท้ายบท</a></div></details>
+<details class="nav-chapter" name="course-nav"><summary><span class="nav-number">06</span><a class="nav-title" href="06-optimization.html">โจทย์ปัญหาค่าเหมาะที่สุด</a></summary><div class="nav-topics"><a href="06-optimization.html#s1"><span class="toc-number">6.1</span>สูตรสำเร็จ 5 ขั้น</a><a href="06-optimization.html#s2"><span class="toc-number">6.2</span>ปัญหาพื้นที่และปริมาตร</a><a href="06-optimization.html#bonus6.1"><span class="toc-number">⭐</span>โบนัส 6.1</a><a href="06-optimization.html#s3"><span class="toc-number">6.3</span>ปัญหาตัวเลข</a><a href="06-optimization.html#s4"><span class="toc-number">6.4</span>ปัญหาธุรกิจ: รายได้และกำไร</a><a href="06-optimization.html#bonus6.2"><span class="toc-number">⭐</span>โบนัส 6.2</a><a href="06-optimization.html#s5"><span class="toc-number">6.5</span>ปัญหาการเคลื่อนที่</a><a href="06-optimization.html#s6"><span class="toc-number">6.6</span>Gradient descent: ให้คอมพิวเตอร์เดินหาจุดต่ำสุดเอง เสริม</a><a href="06-optimization.html#bonus6.3"><span class="toc-number">⭐</span>โบนัส 6.3</a><a href="06-optimization.html#review"><span class="toc-number">ฝึก</span>คำถามท้ายบท</a><a href="06-optimization.html#quiz"><span class="toc-number">📝</span>เก็บคะแนนท้ายบท</a></div></details>
+<p class="nav-label">ส่วนที่ 3 · อินทิกรัล</p>
+<details class="nav-chapter" name="course-nav"><summary><span class="nav-number">07</span><a class="nav-title" href="07-indefinite.html">อินทิกรัลไม่จำกัดเขต</a></summary><div class="nav-topics"><a href="07-indefinite.html#s1"><span class="toc-number">7.1</span>อินทิกรัล = ดิฟย้อนกลับ</a><a href="07-indefinite.html#bonus7.1"><span class="toc-number">⭐</span>โบนัส 7.1</a><a href="07-indefinite.html#s2"><span class="toc-number">7.2</span>สูตรอินทิกรัล</a><a href="07-indefinite.html#s3"><span class="toc-number">7.3</span>จัดรูปก่อนอินทิเกรต</a><a href="07-indefinite.html#s4"><span class="toc-number">7.4</span>หาค่าคงที่ C — หาฟังก์ชันจริงจากอนุพันธ์</a><a href="07-indefinite.html#bonus7.2"><span class="toc-number">⭐</span>โบนัส 7.2</a><a href="07-indefinite.html#bonus7.3"><span class="toc-number">⭐</span>โบนัส 7.3</a><a href="07-indefinite.html#s5"><span class="toc-number">7.5</span>การอินทิเกรตโดยการแทนค่า เสริม</a><a href="07-indefinite.html#review"><span class="toc-number">ฝึก</span>คำถามท้ายบท</a><a href="07-indefinite.html#quiz"><span class="toc-number">📝</span>เก็บคะแนนท้ายบท</a></div></details>
+<details class="nav-chapter" name="course-nav"><summary><span class="nav-number">08</span><a class="nav-title" href="08-definite-area.html">อินทิกรัลจำกัดเขตและพื้นที่</a></summary><div class="nav-topics"><a href="08-definite-area.html#s1"><span class="toc-number">8.1</span>อินทิกรัลจำกัดเขต</a><a href="08-definite-area.html#s2"><span class="toc-number">8.2</span>อินทิกรัล = พื้นที่ใต้เส้นโค้ง</a><a href="08-definite-area.html#bonus8.1"><span class="toc-number">⭐</span>โบนัส 8.1</a><a href="08-definite-area.html#s3"><span class="toc-number">8.3</span>พื้นที่ใต้แกน x</a><a href="08-definite-area.html#s4"><span class="toc-number">8.4</span>เมื่อกราฟตัดแกน x — ต้องแบ่งช่วง!</a><a href="08-definite-area.html#bonus8.2"><span class="toc-number">⭐</span>โบนัส 8.2</a><a href="08-definite-area.html#s5"><span class="toc-number">8.5</span>พื้นที่ระหว่างเส้นโค้ง</a><a href="08-definite-area.html#bonus8.3"><span class="toc-number">⭐</span>โบนัส 8.3</a><a href="08-definite-area.html#review"><span class="toc-number">ฝึก</span>คำถามท้ายบท</a><a href="08-definite-area.html#quiz"><span class="toc-number">📝</span>เก็บคะแนนท้ายบท</a></div></details>
+<p class="nav-label">ภาคผนวก</p>
+<details class="nav-chapter" name="course-nav"><summary><span class="nav-number">A</span><a class="nav-title" href="appendix-a-formulas.html">สรุปสูตร (Cheat Sheet)</a></summary><div class="nav-topics"><a href="appendix-a-formulas.html#s1"><span class="toc-number">•</span>พีชคณิตที่ต้องใช้</a><a href="appendix-a-formulas.html#s2"><span class="toc-number">•</span>ลิมิตและความต่อเนื่อง</a><a href="appendix-a-formulas.html#s3"><span class="toc-number">•</span>อนุพันธ์</a><a href="appendix-a-formulas.html#s4"><span class="toc-number">•</span>การประยุกต์อนุพันธ์</a><a href="appendix-a-formulas.html#s5"><span class="toc-number">•</span>อินทิกรัล</a></div></details>
+<details class="nav-chapter" name="course-nav"><summary><span class="nav-number">B</span><a class="nav-title" href="appendix-b-playground.html">ห้องทดลองกราฟ</a></summary><div class="nav-topics"><a href="appendix-b-playground.html#s1"><span class="toc-number">•</span>ภารกิจชวนลอง</a><a href="appendix-b-playground.html#s2"><span class="toc-number">•</span>กราฟโต้ตอบอื่น ๆ ในเว็บนี้</a></div></details>
+<details class="nav-chapter" name="course-nav"><summary><span class="nav-number">C</span><a class="nav-title" href="appendix-c-course.html">เกณฑ์คะแนนและคะแนนนิสิต</a></summary><div class="nav-topics"><a href="appendix-c-course.html#scores"><span class="toc-number">•</span>คะแนนนิสิต</a><a href="appendix-c-course.html#s1"><span class="toc-number">•</span>คะแนนมาจากไหน</a><a href="appendix-c-course.html#s2"><span class="toc-number">•</span>เกณฑ์การตัดเกรด</a><a href="appendix-c-course.html#s3"><span class="toc-number">•</span>ข้อตกลงในชั้นเรียน</a><a href="appendix-c-course.html#s4"><span class="toc-number">•</span>เรียนอย่างไรให้รอด</a></div></details>
+<details class="nav-chapter" name="course-nav"><summary><span class="nav-number">D</span><a class="nav-title" href="appendix-d-pen.html">วิธีใช้ปากกาเขียนบนหน้าเว็บ</a></summary><div class="nav-topics"><a href="appendix-d-pen.html#s1"><span class="toc-number">•</span>เปิดใช้ปากกา</a><a href="appendix-d-pen.html#s2"><span class="toc-number">•</span>ปุ่มในแถบเครื่องมือ</a><a href="appendix-d-pen.html#s5"><span class="toc-number">•</span>กระดานทด (กระดาษเปล่า)</a><a href="appendix-d-pen.html#s3"><span class="toc-number">•</span>การบันทึกและสำรองหมึก</a><a href="appendix-d-pen.html#s4"><span class="toc-number">•</span>ข้อควรรู้</a></div></details>
+<details class="nav-chapter" name="course-nav"><summary><span class="nav-number">E</span><a class="nav-title" href="appendix-e-stats.html">สถิติผู้เข้าชม</a></summary><div class="nav-topics"><a href="appendix-e-stats.html#s1"><span class="toc-number">•</span>ผู้เข้าชมรายวัน</a><a href="appendix-e-stats.html#s2"><span class="toc-number">•</span>แยกรายบท</a><a href="appendix-e-stats.html#s3"><span class="toc-number">•</span>ดูสถิติละเอียด</a></div></details>
+<details class="nav-chapter" name="course-nav" open><summary aria-current="page"><span class="nav-number">F</span><a class="nav-title" href="#lesson-content">ส่งข้อความถึงอาจารย์</a></summary><div class="nav-topics"><a href="#s1"><span class="toc-number">•</span>ส่งข้อความ</a><a href="#s2"><span class="toc-number">•</span>คำถามที่พบบ่อย</a><a href="#s3"><span class="toc-number">•</span>ไม่ระบุชื่อจริงไหม</a></div></details>
+</nav>
+  <figure class="side-photo"><img src="icon/prymania.jpg" alt="อ. พรทิวา ปะวะระ (อ. พราย)" width="360" height="480" loading="lazy"><figcaption>อ. พรทิวา ปะวะระ (อ. พราย)</figcaption></figure>
+  <div class="sidebar-bottom">1204105 Mathematics for Computer Science 2</div>
+</aside>
+<main class="lesson-main pastel" id="lesson-content">
+<div class="utility-row"><a href="index.html">← สารบัญรายวิชา</a><span class="utility-code">1204105 · ภาคผนวก F</span></div>
+<header class="lesson-header"><p class="lesson-kicker">APPENDIX F · ASK & FEEDBACK</p><h1>ส่งข้อความถึงอาจารย์</h1><p>ถามเนื้อหา แจ้งจุดผิด หรือเสนอแนะได้แบบไม่ระบุชื่อ พร้อมคำถามที่พบบ่อยที่อาจารย์ตอบไว้ให้ทุกคน</p></header>
+
+<div class="box idea"><div class="box-t">💬 หน้านี้คืออะไร</div>
+<ul>
+<li>ช่องส่งข้อความถึงอาจารย์ <b>ไม่ต้องล็อกอิน และไม่ระบุชื่อ</b></li>
+<li>ถามเนื้อหาที่ยังไม่เข้าใจ แจ้งจุดผิดในเว็บ หรือบอกว่าอยากให้สอนแบบไหน หรือจะชมก็ได้ ไรเงี้ย 😊 ส่งได้หมดนะ</li>
+<li>คำถามที่หลายคนน่าจะสงสัย อาจารย์จะตอบไว้ในหัวข้อ <a href="#s2">คำถามที่พบบ่อย</a> ให้ทุกคนอ่าน</li>
+</ul></div>
+
+<h2 id="s1">ส่งข้อความ</h2>
+<div class="widget fb" data-w="feedback" data-url="https://script.google.com/macros/s/AKfycbywNdy_JbOKshOPaV1fur_tL7fBXzWxz4ISIwTYKI8tiHMYesh3j1vcwkxCqK52o_g1yg/exec">
+<div class="widget-head">✉️ ข้อความถึงอาจารย์ <span class="tag">ไม่ระบุชื่อ</span></div>
+<form class="widget-body fb-form" novalidate>
+<fieldset class="fb-types"><legend>เรื่องอะไร</legend>
+<label><input type="radio" name="type" value="คำถามเนื้อหา" checked><span>❓ คำถามเนื้อหา</span></label>
+<label><input type="radio" name="type" value="ข้อคิดเห็น/ข้อเสนอแนะ"><span>💡 ข้อคิดเห็น / ข้อเสนอแนะ</span></label>
+<label><input type="radio" name="type" value="แจ้งจุดผิดในเว็บ"><span>🐞 แจ้งจุดผิดในเว็บ</span></label>
+<label><input type="radio" name="type" value="อื่น ๆ"><span>✏️ อื่น ๆ</span></label>
+</fieldset>
+<label class="fb-field"><span>เกี่ยวกับบทไหน</span>
+<select name="chapter">
+<option value="ไม่ระบุ">ไม่ระบุ / ทั้งวิชา</option>
+<option value="บทที่ 1">บทที่ 1 · ฟังก์ชัน กราฟ และความชัน</option>
+<option value="บทที่ 2">บทที่ 2 · ลิมิตของฟังก์ชัน</option>
+<option value="บทที่ 3">บทที่ 3 · ความต่อเนื่องของฟังก์ชัน</option>
+<option value="บทที่ 4">บทที่ 4 · อนุพันธ์และสูตรการดิฟ</option>
+<option value="บทที่ 5">บทที่ 5 · ความชัน เส้นสัมผัส และค่าสูงสุด–ต่ำสุด</option>
+<option value="บทที่ 6">บทที่ 6 · โจทย์ปัญหาค่าเหมาะที่สุด</option>
+<option value="บทที่ 7">บทที่ 7 · อินทิกรัลไม่จำกัดเขต</option>
+<option value="บทที่ 8">บทที่ 8 · อินทิกรัลจำกัดเขตและพื้นที่</option>
+<option value="ภาคผนวก">ภาคผนวก / หน้าเว็บทั่วไป</option>
+</select></label>
+<label class="fb-field"><span>ข้อความ</span>
+<textarea name="msg" rows="6" maxlength="2000" placeholder="เช่น ลิมิตแบบ 0/0 ทำไมต้องแยกตัวประกอบก่อน · คำถามท้ายบทข้อ 4 พิมพ์ผิด · อยากให้มีตัวอย่างโจทย์ปัญหาเพิ่ม"></textarea></label>
+<div class="fb-hp" aria-hidden="true"><label>เว็บไซต์ <input name="website" tabindex="-1" autocomplete="off"></label></div>
+<div class="fb-foot"><span class="fb-count">0 / 2000</span><button type="submit">ส่งข้อความ</button></div>
+<p class="fb-status" role="status" aria-live="polite"></p>
+</form></div>
+<p>ถ้าแจ้งจุดผิด บอกเลขตัวอย่างหรือเลขข้อมาด้วย อาจารย์จะหาเจอเร็วขึ้น · หรือถามในห้องเรียนเลยก็ได้นะ อาจจะได้โบนัสด้วยงี้</p>
+
+<h2 id="s2">คำถามที่พบบ่อย</h2>
+<p>คำถามจากเพื่อน ๆ ที่อาจารย์เลือกมาตอบให้ทุกคนอ่าน ใหม่สุดอยู่บน · กดที่คำถามเพื่อดูคำตอบ</p>
+<div class="widget" data-w="faq" data-url="https://script.google.com/macros/s/AKfycbywNdy_JbOKshOPaV1fur_tL7fBXzWxz4ISIwTYKI8tiHMYesh3j1vcwkxCqK52o_g1yg/exec"></div>
+
+<h2 id="s3">ไม่ระบุชื่อจริงไหม</h2>
+<div class="kv"><span>อาจารย์เห็น</span><span>เวลาที่ส่ง · ประเภท · บท · ข้อความ</span><span>ระบบไม่เก็บ</span><span>ชื่อ · อีเมล · รหัสนิสิต · IP · คุกกี้</span><span>เพื่อนเห็น</span><span>เฉพาะคำถามที่อาจารย์เลือกขึ้นคำถามที่พบบ่อย และอาจารย์อาจเกลาคำถามใหม่ก่อน</span><span>ระวังเอง</span><span>ถ้าเขียนสิ่งที่บอกตัวตน เช่น ชื่อเล่น หรือ "ผมที่นั่งหน้าสุด" ระบบก็ช่วยปิดให้ไม่ได้</span></div>
+<p>ส่งแล้วแก้หรือลบเองไม่ได้ ถ้าส่งผิด ส่งข้อความใหม่บอกอาจารย์ได้เลย</p>
+
+<div class="box cs"><div class="box-t">💻 ในโลกคอมพิวเตอร์: กด "ส่ง" แล้วข้อความไปไหน</div>
+<ul>
+<li>เบราว์เซอร์แพ็กข้อความเป็นคำขอแบบ <b>HTTP POST</b> ส่งไปที่ <b>Google Apps Script</b> ซึ่งทำหน้าที่เป็นเซิร์ฟเวอร์เล็ก ๆ แล้วเขียนลงแถวใหม่ใน Google Sheet</li>
+<li>คำถามที่พบบ่อยใช้ทางกลับกัน คือ <b>HTTP GET</b> ขอรายการมาเป็น <b>JSON</b> แล้ว JavaScript ในหน้าเว็บสร้างเป็นรายการให้อ่าน</li>
+<li>กันบอตสแปมด้วย<b>ช่องดัก (honeypot)</b> ที่คนมองไม่เห็นแต่บอตชอบกรอก และ<b>จำกัดอัตรา (rate limit)</b> ว่ารับได้กี่ข้อความต่อ 10 นาที</li>
+<li>เว็บใหญ่ ๆ ใช้หลักเดียวกัน แค่เปลี่ยน Google Sheet เป็นฐานข้อมูล และเปลี่ยนช่องดักเป็น CAPTCHA</li>
+</ul></div>
+
+<nav class="lesson-pager" aria-label="บทก่อนหน้าและถัดไป"><a class="pager-link secondary" href="appendix-e-stats.html">← สถิติผู้เข้าชม</a></nav>
+<footer class="lesson-footer">1204105 Mathematics for Computer Science 2 (Calculus) · Calculus by Prymania · วิทยาการคอมพิวเตอร์ ม.มหาสารคาม</footer>
+</main>
+</div>
+<script defer src="assets/nav.js?v=26def782"></script>
+<script defer src="assets/widgets.js?v=0400041d"></script>
+<script defer src="assets/ink.js?v=56e2b054"></script>
+<script>window.goatcounter={path:function(p){return p.replace(/\/index\.html$/,"/")}}</script>
+<script data-goatcounter="https://prymania-calculus.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

@@ -2965,3 +2965,60 @@ table.tbl td.gc-n { font-family: var(--f-mono); text-align: right; white-space: 
   .gc-chart, .gc-days { gap: 2px; }
   .gc-v, .gc-days span { font-size: 9px; }
 }
+
+/* ---------- ภาคผนวก F: ส่งข้อความถึงอาจารย์ + คำถามที่พบบ่อย (widgets.js → feedback, faq; ปุ่มท้ายบท .ask-card) ---------- */
+.ask-card { display: flex; gap: 14px; align-items: flex-start; margin-top: 24px; border: 1px solid #f0d3b8; border-left: 4px solid var(--mango); border-radius: 10px; background: var(--mangobg); padding: 14px 18px; }
+.ask-card h4 { margin: 0 0 2px; font-size: 16.5px; }
+.ask-card p { margin: 0 0 10px; color: var(--muted); font-size: 14.5px; }
+.quiz-btn.ask { background: #b9740a; }
+.quiz-btn.ask:hover { background: #94650a; }
+.fb-form { display: grid; gap: 14px; }
+.fb-types { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; border: 0; padding: 0; }
+.fb-types legend, .fb-field > span { margin-bottom: 6px; padding: 0; font-weight: 600; font-size: 15px; }
+.fb-types label { position: relative; }
+.fb-types input { position: absolute; opacity: 0; pointer-events: none; }
+.fb-types span { display: inline-flex; min-height: 38px; align-items: center; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); padding: 5px 14px; font-size: 14.5px; cursor: pointer; }
+.fb-types input:checked + span { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+.fb-types input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+.fb-field { display: grid; }
+.fb-field select, .fb-field textarea, .faq-ctl select, .faq-ctl input { width: 100%; border: 1px solid #b7c1cf; border-radius: 8px; background: var(--surface); padding: 8px 11px; color: var(--fg); font: 15px/1.6 var(--f-body); }
+.fb-field textarea { min-height: 140px; resize: vertical; }
+.fb-field select:focus, .fb-field textarea:focus, .faq-ctl select:focus, .faq-ctl input:focus { border-color: var(--accent); outline: none; }
+.fb-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.fb-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.fb-count { color: var(--muted); font: 12.5px var(--f-mono); }
+.fb-foot button { min-height: 42px; border: 0; border-radius: 8px; background: var(--accent); padding: 8px 22px; color: #fff; font: 600 15px var(--f-body); cursor: pointer; }
+.fb-foot button:hover { background: #174a96; }
+.fb-foot button:disabled { opacity: .55; cursor: default; }
+.fb-status { margin: 0; font-size: 14.5px; }
+.fb-status:empty { display: none; }
+.fb-status.ok { border-radius: 8px; background: var(--ok-soft); padding: 8px 12px; color: var(--ok); font-weight: 600; }
+.fb-status.err { color: var(--warn); }
+.faq-ctl { display: grid; grid-template-columns: minmax(0, 200px) minmax(0, 1fr); gap: 8px; margin-bottom: 12px; }
+.faq-ctl:empty { display: none; }
+.faq-list { display: grid; gap: 8px; }
+.faq-item { border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.faq-item[open] { border-color: #c9d8f2; }
+.faq-item summary { display: flex; gap: 10px; align-items: baseline; padding: 10px 14px; cursor: pointer; list-style: none; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after { content: "▾"; margin-left: auto; color: var(--muted); transition: transform .15s; }
+.faq-item[open] summary::after { transform: rotate(180deg); }
+.faq-chip { flex: none; border-radius: 999px; background: var(--accent-soft); padding: 1px 9px; color: var(--accent); font: 600 12px var(--f-body); white-space: nowrap; }
+.faq-q { font-weight: 600; white-space: pre-line; overflow-wrap: anywhere; }
+.faq-a { border-top: 1px dashed var(--line); padding: 10px 14px 12px; }
+.faq-at { margin-bottom: 4px; color: var(--mint2); font-size: 13px; font-weight: 600; }
+.faq-text { white-space: pre-line; overflow-wrap: anywhere; }
+.pastel .faq-a { background: var(--g1); border-radius: 0 0 10px 10px; }
+@media (max-width: 560px) {
+  .faq-ctl { grid-template-columns: 1fr; }
+  .fb-types span { font-size: 14px; padding: 4px 12px; }
+}
+@media screen {
+  html.dark .ask-card { border-color: #5a4a2a; }
+  html.dark .quiz-btn.ask { background: #a8690a; }
+  html.dark .quiz-btn.ask:hover { background: #c07a10; }
+  html.dark .fb-field select, html.dark .fb-field textarea, html.dark .faq-ctl select, html.dark .faq-ctl input { border-color: var(--line); }
+  html.dark .fb-foot button { background: var(--btn); }
+  html.dark .fb-foot button:hover { background: var(--btn-hover); }
+  html.dark .faq-item[open] { border-color: #3d5274; }
+}
